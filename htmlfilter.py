@@ -17,7 +17,9 @@ for d,subdir,files in os.walk('/home/hexuotzo/khufu/www.zaojiao.com'):
             except:
                 #print fname
                 continue
-        text = html2text(r)
+        r= r.strip()
+        text = html2text(r).replace('"','')
         key = hashlib.md5(fname).hexdigest()
-        os.popen("dystmgr put khufu 1%s %s"%(key,text.encode('utf8')))
-        
+        #print 'dystmgr put khufu 1%s "%s"'%(key,text.encode('utf8'))
+        print os.popen('dystmgr put khufu 1%s "%s"'%(key,text.encode('utf8'))).read()
+               
