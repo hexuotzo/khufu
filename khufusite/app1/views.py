@@ -7,7 +7,9 @@ def hello(request):
     return render_to_response('index.html',locals())
 def keyword(request):
     word=request.GET["insearch"]
-    print tmpsearch(word)
+    result=tmpsearch(word)
+    return render_to_response('result.html',locals())
 def tmpsearch(word):
-    tmp=os.popen("dystmgr search -pv khufu %s"%word).read()
+    word=word.encode("utf8")
+    tmp=os.popen("dystmgr search -pv /Users/uc0079/khufu/khufu/ %s"%word).read()
     return tmp.split('\n')
