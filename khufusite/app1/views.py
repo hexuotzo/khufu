@@ -1,9 +1,12 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from models import KhufuForm
 import os
 
 def hello(request):
+    print 'a'
+    f=KhufuForm()
     return render_to_response('index.html',locals())
 def keyword(request):
     word=request.GET["insearch"]

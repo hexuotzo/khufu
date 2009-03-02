@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>index</title>
+	<title>home</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="uc0079">
 	<!-- Date: 2009-02-26 -->
@@ -21,8 +21,21 @@
 			<input type="submit" name="sb" value="手气不错" id="some_name">
 		  </form>
 	  </td>
+	<tr>
+		{% load comments%}
+	</tr>	
 	</tr>
+	<tr>
+      <td>
+		{% get_comment_form for f as form %}
+		<form action="{% comment_form_target %}" method="POST">
+		  {{ form }}
+		  <p class="submit">
+		    <input type="submit" name="preview" class="submit-post" value="Preview">
+		  </p>
+		</form>
+	  </td>
+	</tr>	
   </table>	
-
 </body>
 </html>
