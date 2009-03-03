@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
+		{% load comments%}
 
 <html lang="en">
 <head>
@@ -21,21 +22,17 @@
 			<input type="submit" name="sb" value="手气不错" id="some_name">
 		  </form>
 	  </td>
-	<tr>
-		{% load comments%}
-	</tr>	
 	</tr>
 	<tr>
       <td>
-		{% get_comment_form for f as form %}
-		<form action="{% comment_form_target %}" method="POST">
-		  {{ form }}
-		  <p class="submit">
-		    <input type="submit" name="preview" class="submit-post" value="Preview">
-		  </p>
-		</form>
+		{%render_comment_form for f%}
 	  </td>
 	</tr>	
-  </table>	
+  </table>
+    <!-- {% get_comment_form for f as commentlist %}
+    	{% for comment in commentlist%}
+    	    {{comment}}
+    	{% endfor %} -->
+
 </body>
 </html>
