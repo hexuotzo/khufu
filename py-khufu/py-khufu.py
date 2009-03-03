@@ -1,9 +1,8 @@
 # encoding: utf-8
 import ctypes
 
-LIB_PATH = '/home/yanxu/tokyodystopia-0.9.9/libtokyodystopia.so'
 def search(text,dbname='khufu'):
-    lib=ctypes.CDLL(LIB_PATH)
+    lib=ctypes.CDLL('libtokyodystopia.so')
     idb=lib.tcidbnew()
     ecode=lib.tcidbopen(idb,dbname)
     rnum=ctypes.c_int()
