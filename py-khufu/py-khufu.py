@@ -36,5 +36,6 @@ if __name__ == '__main__':
         print "kid",kid
     print pd.put(5,'用Python插入的')
     print pd.put(6,'zhmocean脱耦和求偶的心理学差异...风马牛不相及的事情却有着千丝万缕的联系...')
+    print pd.commit()
     print pd.get(1)
 
