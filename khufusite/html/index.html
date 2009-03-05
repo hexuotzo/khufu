@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
+		{% load comments%}
 
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>index</title>
+	<title>home</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="uc0079">
 	<!-- Date: 2009-02-26 -->
@@ -12,7 +13,7 @@
 <body>
   <table align="center">
 	<tr>
-	  <td><img src="./media/Khufu.png"></td>
+	  <td><img src="http://lh5.ggpht.com/_Dwix0HKdasA/Sat5irsbX3I/AAAAAAAAAV8/LpIyI9GRcAU/Khufu.png" alt="Khufu搜索" height="100%"></td>
     </tr>	
     <tr>
 	  <td>
@@ -22,7 +23,16 @@
 		  </form>
 	  </td>
 	</tr>
-  </table>	
+	<tr>
+      <td>
+		{%render_comment_form for f%}
+	  </td>
+	</tr>	
+  </table>
+    <!-- {% get_comment_form for f as commentlist %}
+    	{% for comment in commentlist%}
+    	    {{comment}}
+    	{% endfor %} -->
 
 </body>
 </html>

@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     # (r'^admin/(.*)', admin.site.root),
     (r'^hello','khufusite.app1.views.hello'),
     (r'^keyword','khufusite.app1.views.keyword'),
-    (r'$','khufusite.app1.views.index')
+    #(r'$','khufusite.app1.views.index'),
+    (r'comments/',include('django.contrib.comments.urls'))
 )
