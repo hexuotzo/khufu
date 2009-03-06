@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from models import KhufuForm
 from pykhufu import PyDystopia
+import memcache
+import cjson
 import os
 
 
@@ -24,12 +26,15 @@ def keyword(request):
     
 def tmpsearch(word):
     word=word.encode("utf8")
-    pd = PyDystopia('/Users/uc0079/khufu/tmpa/dystopia')
+    pd = PyDystopia('/Users/uc0079/khufu/khufu')
+    mc = memcache.Client(['boypark.cn:11211'])
     print "e"
+    print list(pd.search(word))
     for kid in pd.search(word):
         print "f"
         print "kid",kid
-        tmp=cjson.decode(os.popen("tchmgr get /Users/uc0079/khufu/tmpa/metaDB.tch %s"%kid).read())
-        print tmp['title']
+        print mc.get(str(kid))
+        tmp=cjson.decode(mc.get(str(kid)))
+        
+        print tmp['title'].encoding('utf8')
         yield tmp['title'],tmp['url'],tmp['text'][:100]
-    
