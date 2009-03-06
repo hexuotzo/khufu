@@ -3,7 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from models import KhufuForm
 from pykhufu import PyDystopia
-import memcache
+try:
+    import cmemcache as memcache
+except:
+    import memcache
 import cjson
 import os
 
