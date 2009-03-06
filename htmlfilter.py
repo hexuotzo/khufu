@@ -1,7 +1,13 @@
 # encoding: utf-8
 import os,sys
 import hashlib
+import cjson
+import datetime
+import re
+from pykhufu import PyDystopia
+import cmemcache as memcache
 from html2text import html2text
+from addpinyin import *
 
 def findpath(path):
     #dir:文件夹名 
@@ -21,12 +27,31 @@ def readtext(f):
             r=u''
     return r
 
+def readtitle(fname):
+    s=open(fname).read()
+    s=s.strip()
+    for title in re.findall(r'<title>(.*)</title>',s):
+        return title    
+
 path = sys.argv[1]
+pd = PyDystopia()
+mc = memcache.Client(['boypark.cn:11211'])
 for d,f in findpath(path):
     fname = os.path.join(d,f)
     r=readtext(fname)
     if r=='':continue
-    text = html2text(r).replace('"','')
-    key = hashlib.md5(fname).hexdigest()
-    print os.popen('dystmgr put khufu 1%s "%s"'%(key,text.encode('utf8'))).read()
-               
+    try:
+        text = html2text(r)
+    except:
+        text = r
+    key = "%s" % hashlib.md5(fname).hexdigest()
+    nowtime=datetime.datetime.now()
+    ttl = readtitle(fname)
+    pinyin = addpinyin(text)
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin})
+    #os.popen('dystmgr put khufu %s "%s"'%(key,text.encode('utf8'))).read()
+    #os.popen('tchmgr put metaDB.tch %s "%s"'%(key,dbvalue)).read()
+    print "key",key
+    print pd.put(key,text.encode('utf8'))
+    print mc.set(key,dbvalue)
+pd.commit()

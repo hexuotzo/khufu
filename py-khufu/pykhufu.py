@@ -1,5 +1,6 @@
 # encoding: utf-8
 from ctypes import *
+import string
 
 class PyDystopia(object):
     """Tokyo Dystopia Python Interface"""
@@ -30,6 +31,8 @@ class PyDystopia(object):
                 yield result[i],stext
             yield result[i]
     def put(self,kid,text):
+        kid=string.atoi(kid[:10],16)
+        print "kid",kid
         return self.lib.tcidbput(self.idb,c_int64(kid),text)
     def commit(self):
         return self.lib.tcidbclose(self.idb)
