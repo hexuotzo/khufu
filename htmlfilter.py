@@ -7,6 +7,7 @@ import re
 from pykhufu import PyDystopia
 import cmemcache as memcache
 from html2text import html2text
+from addpinyin import *
 
 def findpath(path):
     #dir:文件夹名 
@@ -43,12 +44,14 @@ for d,f in findpath(path):
         text = html2text(r)
     except:
         text = r
-    key = "1%s" % hashlib.md5(fname).hexdigest()
+    key = "%s" % hashlib.md5(fname).hexdigest()
     nowtime=datetime.datetime.now()
     ttl = readtitle(fname)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime)})
+    pinyin = addpinyin(text)
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin})
     #os.popen('dystmgr put khufu %s "%s"'%(key,text.encode('utf8'))).read()
     #os.popen('tchmgr put metaDB.tch %s "%s"'%(key,dbvalue)).read()
+    print "key",key
     print pd.put(key,text.encode('utf8'))
-    print mc.put(key,dbvalue)
+    print mc.set(key,dbvalue)
 pd.commit()
