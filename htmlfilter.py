@@ -4,6 +4,8 @@ import hashlib
 import cjson
 import datetime
 import re
+from pykhufu import PyDystopia
+import cmemcache as memcache
 from html2text import html2text
 
 def findpath(path):
@@ -31,20 +33,22 @@ def readtitle(fname):
         return title    
 
 path = sys.argv[1]
+pd = PyDystopia()
+mc = memcache.Client(['boypark.cn:11211'])
 for d,f in findpath(path):
     fname = os.path.join(d,f)
     r=readtext(fname)
     if r=='':continue
     try:
-        text = html2text(r).replace('"','')
+        text = html2text(r)
     except:
-        text = r.replace('"','')
+        text = r
     key = "1%s" % hashlib.md5(fname).hexdigest()
     nowtime=datetime.datetime.now()
     ttl = readtitle(fname)
     dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime)})
-    dbvalue = dbvalue.replace('"','')
-    os.popen('dystmgr put khufu %s "%s"'%(key,text.encode('utf8'))).read()
-    os.popen('tchmgr put metaDB.tch %s "%s"'%(key,dbvalue)).read()
-    print key
-    
+    #os.popen('dystmgr put khufu %s "%s"'%(key,text.encode('utf8'))).read()
+    #os.popen('tchmgr put metaDB.tch %s "%s"'%(key,dbvalue)).read()
+    print pd.put(key,text.encode('utf8'))
+    print mc.put(key,dbvalue)
+pd.commit()
