@@ -11,7 +11,10 @@
 </head>
 <body>
  {% for i in result %}
-  {{i}}
+  <p style="margin-top:30px">
+   <b><a href="/v/{{i.2}}">{{i.0}}</a></b><br>
+   {{i.1}}
+  </p>
  {% endfor %}
 </body>
 </html>

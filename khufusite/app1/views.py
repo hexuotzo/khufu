@@ -1,8 +1,8 @@
-# Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from models import KhufuForm
 from pykhufu import PyDystopia
+from subprocess import Popen,PIPE
 try:
     import cmemcache as memcache
 except:
@@ -12,7 +12,6 @@ import os
 
 
 def hello(request):
-    print 'a'
     try:
         f = KhufuForm.objects.get(id=1)
     except:
@@ -20,24 +19,25 @@ def hello(request):
     return render_to_response('index.html',locals())
     
 def keyword(request):
-    print "b"
     word=request.GET["insearch"]
-    print "c"
     result=tmpsearch(word)
-    print "d"
     return render_to_response('result.html',locals())
+
+def v(request,kid):
+    mc = memcache.Client(['61.135.214.29:11211'])
+    obj=cjson.decode(mc.get(kid))['addpinyin']
+    return HttpResponse("<pre>%s</pre>"%obj)
     
 def tmpsearch(word):
     word=word.encode("utf8")
-    pd = PyDystopia('/Users/uc0079/khufu/khufu')
-    mc = memcache.Client(['boypark.cn:11211'])
-    print "e"
-    print list(pd.search(word))
-    for kid in pd.search(word):
-        print "f"
+    #pd = PyDystopia('/home/yanxu/khufu/khufu')
+    mc = memcache.Client(['61.135.214.29:11211'])
+    results=os.popen('dystmgr search -nl -max 10 khufu "%s"'%word).read()
+    #print list(pd.search(word))
+    #for kid in pd.search(word):
+    for kid in results.split('\n'):
+        obj=mc.get(kid)
         print "kid",kid
-        print mc.get(str(kid))
-        tmp=cjson.decode(mc.get(str(kid)))
-        
-        print tmp['title'].encoding('utf8')
-        yield tmp['title'],tmp['url'],tmp['text'][:100]
+        if obj==None:continue
+        tmp=cjson.decode(obj)
+        yield tmp['title'],tmp['addpinyin'],kid
