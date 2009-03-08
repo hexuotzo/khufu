@@ -2,30 +2,30 @@
    "http://www.w3.org/TR/html4/strict.dtd">
 		{% load comments%}
 
-<html lang="en">
+<html lang="zh-cn">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>home</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
+	<title>Khufu Search</title>
 	<meta name="author" content="uc0079">
 	<!-- Date: 2009-02-26 -->
 </head>
 <body>
   <table align="center">
 	<tr>
-	  <td><img src="http://lh5.ggpht.com/_Dwix0HKdasA/Sat5irsbX3I/AAAAAAAAAV8/LpIyI9GRcAU/Khufu.png" alt="Khufu搜索" height="100%"></td>
+	  <td><img src="http://img.f.hatena.ne.jp/images/fotolife/y/yanxu/20090306/20090306230646.png" alt="Khufu搜索" height="100%"></td>
     </tr>	
     <tr>
 	  <td>
 		  <form action="/keyword/" method="GET" align="center">
 			<input type="text" name="insearch" value="" id="search" size= 40maxlength=100>
-			<input type="submit" name="sb" value="手气不错" id="some_name">
+			<input type="submit" name="sb" value="手气不错" id="some_name"><br>
+              <a href="/keyword/?insearch=身心发育&sb=手气不错">身心发育</a>
 		  </form>
 	  </td>
 	</tr>
 	<tr>
       <td>
-		{%render_comment_form for f%}
+	<!--	{%render_comment_form for f%}-->
 	  </td>
 	</tr>	
   </table>

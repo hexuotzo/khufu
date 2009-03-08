@@ -1,0 +1,5 @@
+Python extension for libmemcache, the C API to memcached. cmemcache API is the same as python-memcache, so it is easy to replace python-memcache with cmemcache, and vice versa.
+
+cmemcache is about 1.7 times faster than python-memcache with short key names (8 characters), faster with larger key names (I get about 2x for 100 character keys). Using get_multi is faster still, almost 2x for 2 8-character keys. See cachecmp.py for profiling logic.
+
+WWW:	http://gijsbert.org/cmemcache/
