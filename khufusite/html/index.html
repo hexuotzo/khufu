@@ -1,38 +1,190 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-		{% load comments%}
-
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>home</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
-	<meta name="author" content="uc0079">
-	<!-- Date: 2009-02-26 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>早教知识网 www.zaojiao100.com</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-  <table align="center">
-	<tr>
-	  <td><img src="http://lh5.ggpht.com/_Dwix0HKdasA/Sat5irsbX3I/AAAAAAAAAV8/LpIyI9GRcAU/Khufu.png" alt="Khufu搜索" height="100%"></td>
-    </tr>	
-    <tr>
-	  <td>
-		  <form action="/keyword/" method="GET" align="center">
-			<input type="text" name="insearch" value="" id="search" size= 40maxlength=100>
-			<input type="submit" name="sb" value="手气不错" id="some_name">
-		  </form>
-	  </td>
-	</tr>
-	<tr>
-      <td>
-		{%render_comment_form for f%}
-	  </td>
-	</tr>	
-  </table>
-    <!-- {% get_comment_form for f as commentlist %}
-    	{% for comment in commentlist%}
-    	    {{comment}}
-    	{% endfor %} -->
 
+<body>
+<iframe src="top.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
+
+<div id="search">
+<img src="images/icon9.gif" />
+<h3>育儿知识查询</h3>
+<input type="text" class="searchbox" value="孩子发烧" onclick="window.location='/keyword/"+this.value"'" onblur="this.value='孩子发烧'" name="insearch" />
+<select>
+  <option selected="selected">全部时期</option>
+  <option>备孕</option>
+  <option>怀孕</option>
+  <option>分娩期</option>
+  <option>1-2岁</option>
+  <option>2-3岁</option>
+  <option>3-6岁</option>
+</select>
+<input type="image" src="images/baby_10.gif" name="Submit" value="提交" />
+</div>
+
+<div id="recom">
+	<ul class="overflow">
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	</ul>
+</div>
+
+<div class="content overflow">
+	<div class="pink">
+		<dl >
+			<dt><img src="images/icon1.gif"/>备孕</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="pink margin_left">
+		<dl >
+			<dt><img src="images/icon2.gif"/>怀孕</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="pink margin_left">
+		<dl>
+			<dt><img src="images/icon3.gif"/>分娩期</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="pink margin_left">
+		<dl >
+			<dt><img src="images/icon4.gif"/>0-1岁</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+</div>
+
+<div class="ad970"><img src="images/97080.gif" /></div>
+
+<div class="content overflow">
+	<div class="blue">
+		<dl >
+			<dt><img src="images/icon5.gif"/>1-2岁</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="blue margin_left">
+		<dl >
+			<dt><img src="images/icon6.gif"/>2-3岁</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="blue margin_left">
+		<dl>
+			<dt><img src="images/icon7.gif"/>3-6岁</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+	
+	<div class="blue margin_left">
+		<dl >
+			<dt><img src="images/icon8.gif"/>专家咨询</dt>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+		</dl>
+	</div>
+</div>
+
+<div id="special">
+	<dl>
+		<dt>专 题</dt>
+	  <dd><h3><a href="#">优生：一滴血筛查5种病毒</a></h3>2009年的春节，并没有人们想象中的那么惨淡，恰恰相反，在金融危机乌云笼罩下的中国人民，可能更倾向于用另外一种方式来给自己打气，所以，这个春节，依然四处张灯结彩，喜气洋洋。除夕的那一天，烟花弥漫着整个中国，爆竹声也更加震耳欲聋。<span><a href="#">[详细内容]</a></span></dd>
+	  <dd><h3><a href="#">优生：一滴血筛查5种病毒</a></h3>2009年的春节，并没有人们想象中的那么惨淡，恰恰相反，在金融危机乌云笼罩下的中国人民，可能更倾向于用另外一种方式来给自己打气，所以，这个春节，依然四处张灯结彩，喜气洋洋。除夕的那一天，烟花弥漫着整个中国，爆竹声也更加震耳欲聋。<span><a href="#">[详细内容]</a></span></dd>
+	  <dd><h3><a href="#">优生：一滴血筛查5种病毒</a></h3>2009年的春节，并没有人们想象中的那么惨淡，恰恰相反，在金融危机乌云笼罩下的中国人民，可能更倾向于用另外一种方式来给自己打气，所以，这个春节，依然四处张灯结彩，喜气洋洋。除夕的那一天，烟花弥漫着整个中国，爆竹声也更加震耳欲聋。<span><a href="#">[详细内容]</a></span></dd>
+	  <dd><h3><a href="#">优生：一滴血筛查5种病毒</a></h3>2009年的春节，并没有人们想象中的那么惨淡，恰恰相反，在金融危机乌云笼罩下的中国人民，可能更倾向于用另外一种方式来给自己打气，所以，这个春节，依然四处张灯结彩，喜气洋洋。除夕的那一天，烟花弥漫着整个中国，爆竹声也更加震耳欲聋。<span><a href="#">[详细内容]</a></span></dd>
+	</dl>
+</div>
+
+<div id="label" >
+	<h3>全部分类</h3>
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+		<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+	
+	<ul class="margin_left">
+		<li><h5><a href="#">备孕</a></h5></li>
+		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+	</ul>
+</div>
+
+<iframe src="bottom.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
 </body>
 </html>

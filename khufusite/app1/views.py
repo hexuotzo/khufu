@@ -16,6 +16,12 @@ def hello(request):
         f = KhufuForm.objects.create(id=1)
     return render_to_response('index.html',locals())
     
+def top(request):
+    return render_to_response('top.html',locals())
+    
+def bottom(request):
+    return render_to_response('bottom.html',locals())
+
 def keyword(request):
     print "b"
     word=request.GET["insearch"]
@@ -30,6 +36,7 @@ def tmpsearch(word):
     mc = memcache.Client(['boypark.cn:11211'])
     print "e"
     print list(pd.search(word))
+    print mc.get(str(1097167004316L))
     for kid in pd.search(word):
         print "f"
         print "kid",kid
