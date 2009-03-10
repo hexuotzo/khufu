@@ -33,7 +33,7 @@ def readtext(f):
 
 def readtitle(fname):
     s=open(fname).read()
-    s=s.strip()
+    s=s.strip() 
     for title in re.findall(r'<title>(.*)</title>',s):
         try:
             return title.decode('utf8')
