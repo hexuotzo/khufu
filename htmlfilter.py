@@ -8,6 +8,7 @@ from pykhufu import PyDystopia
 import cmemcache as memcache
 from html2text import html2text
 from addpinyin import *
+from bodytext import getbody
 import string
 import glob
 
@@ -53,13 +54,12 @@ for fname in findpath(path):
     print "key",key,kid,fname
     try:
         text = html2text(r)
+        body = getbody(r)
     except:
         continue
     ttl = readtitle(fname)
-    pinyin = addpinyin(text)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin})
-    #os.popen('dystmgr put khufu %s "%s"'%(key,text.encode('utf8'))).read()
-    #os.popen('tchmgr put metaDB.tch %s "%s"'%(key,dbvalue)).read()
+    pinyin = addpinyin(body)
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body})
     pd.put(kid,text.encode('utf8'))
     mc.set(str(kid),dbvalue)
 pd.commit()
