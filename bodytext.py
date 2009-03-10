@@ -7,8 +7,8 @@ from html2text import html2text
 def getbody(html):
     bodys = re.findall(r'''.*<!--正文-->(.*)<!--内容分页-->''',html,re.S|re.M|re.L)
     if len(bodys)>0:
-        return html2text(bodys[0])
-    return html2text(html)
+        return html2text(bodys[0].decode('utf8'))
+    return html2text(html.decode('utf8'))
 if __name__ == '__main__':
     url = "http://www.zaojiao.com/education/2008/0516/article_1630.html"
     html = os.popen("curl --compressed %s" % url).read()
