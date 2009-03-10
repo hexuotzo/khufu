@@ -27,18 +27,20 @@ def bottom(request):
 def keyword(request):
     word=request.GET["insearch"]
     result=tmpsearch(word)
-    return render_to_response('result.html',locals())
+    return render_to_response('search.html',locals())
 
 def v(request,kid):
     mc = memcache.Client(['61.135.214.29:11211'])
-    obj=cjson.decode(mc.get(kid))['addpinyin']
-    return HttpResponse("<pre>%s</pre>"%obj)
+    obj=cjson.decode(mc.get(str(kid)))['addpinyin']
+    return render_to_response('info.html',locals())
     
 def tmpsearch(word):
     word=word.encode("utf8")
     mc = memcache.Client(['61.135.214.29:11211'])
-    results=os.popen('dystmgr search -nl -max 10 khufu "%s"'%word).read()
+    results=os.popen('dystmgr search -nl -max 10 /Users/uc0079/khufu/khufu "%s"'%word).read()
+    print "result:",results
     for kid in results.split('\n'):
+        print kid
         obj=mc.get(kid)
         print "kid",kid
         if obj==None:continue
