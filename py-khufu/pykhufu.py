@@ -5,14 +5,10 @@ class PyDystopia(object):
     """Tokyo Dystopia Python Interface"""
     def __init__(self, dbname='khufu'):
         self.dbname = dbname
-<<<<<<< HEAD:py-khufu/py-khufu.py
-        self.lib=CDLL('libtokyodystopia.dylib')
-=======
         try:
             self.lib=CDLL('libtokyodystopia.so')
         except:
             self.lib=CDLL('libtokyodystopia.dylib')
->>>>>>> f76b75e75cd9b79bd59efeccbdf615dfd76fa894:py-khufu/pykhufu.py
         self.idb=self.lib.tcidbnew()
         #IDBOWRITER | IDBOCREAT
         ecode=self.lib.tcidbopen(self.idb,self.dbname,6)

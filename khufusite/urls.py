@@ -23,6 +23,7 @@ urlpatterns = patterns('',
             {'document_root': '/Users/uc0079/khufu/khufusite/html/media/images'}),
     (r'^css/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': '/Users/uc0079/khufu/khufusite/html/media/css'}),
+    (r'^v/(?P<kid>.*)/','khufusite.app1.views.v'),
     #(r'$','khufusite.app1.views.index'),
     (r'comments/',include('django.contrib.comments.urls'))
 )
