@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>早教知识网 www.zaojiao100.com</title>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<iframe src="/top.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
+
+<div id="search">
+<img src="/images/icon9.gif" />
+<h3>育儿知识查询</h3>
+<input type="text" class="searchbox" value="孩子发烧" onclick="this.value=''" onblur="this.value='孩子发烧'"  />
+<select>
+  <option selected="selected">全部时期</option>
+  <option>备孕</option>
+  <option>怀孕</option>
+  <option>分娩期</option>
+  <option>1-2岁</option>
+  <option>2-3岁</option>
+  <option>3-6岁</option>
+</select>
+<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" />
+</div>
+
+<div id="recom">
+	<ul class="overflow">
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	</ul>
+</div>
+
+<div id="guide">
+	<ul class="overflow">
+		<li><a href="#" class="active">备孕</a></li>
+		<li><a href="#">怀孕</a></li>
+		<li><a href="#">分娩期</a></li>
+		<li><a href="#">0-1岁</a></li>
+		<li><a href="#">1-2岁</a></li>
+		<li><a href="#">2-3岁</a></li>
+		<li><a href="#">3-6岁</a></li>
+		<li><a href="#">专家咨询</a></li>
+	</ul>
+</div>
+
+<div class="content overflow">
+	<div id="main">
+		<h5><a href="#">备孕</a> > 文章列表</h5>
+		<ul>
+			{%for i in result%}
+			<li><a href="/v/{{i.2}}">{{i.0}}</a><span>02.29 2009</span></li>
+			{%endfor%}
+		</ul>
+		<ul>
+			{%for j in result%}
+			<li><a href="{{j.1}}">{{j.0}}</a><span>02.29 2009</span></li>
+			{%endfor%}
+		</ul>
+		
+		<h3>1/30 <a href="#">上一页</a> <a href="#">下一页</a> </h3>
+	</div>
+
+	<div id="right">
+		<div class="ad230">广告位 230</div>
+		<div class="ad230">广告位 230</div>
+		<div class="ad230">广告位 230</div>
+	
+	</div>
+</div>
+
+<iframe src="/bottom.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
+</body>
+</html>
