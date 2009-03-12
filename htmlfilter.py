@@ -46,7 +46,7 @@ pd = PyDystopia()
 mc = memcache.Client(['61.135.214.29:11211'])
 for fname in findpath(path):
     #fname = os.path.join(d,f)
-    r=readtext(fname)
+    html = readtext(fname)
     if r=='':continue
     key = "%s" % hashlib.md5(fname).hexdigest()
     kid=string.atoi(key[:10],16)
@@ -59,7 +59,7 @@ for fname in findpath(path):
         continue
     ttl = readtitle(fname)
     pinyin = addpinyin(body)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body})
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":html,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body})
     pd.put(kid,text.encode('utf8'))
     mc.set(str(kid),dbvalue)
 pd.commit()
