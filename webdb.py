@@ -10,8 +10,8 @@ def removetext(text):
     return text.replace('-育儿早教-中国早教网','')
 
 word = sys.argv[1]
-mc = memcache.Client(['61.135.214.29:11211'])
-mc2 = memcache.Client(['61.135.214.29:11212'])
+mc = memcache.Client(['114.113.30.29:11211'])
+mc2 = memcache.Client(['114.113.30.29:11212'])
 for kid in os.popen('dystmgr search -nl khufu %s' % word).read().split('\n'):
     if kid=='':continue
     print kid
