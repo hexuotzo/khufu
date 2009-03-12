@@ -1,9 +1,9 @@
 # encoding: utf-8
 import os
 from html2text import html2text
-bodyss=[]
-url = "http://www.zaojiao.com/education/2008/1120/article_2079.html"
+url = "http://baby.sina.com.cn/nutrition/09/1203/0817133159.shtml"
 html = os.popen("curl --compressed %s" % url).read()
+body=[]
 try:
     txt = html2text(html.decode('utf8'))
 except:
@@ -13,12 +13,10 @@ try:
 except:
     txt = txt.encode('gbk').split('\n')
 for r in txt:
-    try:
-        r = r.strip().decode('utf8')
-    except:
-        r = r.strip().decode('gbk')
+    r = r.strip()
     if r == '':continue
-    elif type(r[0])==int:bodyss.append(r)
-    #elif type(r[0])==str:yield r
-    elif r[0]== '*' and r[1]=='*': bodyss.append(r)
-print bodyss
+    elif r[0]=='[':pass
+    elif r[0].isdigit() and r[2]>chr(127):print r
+    elif r[0]=='#':print r
+    elif r[0]== '*' and r[1]=='*': print r
+    elif r[0]>chr(127):print r
