@@ -7,11 +7,21 @@ Version 0.1
  
 <pre>
 ./khufubot.sh [URL]
-./khufutext.sh [FOLDER]
+python htmlfilter.py [FOLDER] > log &
+./runserver.sh
+./runwebdb.sh
+./webdb.py
+</pre>
+
+* Run Web Server
+<pre>
+cd khufusite
+sudo ./runfcgi.sh
+sudo /usr/local/etc/rc.d/nginx start
 </pre>
 
 <h2>Web</h2>
 
 <pre>
-curl http://localhost/keyword/
+curl http://localhost/
 </pre>
