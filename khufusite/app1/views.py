@@ -30,13 +30,13 @@ def keyword(request):
     return render_to_response('search.html',locals())
 
 def v(request,kid):
-    mc = memcache.Client(['61.135.214.29:11211'])
-    obj=cjson.decode(mc.get(str(kid)))['addpinyin']
+    mc = memcache.Client(['114.113.30.29:11211'])
+    obj=cjson.decode(mc.get(str(kid)))
     return render_to_response('info.html',locals())
     
 def tmpsearch(word):
     word=word.encode("utf8")
-    mc = memcache.Client(['61.135.214.29:11211'])
+    mc = memcache.Client(['114.113.30.29:11211'])
     results=os.popen('dystmgr search -nl -max 10 /Users/uc0079/khufu/khufu "%s"'%word).read()
     print "result:",results
     for kid in results.split('\n'):
