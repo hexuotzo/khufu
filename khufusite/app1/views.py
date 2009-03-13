@@ -1,8 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from models import KhufuForm
 from pykhufu import PyDystopia
-from subprocess import Popen,PIPE
 try:
     import cmemcache as memcache
 except:
@@ -12,10 +10,23 @@ import os
 
 
 def hello(request):
-    try:
-        f = KhufuForm.objects.get(id=1)
-    except:
-        f = KhufuForm.objects.create(id=1)
+    menus = [
+        "备孕",
+        "怀孕",
+        "分娩期",
+        "0-1岁",
+        "1-2岁",
+        "2-3岁",
+        "3-6岁",
+        "专家咨询",
+    ]
+    data = []
+    mc = memcache.Client(['114.113.30.29:11212'])
+    for m in menus:
+        key = hashlib.md5(m).hexdigest()
+        d = mc.get(key)
+        if d:
+            data.append( cjson.decode(d)[:4] )
     return render_to_response('index.html',locals())
     
 def top(request):
