@@ -14,12 +14,14 @@ def getbody(html):
     for r in txt:
         r = r.strip()
         if r == '':continue
-        elif r[0]=='[':pass
-        elif r[0].isdigit() and r[2]>chr(127):yield r
-        elif r[0]=='#':yield r
-        elif r[0]== '*' and r[1]=='*': yield r
-        elif r[0]>chr(127):yield r
+        elif r[0] == '[':pass
+        elif r[-1] == ']':pass
+        elif r[5:]<chr(127):pass
+        elif r[0].isdigit() and r[2] > chr(127):yield r
+        elif r[0] == '#' and r[1] != '#':yield r
+        elif r[0] == '*' and r[1] == '*': yield r
+        elif r[0] > chr(127):yield r
 if __name__ == '__main__':
-    url = "http://baby.sina.com.cn/nutrition/09/1203/0817133159.shtml"
+    url = "http://baby.sina.com.cn/edu/09/1303/0800133263.shtml"
     html = os.popen("curl --compressed %s" % url).read()
-    print getbody(html)
+    print '\n'.join(getbody(html))
