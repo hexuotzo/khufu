@@ -18,7 +18,9 @@ MENU = [
 
 def removetext(text):
     text = text.encode('utf8')
-    return text.replace('-育儿早教-中国早教网','')
+    text = text.replace('-育儿早教-中国早教网','')
+    text = text.replace('-中国早教网','')
+    return text
 
 def search(word):
     for kid in os.popen('dystmgr search -nl khufu %s' % word).read().split('\n'):
