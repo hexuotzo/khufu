@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>早教知识网 www.zaojiao100.com</title>
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" charset="utf-8">
+	function search () {
+		window.location="/keyword/?insearch="+document.getElementById("insearch").value
+	}
+</script>
 </head>
 
 <body>
@@ -12,7 +17,7 @@
 <div id="search">
 <img src="/images/icon9.gif" />
 <h3>育儿知识查询</h3>
-<input type="text" class="searchbox" value="孩子发烧" onclick="this.value=''" onblur="this.value='孩子发烧'"  />
+<input type="text" class="searchbox" value="孩子发烧" name="insearch" id="insearch" />
 <select>
   <option selected="selected">全部时期</option>
   <option>备孕</option>
@@ -22,7 +27,7 @@
   <option>2-3岁</option>
   <option>3-6岁</option>
 </select>
-<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" />
+<input type="image" src="images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
 </div>
 
 <div id="recom">
