@@ -15,25 +15,27 @@ def getbody(html):
     for r in txt:
         r = r.strip()
         if r == '':continue
+        if r in bodytxt:pass      #pass repeat
         elif r[0] == '[':
             if len(bodytxt) >= 5:break
             else:pass
-        elif ']' in r[-4:] and len(bodytxt) < 5:pass
-        elif r[:4] == '****':break
-        elif r[5:]<chr(127):pass
-        elif r[0].isdigit() and r[2] > chr(127):bodytxt.append(r)
-        elif r[0] == '#' and r[1] != '#':
+        elif ']' in r[-4:] and len(bodytxt) < 5:pass  #pass writer's name
+        elif r[4:] == '****':break                #body end
+        elif r[5:]<chr(127):pass            #pass address
+        elif r[0].isdigit() and r[2] > chr(127):bodytxt.append(r)  #int+chinese
+        elif r[0] == '#' and r[1] != '#':        # title
             try:
                 if bodytxt[-1][0] == '#':bodytxt=[]
                 else:bodytxt.append(r)
             except:
                 bodytxt.append(r)
-        elif r[:2] == '**':bodytxt.append(r)
-        elif r[0] > chr(127):bodytxt.append(r)
+        elif r[:2] == '**':bodytxt.append(r)      # branch title
+        elif r[0] > chr(127):bodytxt.append(r)    #add chinese to bodytxt
         elif r[0] == '#' and len(bodytxt) >= 5:break
     return '\n'.join(bodytxt)
 if __name__ == '__main__':
-    url = "http://baby.sina.com.cn/edu/09/1303/0800133263.shtml"
+    url = "http://www.zaojiao.com/ask/q38729.html"
+    #url = "http://baby.sina.com.cn/edu/09/1303/0800133263.shtml"
     #url = "http://www.zaojiao.com/education/2007/1210/article_1308.html"
     #url = "http://news.163.com/09/0313/10/549ESDIR000136K8.html"
     #url = "http://wow.duowan.com/0903/100883030207.html"
