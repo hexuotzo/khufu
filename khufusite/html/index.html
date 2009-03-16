@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<iframe src="/top.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
+<iframe src="/top.html" width="100%" height="174" scrolling="no" frameborder="0"></iframe>
 
 <div id="search">
 <img src="images/icon9.gif" />
@@ -47,10 +47,9 @@
 	<div class="pink">
 		<dl >
 			<dt><img src="images/icon1.gif"/>备孕</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.0 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -58,10 +57,9 @@
 	<div class="pink margin_left">
 		<dl >
 			<dt><img src="images/icon2.gif"/>怀孕</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.1 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -69,10 +67,9 @@
 	<div class="pink margin_left">
 		<dl>
 			<dt><img src="images/icon3.gif"/>分娩期</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.2 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -80,10 +77,9 @@
 	<div class="pink margin_left">
 		<dl >
 			<dt><img src="images/icon4.gif"/>0-1岁</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.3 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -95,10 +91,9 @@
 	<div class="blue">
 		<dl >
 			<dt><img src="images/icon5.gif"/>1-2岁</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.4 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -106,10 +101,9 @@
 	<div class="blue margin_left">
 		<dl >
 			<dt><img src="images/icon6.gif"/>2-3岁</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.5 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -117,10 +111,9 @@
 	<div class="blue margin_left">
 		<dl>
 			<dt><img src="images/icon7.gif"/>3-6岁</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.6 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>
@@ -128,10 +121,9 @@
 	<div class="blue margin_left">
 		<dl >
 			<dt><img src="images/icon8.gif"/>专家咨询</dt>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-			<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+			{% for d in data.7 %}
+			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
+			{% endfor %}
 			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 		</dl>
 	</div>

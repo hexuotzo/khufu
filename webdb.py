@@ -5,9 +5,22 @@ import cmemcache as memcache
 import cjson
 import sys,os,hashlib
 
+MENU = [
+    "备孕",
+    "怀孕",
+    "分娩期",
+    "0-1岁",
+    "1-2岁",
+    "2-3岁",
+    "3-6岁",
+    "专家咨询",
+]
+
 def removetext(text):
     text = text.encode('utf8')
-    return text.replace('-育儿早教-中国早教网','')
+    text = text.replace('-育儿早教-中国早教网','')
+    text = text.replace('-怀孕胎教-中国早教网','')
+    return text
 
 def search(word):
     for kid in os.popen('dystmgr search -nl khufu %s' % word).read().split('\n'):
@@ -19,10 +32,19 @@ def search(word):
         )
         yield kid,d
 
-word = sys.argv[1].strip()
+def words():
+    if len(sys.argv)>1:
+        word = sys.argv[1].strip()
+        yield word
+    else:
+        for word in MENU:
+            yield word
+
 mc = memcache.Client(['114.113.30.29:11211'])
-data = [d for kid,d in search(word)]
-obj = cjson.encode(data)
 mc2 = memcache.Client(['114.113.30.29:11212'])
-k = hashlib.md5(word).hexdigest()
-mc2.set(k,obj)
+for word in words():
+    print word
+    data = [d for kid,d in search(word)]
+    obj = cjson.encode(data)
+    k = hashlib.md5(word).hexdigest()
+    mc2.set(k,obj)
