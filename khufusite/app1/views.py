@@ -37,7 +37,9 @@ def hello(request):
         key = hashlib.md5(m).hexdigest()
         d = mc.get(key)
         if d:
-            data.append( cjson.decode(d)[:4] )
+            d = cjson.decode(d)[:4]
+            d["kid"]=key
+            data.append( d )
     for key in show_views:
         d = mc2.get(key)
         if d:
