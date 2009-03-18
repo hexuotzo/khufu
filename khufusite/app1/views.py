@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from pykhufu import PyDystopia
+from subprocess import Popen,PIPE
 try:
     import cmemcache as memcache
 except:
     import memcache
 import cjson
+import hashlib
 import os
 
 
@@ -49,12 +51,11 @@ def v(request,kid):
 def tmpsearch(word):
     word=word.encode("utf8")
     mc = memcache.Client(['114.113.30.29:11211'])
-    results=os.popen('dystmgr search -nl -max 10 /Users/uc0079/khufu/khufu "%s"'%word).read()
+    results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%word).read()
     print "result:",results
     for kid in results.split('\n'):
-        print kid
         obj=mc.get(kid)
         print "kid",kid
         if obj==None:continue
         tmp=cjson.decode(obj)
-        yield tmp['title'],tmp['addpinyin'],kid
+        yield tmp['title'].encode('utf8').replace("-育儿早教-中国早教网",""),tmp['addpinyin'],kid
