@@ -32,15 +32,16 @@ def hello(request):
     data = []
     data_view = []
     mc = memcache.Client(['114.113.30.29:11212'])
+    mc2 = memcache.Client(['114.113.30.29:11211'])
     for m in menus:
         key = hashlib.md5(m).hexdigest()
         d = mc.get(key)
         if d:
             data.append( cjson.decode(d)[:4] )
     for key in show_views:
-        d = mc.get(key)
+        d = mc2.get(key)
         if d:
-            data_view.append( cjson.decode(d)[:4] )
+            data_view.append( cjson.decode(d) )
     return render_to_response('index.html',locals())
     
 def top(request):
