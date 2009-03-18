@@ -12,6 +12,7 @@ class PyDystopia(object):
         self.idb=self.lib.tcidbnew()
         #IDBOWRITER | IDBOCREAT
         ecode=self.lib.tcidbopen(self.idb,self.dbname,6)
+        #ecode=self.lib.tcidbopen(self.idb,self.dbname)
     def search(self,text,returntext=False):
         """search text"""
         lib = self.lib
@@ -35,10 +36,10 @@ class PyDystopia(object):
 
 if __name__ == '__main__':
     pd = PyDystopia()
-    for kid in pd.search('严旭'):
+    for kid in pd.search('你好'):
         print "kid",kid
     print pd.put(5,'用Python插入的')
     print pd.put(6,'zhmocean脱耦和求偶的心理学差异...风马牛不相及的事情却有着千丝万缕的联系...')
     print pd.commit()
-    print pd.get(1)
+    print pd.get(5)
 

@@ -33,7 +33,7 @@ def readtext(f):
 
 def readtitle(fname):
     s=open(fname).read()
-    s=s.strip() 
+    s=s.strip()
     for title in re.findall(r'<title>(.*)</title>',s):
         try:
             return title.decode('utf8')
@@ -43,10 +43,11 @@ def readtitle(fname):
 
 path = sys.argv[1]
 pd = PyDystopia()
-mc = memcache.Client(['61.135.214.29:11211'])
+mc = memcache.Client(['114.113.30.29:11211'])
 for fname in findpath(path):
     #fname = os.path.join(d,f)
-    html = readtext(fname)
+    if fname.find("article")==-1:continue
+    r=readtext(fname)
     if r=='':continue
     key = "%s" % hashlib.md5(fname).hexdigest()
     kid=string.atoi(key[:10],16)
@@ -54,12 +55,12 @@ for fname in findpath(path):
     print "key",key,kid,fname
     try:
         text = html2text(r)
-        body = getbody(r)
+        body = getbody(r.encode("utf8"))
     except:
         continue
     ttl = readtitle(fname)
     pinyin = addpinyin(body)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":html,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body})
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body})
     pd.put(kid,text.encode('utf8'))
     mc.set(str(kid),dbvalue)
 pd.commit()

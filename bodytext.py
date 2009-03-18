@@ -10,6 +10,6 @@ def getbody(html):
         return html2text(bodys[0].decode('utf8'))
     return html2text(html.decode('utf8'))
 if __name__ == '__main__':
-    url = "http://www.zaojiao.com/education/2007/1206/article_678.html"
+    url = "http://www.zaojiao.com/education/2008/0516/article_1630.html"
     html = os.popen("curl --compressed %s" % url).read()
     print getbody(html)
