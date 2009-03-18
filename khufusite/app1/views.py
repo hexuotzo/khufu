@@ -37,13 +37,13 @@ def hello(request):
         key = hashlib.md5(m).hexdigest()
         d = mc.get(key)
         if d:
-            d = cjson.decode(d)[:4]
-            d["kid"]=key
-            data.append( d )
+            data.append( cjson.decode(d)[:4] )
     for key in show_views:
         d = mc2.get(key)
         if d:
-            data_view.append( cjson.decode(d) )
+            d = cjson.decode(d)
+            d["kid"]=key
+            data_view.append( d )
     return render_to_response('index.html',locals())
     
 def top(request):
