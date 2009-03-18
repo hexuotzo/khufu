@@ -41,6 +41,8 @@ def bottom(request):
 def keyword(request):
     word=request.GET["insearch"]
     result=tmpsearch(word)
+    result1=result[:10]
+    result2=result[10:]
     return render_to_response('search.html',locals())
 
 def v(request,kid):
@@ -58,4 +60,4 @@ def tmpsearch(word):
         print "kid",kid
         if obj==None:continue
         tmp=cjson.decode(obj)
-        yield tmp['title'].encode('utf8').replace("-育儿早教-中国早教网",""),tmp['addpinyin'],kid
+        yield tmp['title'],tmp['addpinyin'],kid

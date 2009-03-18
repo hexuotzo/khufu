@@ -12,6 +12,7 @@
 </head>
 
 <body>
+{% load text %}
 <iframe src="/top.html" width="100%" height="140" scrolling="no" frameborder="0"></iframe>
 
 <div id="search">
@@ -60,12 +61,12 @@
 	<div id="main">
 		<h5><a href="#">备孕</a> > 文章列表</h5>
 		<ul>
-			{%for i in result%}
-			<li><a href="/v/{{i.2}}">{{i.0}}</a><span>02.29 2009</span></li>
+			{%for i in result1%}
+			<li><a href="/v/{{i.2}}">{{i.0|removetext}}</a><span>02.29 2009</span></li>
 			{%endfor%}
 		</ul>
 		<ul>
-			{%for j in result%}
+			{%for j in result2%}
 			<li><a href="{{j.1}}">{{j.0}}</a><span>02.29 2009</span></li>
 			{%endfor%}
 		</ul>
