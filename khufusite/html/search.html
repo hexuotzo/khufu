@@ -67,7 +67,7 @@
 		</ul>
 		<ul>
 			{%for j in result2%}
-			<li><a href="{{j.1}}">{{j.0}}</a><span>02.29 2009</span></li>
+			<li><a href="{{j.1}}">{{j.0|removetext}}</a><span>02.29 2009</span></li>
 			{%endfor%}
 		</ul>
 		
