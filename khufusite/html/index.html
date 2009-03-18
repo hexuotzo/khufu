@@ -15,7 +15,7 @@
 <iframe src="/top.html" width="100%" height="174" scrolling="no" frameborder="0"></iframe>
 
 <div id="search">
-<img src="images/icon9.gif" />
+<img src="/images/icon9.gif" />
 <h3>育儿知识查询</h3>
 <input type="text" class="searchbox" value="孩子发烧" name="insearch" id="insearch" />
 <select>
@@ -27,7 +27,7 @@
   <option>2-3岁</option>
   <option>3-6岁</option>
 </select>
-<input type="image" src="images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
+<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
 </div>
 
 <div id="recom">
@@ -46,7 +46,7 @@
 <div class="content overflow">
 	<div class="pink">
 		<dl >
-			<dt><img src="images/icon1.gif"/>备孕</dt>
+			<dt><img src="/images/icon1.gif"/>备孕</dt>
 			{% for d in data.0 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -56,7 +56,7 @@
 	
 	<div class="pink margin_left">
 		<dl >
-			<dt><img src="images/icon2.gif"/>怀孕</dt>
+			<dt><img src="/images/icon2.gif"/>怀孕</dt>
 			{% for d in data.1 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -66,7 +66,7 @@
 	
 	<div class="pink margin_left">
 		<dl>
-			<dt><img src="images/icon3.gif"/>分娩期</dt>
+			<dt><img src="/images/icon3.gif"/>分娩期</dt>
 			{% for d in data.2 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -76,7 +76,7 @@
 	
 	<div class="pink margin_left">
 		<dl >
-			<dt><img src="images/icon4.gif"/>0-1岁</dt>
+			<dt><img src="/images/icon4.gif"/>0-1岁</dt>
 			{% for d in data.3 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -85,12 +85,12 @@
 	</div>
 </div>
 
-<div class="ad970"><img src="images/97080.gif" /></div>
+<div class="ad970"><img src="/images/97080.gif" /></div>
 
 <div class="content overflow">
 	<div class="blue">
 		<dl >
-			<dt><img src="images/icon5.gif"/>1-2岁</dt>
+			<dt><img src="/images/icon5.gif"/>1-2岁</dt>
 			{% for d in data.4 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -100,7 +100,7 @@
 	
 	<div class="blue margin_left">
 		<dl >
-			<dt><img src="images/icon6.gif"/>2-3岁</dt>
+			<dt><img src="/images/icon6.gif"/>2-3岁</dt>
 			{% for d in data.5 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -110,7 +110,7 @@
 	
 	<div class="blue margin_left">
 		<dl>
-			<dt><img src="images/icon7.gif"/>3-6岁</dt>
+			<dt><img src="/images/icon7.gif"/>3-6岁</dt>
 			{% for d in data.6 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
@@ -120,7 +120,7 @@
 	
 	<div class="blue margin_left">
 		<dl >
-			<dt><img src="images/icon8.gif"/>专家咨询</dt>
+			<dt><img src="/images/icon8.gif"/>专家咨询</dt>
 			{% for d in data.7 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
