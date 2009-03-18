@@ -15,7 +15,7 @@
 <iframe src="/top.html" width="100%" height="174" scrolling="no" frameborder="0"></iframe>
 
 <div id="search">
-<img src="images/icon9.gif" />
+<img src="/images/icon9.gif" />
 <h3>育儿知识查询</h3>
 <input type="text" class="searchbox" value="孩子发烧" name="insearch" id="insearch" />
 <select>
@@ -27,7 +27,7 @@
   <option>2-3岁</option>
   <option>3-6岁</option>
 </select>
-<input type="image" src="images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
+<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
 </div>
 
 <div id="recom">
@@ -46,85 +46,85 @@
 <div class="content overflow">
 	<div class="pink">
 		<dl >
-			<dt><img src="images/icon1.gif"/>备孕</dt>
+			<dt><img src="/images/icon1.gif"/>备孕</dt>
 			{% for d in data.0 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=备孕">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="pink margin_left">
 		<dl >
-			<dt><img src="images/icon2.gif"/>怀孕</dt>
+			<dt><img src="/images/icon2.gif"/>怀孕</dt>
 			{% for d in data.1 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=怀孕">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="pink margin_left">
 		<dl>
-			<dt><img src="images/icon3.gif"/>产后</dt>
+			<dt><img src="/images/icon3.gif"/>产后</dt>
 			{% for d in data.2 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=产后">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="pink margin_left">
 		<dl >
-			<dt><img src="images/icon4.gif"/>0-1岁</dt>
+			<dt><img src="/images/icon4.gif"/>0-1岁</dt>
 			{% for d in data.3 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=0-1岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 </div>
 
-<div class="ad970"><img src="images/97080.gif" /></div>
+<div class="ad970"><img src="/images/97080.gif" /></div>
 
 <div class="content overflow">
 	<div class="blue">
 		<dl >
-			<dt><img src="images/icon5.gif"/>1-2岁</dt>
+			<dt><img src="/images/icon5.gif"/>1-2岁</dt>
 			{% for d in data.4 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=1-2岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="blue margin_left">
 		<dl >
-			<dt><img src="images/icon6.gif"/>2-3岁</dt>
+			<dt><img src="/images/icon6.gif"/>2-3岁</dt>
 			{% for d in data.5 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=2-3岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="blue margin_left">
 		<dl>
-			<dt><img src="images/icon7.gif"/>3-6岁</dt>
+			<dt><img src="/images/icon7.gif"/>3-6岁</dt>
 			{% for d in data.6 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=3-6岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 	
 	<div class="blue margin_left">
 		<dl >
-			<dt><img src="images/icon8.gif"/>专家咨询</dt>
+			<dt><img src="/images/icon8.gif"/>专家咨询</dt>
 			{% for d in data.7 %}
 			<dd><a href="/v/{{d.kid}}">{{d.title}}</a></dd>
 			{% endfor %}
-			<dd class="more"><h4><a href="#">更多>></a></h4></dd>
+			<dd class="more"><h4><a href="/keyword/?insearch=专家咨询">更多&gt;&gt;</a></h4></dd>
 		</dl>
 	</div>
 </div>
@@ -142,43 +142,45 @@
 <div id="label" >
 	<h3>全部分类</h3>
 	<ul class="margin_left">
-		<li><h5><a href="#">备孕</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=备孕">备孕</a></h5></li>
+		<li><a href="/keyword/?insearch=备孕 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=备孕 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=备孕 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=备孕 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=备孕 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=备孕 常见问题">常见问题</a></li>
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">孕期</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=孕期">孕期</a></h5></li>
+		<li><a href="/keyword/?insearch=孕期 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=孕期 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=孕期 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=孕期 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=孕期 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=孕期 常见问题">常见问题</a></li>
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">分娩期</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=产后">产后</a></h5></li>
+		<li><a href="/keyword/?insearch=产后 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=产后 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=产后 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=产后 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=产后 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=产后 常见问题">常见问题</a></li>
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">0-1岁</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=0-1岁">0-1岁</a></h5></li>
+		<li><a href="/keyword/?insearch=0-1岁 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=0-1岁 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=0-1岁 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=0-1岁 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=0-1岁 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=0-1岁 常见问题">常见问题</a></li>
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">1-2岁</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=1-2岁">1-2岁</a></h5></li>
+		<li><a href="/keyword/?insearch=1-2岁 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=1-2岁 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=1-2岁 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=1-2岁 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=1-2岁 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=1-2岁 常见问题">常见问题</a></li>
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">2-3岁</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=2-3岁">2-3岁</a></h5></li>
+		<li><a href="/keyword/?insearch=2-3岁 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=2-3岁 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=2-3岁 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=2-3岁 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=2-3岁 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=2-3岁 常见问题">常见问题</a></li>
+		
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">3-6岁</a></h5></li>
-		<li><a href="#">生活提示</a></li><li><a href="#">母胎变化</a></li><li><a href="#">适时胎教</a></li><li><a href="#">营养保健</a></li><li><a href="#">疾病护理</a></li><li><a href="#">常见问题</a></li>
+		<li><h5><a href="/keyword/?insearch=3-6岁">3-6岁</a></h5></li>
+		<li><a href="/keyword/?insearch=3-6岁 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=3-6岁 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=3-6岁 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=3-6岁 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=3-6岁 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=3-6岁 常见问题">常见问题</a></li>
+		
 	</ul>
 	
 	<ul class="margin_left">
-		<li><h5><a href="#">备孕</a></h5></li>
-		<li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li><li><a href="#">一级分类</a></li>
+		<li><h5><a href="/keyword/?insearch=专家咨询">专家咨询</a></h5></li>
+		<li><a href="/keyword/?insearch=专家咨询 生活提示">生活提示</a></li><li><a href="/keyword/?insearch=专家咨询 母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=专家咨询 适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=专家咨询 营养保健">营养保健</a></li><li><a href="/keyword/?insearch=专家咨询 疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=专家咨询 常见问题">常见问题</a></li>
 	</ul>
 </div>
 
