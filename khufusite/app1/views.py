@@ -40,7 +40,7 @@ def bottom(request):
 
 def keyword(request):
     word=request.GET["insearch"]
-    result=tmpsearch(word)
+    result=list(tmpsearch(word))
     result1=result[:10]
     result2=result[10:]
     return render_to_response('search.html',locals())
