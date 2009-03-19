@@ -27,9 +27,14 @@
 
 <div id="recom">
 	<ul class="overflow">
-	  {% for d in rel_page %}
-	  <li><a href="/v/{{d.1}}">{{d.0|removetext}}</a></li>
-	  {% endfor %}
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
 	</ul>
 </div>
 
@@ -75,18 +80,9 @@
 		<div class="pink margin_bottom">
 			<dl >
 				<dt><img src="/images/icon1.gif"/>相关文章</dt>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
-				<dd><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></dd>
+				{% for d in rel_page %}
+				<dd><a href="/v/{{d.1}}/">{{d.0|removetext}}</a></dd>
+				  {% endfor %}
 				<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 			</dl>
 		</div>
