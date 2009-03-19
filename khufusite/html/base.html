@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>早教知识网 www.zaojiao100.com</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" charset="utf-8">
+	function search () {
+		window.location="/keyword/?insearch="+document.getElementById("insearch").value
+	}
+</script>
+<base target="_blank" />
+</head>
+
+<body>
+	<div id="top" class="overflow">
+		<div class="logo"><a href="http://www.zaojiao100.com" target="_self"><img src="/images/logo.gif" border="0" /></a></div>
+		<div class="ad"><img src="/images/48080.gif" /></div>
+	</div>
+
+	<div id="guide">
+		<ul class="overflow">
+			<li><a href="/">首页</a></li>
+			<li><a href="/keyword/?insearch=备孕" class="active">备孕</a></li>
+			<li><a href="/keyword/?insearch=怀孕">怀孕</a></li>
+			<li><a href="/keyword/?insearch=分娩期">分娩期</a></li>
+			<li><a href="/keyword/?insearch=0-1岁">0-1岁</a></li>
+			<li><a href="/keyword/?insearch=1-2岁">1-2岁</a></li>
+			<li><a href="/keyword/?insearch=2-3岁">2-3岁</a></li>
+			<li><a href="/keyword/?insearch=3-6岁">3-6岁</a></li>
+			<li><a href="/keyword/?insearch=专家咨询">专家咨询</a></li>
+		</ul>
+	</div>
+
+	<div id="guide2" style="display:none">
+		<ul class="overflow">
+			<li><a href="#" class="active2">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+			<li><a href="#">二级分类</a></li>
+		</ul>
+	</div>
+
+{% block body %}
+{% endblock %}
+
+<div id="bottom">
+	<hr />
+	<p class="center"><a href="#">关于我们</a> | 联系我们 | 广告投放 | 免责条款 | <a href="link.html">友情链接</a></p>
+</div>
+
+</body>
+</html>
