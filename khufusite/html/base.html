@@ -8,7 +8,11 @@
 function search () {
 	word = document.getElementById("insearch").value
 	type_class = document.getElementById("type_class").value
-	window.location="/keyword/?insearch="+word+"||"+type_class
+	if(type_class=="0")
+			window.location="/keyword/?insearch="+word+"||"+type_class
+	else
+		window.location="/keyword/?insearch="+word
+		
 }
 </script>
 <base target="_blank" />

@@ -83,7 +83,7 @@ def v(request,kid):
 def tmpsearch(word):
     word=word.encode("utf8")
     mc = memcache.Client(['114.113.30.29:11211'])
-    results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%word).read()
+    results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu %s'%word).read()
     for kid in results.split('\n'):
         obj=mc.get(kid)
         if obj==None:continue
