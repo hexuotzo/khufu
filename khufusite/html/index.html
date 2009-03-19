@@ -2,28 +2,6 @@
 
 {% block body %}
 {% load text %}
-<script type="text/javascript" charset="utf-8">
-	function search () {
-		window.location="/keyword/?insearch="+document.getElementById("insearch").value
-	}
-</script>
-
-
-<div id="search">
-<img src="/images/icon9.gif" />
-<h3>育儿知识查询</h3>
-<input type="text" class="searchbox" value="孩子发烧" name="insearch" id="insearch" onclick="this.value=''" />
-<select>
-  <option selected="selected">全部时期</option>
-  <option>备孕</option>
-  <option>怀孕</option>
-  <option>分娩期</option>
-  <option>1-2岁</option>
-  <option>2-3岁</option>
-  <option>3-6岁</option>
-</select>
-<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
-</div>
 
 <div id="recom">
 	<ul class="overflow">
