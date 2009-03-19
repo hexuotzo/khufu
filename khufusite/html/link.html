@@ -1,13 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>早教知识网 www.zaojiao100.com</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-</head>
+{% extends "base.html" %}
 
-<body>
-<iframe src="top.html" width="100%" height="174" scrolling="no" frameborder="0"></iframe>
+{% block body %}
 
 <div id="search">
 <img src="images/icon9.gif" />
@@ -52,6 +45,5 @@
 	</div>
 </div>
 
-<iframe src="bottom.html" width="100%" height="100" scrolling="no" frameborder="0"></iframe>
-</body>
-</html>
+
+{% endblock %}
