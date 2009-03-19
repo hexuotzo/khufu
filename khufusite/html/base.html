@@ -8,6 +8,7 @@
 </head>
 
 <body>
+{% load text %}
 	<div id="top" class="overflow">
 		<div class="logo"><a href="http://www.zaojiao100.com" target="_self"><img src="/images/logo.gif" border="0" /></a></div>
 		<div class="ad"><img src="/images/48080.gif" /></div>
@@ -16,8 +17,8 @@
 <div id="guide">
 	<ul class="overflow">
 		<li><a href="/">首页</a></li>
-		<li><a href="/keyword/?insearch=备孕" class="active">备孕</a></li>
-		<li><a href="/keyword/?insearch=怀孕">怀孕</a></li>
+		<li><a href="/keyword/?insearch=备孕" {%avtivemenu word "备孕"%}>备孕</a></li>
+		<li><a href="/keyword/?insearch=怀孕" {%avtivemenu word "怀孕"%}>怀孕</a></li>
 		<li><a href="/keyword/?insearch=分娩期">分娩期</a></li>
 		<li><a href="/keyword/?insearch=0-1岁">0-1岁</a></li>
 		<li><a href="/keyword/?insearch=1-2岁">1-2岁</a></li>
