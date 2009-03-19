@@ -59,6 +59,28 @@ def keyword(request):
 def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
+    
+    from ngram import ngram
+    menus = [
+        "备孕",
+        "怀孕",
+        "产后",
+        "0-1岁",
+        "1-2岁",
+        "2-3岁",
+        "3-6岁",
+        "专家咨询",
+    ]
+    rel_page = []
+    tg = ngram(menus,min_sim=0.0)
+    words = "|".join( tg.getSimilarStrings(obj.title)).keys() )
+    results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%words).read()
+    for kid in results.split('\n'):
+        obj=mc.get(kid)
+        print "kid",kid
+        if obj==None:continue
+        tmp=cjson.decode(obj)
+        rel_page.append( tmp['title'],kid )
     return render_to_response('info.html',locals())
     
 def tmpsearch(word):

@@ -27,14 +27,9 @@
 
 <div id="recom">
 	<ul class="overflow">
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
-	  <li><h4><a href="#">[优生]</a></h4><a href="#">优生：一滴血筛查5种病毒</a></li>
+	  {% for d in rel_page %}
+	  <li><a href="/v/{{d.1}}">{{d.0|removetext}}</a></li>
+	  {% endfor %}
 	</ul>
 </div>
 
