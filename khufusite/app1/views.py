@@ -11,7 +11,7 @@ import os
 
 
 def hello(request):
-    word = "首页"
+    word = ""
     menus = [
         "备孕",
         "怀孕",
