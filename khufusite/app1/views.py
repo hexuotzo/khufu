@@ -49,7 +49,9 @@ def link(request):
 
 def keyword(request):
     word=request.GET["insearch"]
-    type_class=request.GET["type_class"]
+    type_class = "0"
+    if type_class in request.GET:
+        type_class=request.GET["type_class"]
     result=list(tmpsearch(word,type_class))
     result1=result[:10]
     result2=result[10:]
