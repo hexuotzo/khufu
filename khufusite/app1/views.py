@@ -71,13 +71,13 @@ def v(request,kid):
     ]
     rel_page = []
     tg = ngram(menus,min_sim=0.0)
-    words = "|".join( (tg.getSimilarStrings(obj["title"])).keys() )
-    results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%words).read()
-    for kid in results.split('\n'):
-        obj2=mc.get(kid)
+    words = "||".join( (tg.getSimilarStrings(obj["title"])).keys() )
+    results=os.popen('dystmgr search -nl -max 10 /home/yanxu/khufu/khufu "%s"'%words).read()
+    for kid2 in results.split('\n'):
+        obj2=mc.get(kid2)
         if obj2==None:continue
         tmp=cjson.decode(obj2)
-        rel_page.append( (tmp['title'],kid) )
+        rel_page.append( (tmp['title'],kid2) )
     return render_to_response('info.html',locals())
     
 def tmpsearch(word):
