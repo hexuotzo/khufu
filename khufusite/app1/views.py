@@ -22,27 +22,46 @@ def hello(request):
         "3-6岁",
         "专家咨询",
     ]
+    data = []
+    mc = memcache.Client(['114.113.30.29:11212'])
+    for m in menus:
+        key = hashlib.md5(m).hexdigest()
+        d = mc.get(key)
+        if d:
+            data.append( cjson.decode(d)[:4] )
     show_views=[
         "1918725321",
         "5710587117",
         "167035163130",
         "16549921536",
     ]
-    data = []
     data_view = []
-    mc = memcache.Client(['114.113.30.29:11212'])
     mc2 = memcache.Client(['114.113.30.29:11211'])
-    for m in menus:
-        key = hashlib.md5(m).hexdigest()
-        d = mc.get(key)
-        if d:
-            data.append( cjson.decode(d)[:4] )
     for key in show_views:
         d = mc2.get(key)
         if d:
             d = cjson.decode(d)
             d["kid"]=key
             data_view.append( d )
+            
+    recoms=[
+        "1918725321",
+        "5710587117",
+        "167035163130",
+        "16549921536",
+        "1918725321",
+        "5710587117",
+        "167035163130",
+        "16549921536",
+    ]
+    data_recoms = []
+    for key in recoms:
+        d = mc2.get(key)
+        if d:
+            d = cjson.decode(d)
+            d["kid"]=key
+            data_recoms.append( d )
+            
     return render_to_response('index.html',locals())
     
 def link(request):
