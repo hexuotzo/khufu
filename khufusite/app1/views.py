@@ -49,7 +49,8 @@ def link(request):
 
 def keyword(request):
     word=request.GET["insearch"]
-    result=list(tmpsearch(word))
+    type_class=request.GET["type_class"]
+    result=list(tmpsearch(word,type_class))
     result1=result[:10]
     result2=result[10:]
     return render_to_response('search.html',locals())
@@ -80,8 +81,11 @@ def v(request,kid):
         rel_page.append( (tmp['title'],kid2) )
     return render_to_response('info.html',locals())
     
-def tmpsearch(word):
+def tmpsearch(word,type_class):
     word=word.encode("utf8")
+    type_class=type_class.encode("utf8")
+    if type_class!="0":
+        word = "||".join( (word,type_class) )
     mc = memcache.Client(['114.113.30.29:11211'])
     results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu %s'%word).read()
     for kid in results.split('\n'):
