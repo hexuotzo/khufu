@@ -1,8 +1,6 @@
 #encoding: utf-8
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from pykhufu import PyDystopia
-from subprocess import Popen,PIPE
 try:
     import cmemcache as memcache
 except:
@@ -77,20 +75,17 @@ def v(request,kid):
     results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%words).read()
     for kid in results.split('\n'):
         obj2=mc.get(kid)
-        print "kid",kid
         if obj2==None:continue
         tmp=cjson.decode(obj2)
-        rel_page.append( tmp['title'],kid )
+        rel_page.append( (tmp['title'],kid) )
     return render_to_response('info.html',locals())
     
 def tmpsearch(word):
     word=word.encode("utf8")
     mc = memcache.Client(['114.113.30.29:11211'])
     results=os.popen('dystmgr search -nl -max 20 /home/yanxu/khufu/khufu "%s"'%word).read()
-    print "result:",results
     for kid in results.split('\n'):
         obj=mc.get(kid)
-        print "kid",kid
         if obj==None:continue
         tmp=cjson.decode(obj)
         yield tmp['title'],tmp['addpinyin'],kid
