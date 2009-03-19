@@ -49,10 +49,10 @@ def hello(request):
         "5710587117",
         "167035163130",
         "16549921536",
-        "1918725321",
-        "5710587117",
-        "167035163130",
+        "9389121638",
         "16549921536",
+        "6065323270",
+        "7181029938",
     ]
     data_recoms = []
     for key in recoms:
@@ -78,6 +78,7 @@ def keyword(request):
     return render_to_response('search.html',locals())
 
 def v(request,kid):
+    word = "首页"
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
