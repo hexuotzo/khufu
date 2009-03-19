@@ -48,9 +48,9 @@ function search () {
 	</div>
 
 	<div id="search">
+	<form action="/keyword/" method="GET">
 	<img src="/images/icon9.gif" />
 	<h3>育儿知识查询</h3>
-	<form action="/keyword/" method="GET">
 	{% if word %}
 	<input type="text" class="searchbox" value="{{word}}" name="insearch" id="insearch" onclick="this.value=''" />
 	{% else %}
