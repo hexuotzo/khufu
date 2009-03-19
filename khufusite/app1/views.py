@@ -71,8 +71,8 @@ def v(request,kid):
     ]
     rel_page = []
     tg = ngram(menus,min_sim=0.0)
-    words = "||".join( (tg.getSimilarStrings(obj["title"])).keys() )
-    results=os.popen('dystmgr search -nl -max 10 /home/yanxu/khufu/khufu "%s"'%words).read()
+    words = "||".join( (tg.getSimilarStrings(obj["title"].encode("utf8"))).keys() )
+    results=os.popen('dystmgr search -nl -max 10 /home/yanxu/khufu/khufu %s'%words).read()
     for kid2 in results.split('\n'):
         obj2=mc.get(kid2)
         if obj2==None:continue
