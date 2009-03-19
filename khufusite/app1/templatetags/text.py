@@ -11,7 +11,7 @@ def removetext(text):
     text=text.replace("-怀孕胎教-中国早教网","")
     return text
 
-@register.simpletag
+@register.simple_tag
 def activemenu(word,text):
     if word==text:
         return 'class="active"'
