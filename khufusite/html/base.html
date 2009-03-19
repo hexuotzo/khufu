@@ -50,12 +50,13 @@ function search () {
 	<div id="search">
 	<img src="/images/icon9.gif" />
 	<h3>育儿知识查询</h3>
+	<form action="/keyword/" method="GET">
 	{% if word %}
 	<input type="text" class="searchbox" value="{{word}}" name="insearch" id="insearch" onclick="this.value=''" />
 	{% else %}
 	<input type="text" class="searchbox" value="孩子发烧" name="insearch" id="insearch" onclick="this.value=''" />
 	{% endif %}
-	<select id="type_class">
+	<select id="type_class" name="type_class">
 	  <option value="0">全部时期</option>
 	  <option value="备孕">备孕</option>
 	  <option value="怀孕">怀孕</option>
@@ -64,7 +65,8 @@ function search () {
 	  <option value="2-3岁">2-3岁</option>
 	  <option value="3-6岁">3-6岁</option>
 	</select>
-	<input type="image" src="/images/baby_10.gif" name="Submit" value="提交" onclick="search()" />
+	<input type="image" src="/images/baby_10.gif" name="Submit" value="提交"/>
+	</form>
 	</div>
 {% block body %}
 {% endblock %}
