@@ -46,11 +46,8 @@ def hello(request):
             data_view.append( d )
     return render_to_response('index.html',locals())
     
-def top(request):
-    return render_to_response('top.html',locals())
-    
-def bottom(request):
-    return render_to_response('bottom.html',locals())
+def link(request):
+    return render_to_response('link.html',locals())
 
 def keyword(request):
     word=request.GET["insearch"]
