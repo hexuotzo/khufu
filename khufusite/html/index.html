@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
+{% load text %}
 <script type="text/javascript" charset="utf-8">
 	function search () {
 		window.location="/keyword/?insearch="+document.getElementById("insearch").value
@@ -127,7 +128,7 @@
 	<dl>
 		<dt>专 题</dt>
 	{% for d in data_view %}
-	  <dd><h3><a href="/v/{{d.kid}}">{{d.title}}</a></h3>{{d.body|slice:":100"}}<span><a href="/v/{{d.kid}}">[详细内容]</a></span></dd>
+	  <dd><h3><a href="/v/{{d.kid}}">{{d.title|removetext}}</a></h3>{{d.body|slice:":100"}}<span><a href="/v/{{d.kid}}">[详细内容]</a></span></dd>
 	{% endfor %}
 	</dl>
 </div>
