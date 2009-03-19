@@ -8,7 +8,7 @@
 function search () {
 	word = document.getElementById("insearch").value
 	type_class = document.getElementById("type_class").value
-	if(type_class=="0")
+	if(type_class!="0")
 			window.location="/keyword/?insearch="+word+"||"+type_class
 	else
 		window.location="/keyword/?insearch="+word
