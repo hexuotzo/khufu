@@ -18,7 +18,14 @@
 			{%endfor%}
 		</ul>
 		
-		<h3>{{pp.number}}/{{p.num_pages}} <a href="/keyword/?insearch={{word}}&amp;page={{pp.previous_page_number}}">上一页</a> <a href="/keyword/?insearch={{word}}&amp;page={{pp.next_page_number}}">下一页</a> </h3>
+		<h3>{{pp.number}}/{{p.num_pages}} 
+		{% if pp.has_previous %}
+			<a href="/keyword/?insearch={{word}}&amp;page={{pp.previous_page_number}}">上一页</a> 
+		{% endif %}
+		{% if pp.has_next %}
+			<a href="/keyword/?insearch={{word}}&amp;page={{pp.next_page_number}}">下一页</a> 
+		{% endif %}
+		</h3>
 	</div>
 
 	<div id="right">
