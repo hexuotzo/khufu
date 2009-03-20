@@ -1,6 +1,7 @@
 #encoding: utf-8
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.core.paginator import Paginator
 try:
     import cmemcache as memcache
 except:
@@ -69,12 +70,17 @@ def link(request):
 
 def keyword(request):
     word=request.GET["insearch"]
+    page = 1
+    if "page" in request.GET:
+        page = request.GET["page"]
     type_class = "0"
-    if type_class in request.GET:
+    if "type_class" in request.GET:
         type_class=request.GET["type_class"]
     result=list(tmpsearch(word,type_class))
-    result1=result[:10]
-    result2=result[10:]
+    p = Paginator(result,20)
+    pp = p.page(page)
+    result1=pp.object_list[:10]
+    result2=pp.object_list[10:]
     return render_to_response('search.html',locals())
 
 def v(request,kid):
