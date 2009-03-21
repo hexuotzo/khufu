@@ -21,7 +21,7 @@
 			<dl >
 				<dt><img src="/images/icon1.gif"/>相关文章</dt>
 				{% for d in rel_page %}
-				<dd><a href="/v/{{d.1}}/">{{d.0|removetext}}</a></dd>
+				<dd><a href="/v/{{d.1}}/" target="_blank">{{d.0|removetext}}</a></dd>
 				  {% endfor %}
 				<dd class="more"><h4><a href="#">更多>></a></h4></dd>
 			</dl>

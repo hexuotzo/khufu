@@ -10,7 +10,6 @@ function menu2(text){
 	window.location="/keyword/?insearch="+menu+" "+text+"/"
 }
 </script>
-<base target="_blank" />
 </head>
 
 <body>
@@ -66,7 +65,7 @@ function menu2(text){
 <div id="recom">
 	<ul class="overflow">
 	{% for d in data_recoms %}
-	  <li><a href="/v/{{d.kid}}/">{{d.title|removetext}}</a></li>
+	  <li><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></li>
 	{% endfor %}
 	</ul>
 </div>
