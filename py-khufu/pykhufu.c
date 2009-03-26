@@ -21,7 +21,7 @@ search(PyObject *self, PyObject *args)
     idb = tcidbnew();
 
     /* open the database */
-    if(!tcidbopen(idb, "khufu", IDBOWRITER | IDBOCREAT)){
+    if(!tcidbopen(idb, "/home/yanxu/khufu/khufu", IDBOWRITER | IDBOCREAT)){
         ecode = tcidbecode(idb);
         fprintf(stderr, "open error: %s\n", tcidberrmsg(ecode));
     }

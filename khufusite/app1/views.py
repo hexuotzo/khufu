@@ -119,7 +119,7 @@ def tmpsearch(word,type_class):
     mc = memcache.Client(['114.113.30.29:11211'])
     results = pykhufu.search(word)
     for kid in results:
-        obj=mc.get(kid)
+        obj=mc.get(str(kid))
         if obj==None:continue
         tmp=cjson.decode(obj)
         yield tmp['title'],tmp['addpinyin'],kid
