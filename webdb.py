@@ -23,7 +23,7 @@ def search(word):
         if d:
             obj = cjson.decode(d)
             d = dict(
-                title = unicode(obj['title'],'utf8'),
+                title = obj['title'],
                 kid = kid
             )
             yield kid,d
