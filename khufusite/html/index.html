@@ -8,7 +8,7 @@
 		<dl >
 			<dt><img src="/images/icon1.gif"/>备孕</dt>
 			{% for d in data.0 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=备孕">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -18,7 +18,7 @@
 		<dl >
 			<dt><img src="/images/icon2.gif"/>怀孕</dt>
 			{% for d in data.1 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=怀孕">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -28,7 +28,7 @@
 		<dl>
 			<dt><img src="/images/icon3.gif"/>产后</dt>
 			{% for d in data.2 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=产后">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -38,7 +38,7 @@
 		<dl >
 			<dt><img src="/images/icon4.gif"/>0-1岁</dt>
 			{% for d in data.3 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=0-1岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -52,7 +52,7 @@
 		<dl >
 			<dt><img src="/images/icon5.gif"/>1-2岁</dt>
 			{% for d in data.4 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=1-2岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -62,7 +62,7 @@
 		<dl >
 			<dt><img src="/images/icon6.gif"/>2-3岁</dt>
 			{% for d in data.5 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=2-3岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -72,7 +72,7 @@
 		<dl>
 			<dt><img src="/images/icon7.gif"/>3-6岁</dt>
 			{% for d in data.6 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=3-6岁">更多&gt;&gt;</a></h4></dd>
 		</dl>
@@ -82,7 +82,7 @@
 		<dl >
 			<dt><img src="/images/icon8.gif"/>专家咨询</dt>
 			{% for d in data.7 %}
-			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title}}</a></dd>
+			<dd><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></dd>
 			{% endfor %}
 			<dd class="more"><h4><a href="/keyword/?insearch=专家咨询">更多&gt;&gt;</a></h4></dd>
 		</dl>
