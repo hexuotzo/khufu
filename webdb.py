@@ -16,21 +16,17 @@ MENU = [
     "专家咨询",
 ]
 
-def removetext(text):
-    text = text.encode('utf8')
-    text = text.replace('-育儿早教-中国早教网','')
-    text = text.replace('-怀孕胎教-中国早教网','')
-    return text
-
 def search(word):
     for kid in os.popen('dystmgr search -nl khufu %s' % word).read().split('\n'):
         if kid=='':continue
-        obj = cjson.decode(mc.get(kid))
-        d = dict(
-            title = unicode(removetext(obj['title']),'utf8'),
-            kid = kid
-        )
-        yield kid,d
+        d = mc.get(kid)
+        if d:
+            obj = cjson.decode(d)
+            d = dict(
+                title = unicode(obj['title'],'utf8'),
+                kid = kid
+            )
+            yield kid,d
 
 def words():
     if len(sys.argv)>1:
