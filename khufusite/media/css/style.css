@@ -10,12 +10,12 @@ a:hover,a:active { color:#FF0000; text-decoration:underline;}
 .center { text-align:center;}
 
 #top,#bottom  { width:970px; margin:8px auto;}
-#bottom { float:left; }
-#top .logo { float:left; margin:0 5px; }
+#top .logo { float:left; margin:5px; }
 #top .ad { float:right;}
+#top h3 { font-size:12px; font-weight:normal; text-align:right;}
 #bottom a { color:#0033CC; text-decoration:underline;}
 
-#guide  { width:970px; margin:0 auto;margin-top:8px;}
+#guide  { width:970px; margin:0 auto;}
 #guide ul { background:url(../images/baby2_3.gif) repeat-x; height:34px; padding-left:50px; border-left:1px solid #DAD7CF; border-right:1px solid #DAD7CF;}
 #guide li { float:left;}
 #guide li a { font-size:14px; display:block;width:91px;text-align:center; line-height:34px;}
@@ -26,15 +26,15 @@ a:hover,a:active { color:#FF0000; text-decoration:underline;}
 #guide2 ul { margin:8px;}
 #guide2 li { float:left; margin-right:10px;}
 #guide2 li a { display:block; padding:2px 4px;}
-#guide2 li a:hover,#guide2 li a:active,#guide2 li a.active { background:#FCFFD5; border:1px solid #FCD184;}
+#guide2 li a:hover,#guide2 li a:active,#guide2 li a.active2 { background:#FCFFD5; border:1px solid #FCD184;}
 
 #search,#recom { width:970px; margin: 0 auto;}
-#search { height:53px; background:url(../images/baby_7.gif) repeat-x; border:1px solid #78C368; text-align:center;font-weight:bold; line-height:53px; color:#FFF; position:relative;}
-#search img { position:absolute; left:105px;}
-#search h3 { display:inline; font-size:14px; }
-#search input { vertical-align:middle;}
-#search select { font-size:17px;vertical-align:middle;}
-#search .searchbox { width:380px; height:28px; line-height:28px; background:#fff; font-size:14px;  border:1px  solid #8ED0A5; margin:0 3px; padding:0 5px;  color:#999999;}
+#search { background:url(../images/baby_7.gif) repeat-x; border:1px solid #78C368; text-align:center;font-weight:bold;  color:#FFF; }
+#search img { margin-left:105px;vertical-align:middle;}
+#search h3 { display:inline; font-size:16px; vertical-align:middle;}
+#search input {vertical-align:middle;}
+#search select { font-size:16px;vertical-align:middle;}
+#search .searchbox { width:380px; height:24px; line-height:24px; background:#fff; font-size:16px;  border:1px  solid #8ED0A5; margin:0 3px; padding-left:5px;  color:#999999;}
 
 #recom { background:#F6F8FB; border:1px solid #E2E8ED; }
 #recom ul { margin:8px;  }
@@ -49,6 +49,7 @@ a:hover,a:active { color:#FF0000; text-decoration:underline;}
 #main ul { margin:8px 10px;float:left; width:320px;}
 #main li a { font-size:14px;}
 #main li span { font-size:10px; font:Verdana; color:#999; margin-left:10px;}
+#main p {margin:10px;}
 #right { float:right; width:230px;}
 
 #right .ad230 { margin-bottom:10px; }
