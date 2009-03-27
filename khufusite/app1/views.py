@@ -28,7 +28,7 @@ def globalrequest(request):
                 type_class=type_class,
                 menus=menus)
 
-def isbot():
+def isbot(request):
     botlist = [
         'Baiduspider',
         'Googlebot',
@@ -85,7 +85,7 @@ def hello(request):
 
 def link(request):
     notbot = True
-    if isbot():notbot = None
+    if isbot(request):notbot = None
     return render_to_response('link.html',locals(),
         context_instance=RequestContext(request))
 
@@ -108,7 +108,7 @@ def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
-    if isbot():
+    if isbot(request):
         obj['memo']=obj['addpinyin']
     else:
         obj['memo']=obj['body']
