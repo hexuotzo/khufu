@@ -11,19 +11,19 @@ import cjson
 import hashlib
 import os
 
+menus = [
+    "备孕",
+    "怀孕",
+    "产后",
+    "0-1岁",
+    "1-2岁",
+    "2-3岁",
+    "3-6岁",
+    "专家咨询",
+]
 
 def globalrequest(request):
     word,type_class = "",""
-    menus = [
-        "备孕",
-        "怀孕",
-        "产后",
-        "0-1岁",
-        "1-2岁",
-        "2-3岁",
-        "3-6岁",
-        "专家咨询",
-    ]
     return dict(word=word,
                 type_class=type_class,
                 menus=menus)
