@@ -10,6 +10,7 @@ a:hover,a:active { color:#FF0000; text-decoration:underline;}
 .center { text-align:center;}
 
 #top,#bottom  { width:970px; margin:8px auto;}
+#bottom { float:left; }
 #top .logo { float:left; margin:5px; }
 #top .ad { float:right;}
 #top h3 { font-size:12px; font-weight:normal; text-align:right;}
