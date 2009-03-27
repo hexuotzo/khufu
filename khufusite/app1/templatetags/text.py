@@ -15,3 +15,8 @@ def removetext(text):
 def activemenu(word,text):
     if word==text:
         return 'class="active"'
+
+@register.simple_tag
+def activemenu2(word,text):
+    if word==text:
+        return 'class="active2"'
