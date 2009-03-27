@@ -9,7 +9,6 @@ except:
 import cjson
 import hashlib
 import os
-import pykhufu
 
 
 def hello(request):
@@ -117,9 +116,9 @@ def tmpsearch(word,type_class):
     if type_class!="0":
         word = " ".join( (word,type_class) )
     mc = memcache.Client(['114.113.30.29:11211'])
-    results = pykhufu.search(word)
-    for kid in results:
-        obj=mc.get(str(kid))
+    results=os.popen('dystmgr search -nl -max 200 /home/yanxu/khufu/khufu %s'%word).read()
+    for kid in results.split('\n'):
+        obj=mc.get(kid)
         if obj==None:continue
         tmp=cjson.decode(obj)
         yield tmp['title'],tmp['addpinyin'],kid
