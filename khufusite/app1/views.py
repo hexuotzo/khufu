@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator
+from django.template import RequestContext
 try:
     import cmemcache as memcache
 except:
@@ -11,7 +12,7 @@ import hashlib
 import os
 
 
-def hello(request):
+def globalrequest(request):
     word,type_class = "",""
     menus = [
         "备孕",
@@ -23,6 +24,10 @@ def hello(request):
         "3-6岁",
         "专家咨询",
     ]
+    return dict(word=word,
+                type_class=type_class,
+                menus=menus)
+def hello(request):
     data = []
     mc = memcache.Client(['114.113.30.29:11212'])
     for m in menus:
@@ -63,7 +68,8 @@ def hello(request):
             d["kid"]=key
             data_recoms.append( d )
             
-    return render_to_response('index.html',locals())
+    return render_to_response('index.html',locals(),
+            context_instance=RequestContext(request))
     
 def link(request):
     return render_to_response('link.html',locals())
@@ -84,7 +90,6 @@ def keyword(request):
     return render_to_response('search.html',locals())
 
 def v(request,kid):
-    word,type_class = "首页",""
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
@@ -99,17 +104,8 @@ def v(request,kid):
             break
         else:
             obj['memo']=obj['body']
+
     from ngram import ngram
-    menus = [
-        "备孕",
-        "怀孕",
-        "产后",
-        "0-1岁",
-        "1-2岁",
-        "2-3岁",
-        "3-6岁",
-        "专家咨询",
-    ]
     rel_page = []
     tg = ngram(menus,min_sim=0.0)
     words = "||".join( (tg.getSimilarStrings(obj["title"].encode("utf8"))).keys() )
@@ -119,8 +115,9 @@ def v(request,kid):
         if obj2==None:continue
         tmp=cjson.decode(obj2)
         rel_page.append( (tmp['title'],kid2) )
-    return render_to_response('info.html',locals())
-    
+    return render_to_response('info.html',locals(),
+        context_instance=RequestContext(request))
+
 def tmpsearch(word,type_class):
     word=word.encode("utf8")
     type_class=type_class.encode("utf8")
