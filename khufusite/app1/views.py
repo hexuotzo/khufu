@@ -84,7 +84,7 @@ def keyword(request):
     return render_to_response('search.html',locals())
 
 def v(request,kid):
-    word = "首页"
+    word,type_class = "首页",""
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
