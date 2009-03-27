@@ -27,6 +27,18 @@ def globalrequest(request):
     return dict(word=word,
                 type_class=type_class,
                 menus=menus)
+
+def isbot():
+    botlist = [
+        'Baiduspider',
+        'Googlebot',
+        'Yahoo! Slurp',
+    ]
+    for bot in botlist:
+        if request.META['HTTP_USER_AGENT'].find(bot)==0:
+            return True
+    return False
+
 def hello(request):
     data = []
     mc = memcache.Client(['114.113.30.29:11212'])
@@ -70,9 +82,12 @@ def hello(request):
             
     return render_to_response('index.html',locals(),
             context_instance=RequestContext(request))
-    
+
 def link(request):
-    return render_to_response('link.html',locals())
+    notbot = True
+    if isbot():notbot = None
+    return render_to_response('link.html',locals(),
+        context_instance=RequestContext(request))
 
 def keyword(request):
     word=request.GET["insearch"]
@@ -93,17 +108,10 @@ def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
-    botlist = [
-        'Baiduspider',
-        'Googlebot',
-        'Yahoo! Slurp',
-    ]
-    for bot in botlist:
-        if request.META['HTTP_USER_AGENT'].find(bot)==0:
-            obj['memo']=obj['addpinyin']
-            break
-        else:
-            obj['memo']=obj['body']
+    if isbot():
+        obj['memo']=obj['addpinyin']
+    else:
+        obj['memo']=obj['body']
 
     from ngram import ngram
     rel_page = []

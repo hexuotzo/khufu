@@ -34,7 +34,13 @@
 <div class="content overflow">
 	<div id="main">
 		<h5>友情链接</h5>
-		<p><a href="#">新浪网</a> <a>新浪网</a> <a>新浪网</a></p>
+		{% if notbot %}
+		<p>
+			<a href="#">新浪网</a>
+			<a>新浪网</a>
+			<a>新浪网</a>
+		</p>
+		{% endif %}
 	</div>
 
 	<div id="right">
