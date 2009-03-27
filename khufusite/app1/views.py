@@ -88,6 +88,11 @@ def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
     
+    if request.META['HTTP_USER_AGENT'].find('Baiduspider')==0
+        or request.META['HTTP_USER_AGENT'].find('Googlebot')==0:
+        obj['memo']=obj['addpinyin']
+    else:
+        obj['memo']=obj['body']
     from ngram import ngram
     menus = [
         "备孕",
