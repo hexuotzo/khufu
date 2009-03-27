@@ -12,7 +12,7 @@ import os
 
 
 def hello(request):
-    word = ""
+    word,type_class = "",""
     menus = [
         "备孕",
         "怀孕",
