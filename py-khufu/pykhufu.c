@@ -21,7 +21,7 @@ search(PyObject *self, PyObject *args)
     idb = tcidbnew();
 
     /* open the database */
-    if(!tcidbopen(idb, "/home/yanxu/khufu/khufu", IDBOWRITER | IDBOCREAT)){
+    if(!tcidbopen(idb, "/home/yanxu/khufu/khufu", IDBOREADER | IDBONOLCK)){
         ecode = tcidbecode(idb);
         fprintf(stderr, "open error: %s\n", tcidberrmsg(ecode));
     }
@@ -31,12 +31,8 @@ search(PyObject *self, PyObject *args)
     if(result){
         for(i = 0; i < rnum; i++){
             PyList_SetItem(pList, i, Py_BuildValue("i", result[i]));
-         //  text = tcidbget(idb, result[i]);
-         //  if(text){
-         //    printf("%d\t%s\n", (int)result[i], text);
-         //    free(text);
         }
-        free(result);
+        tcfree(result);
     } else {
         ecode = tcidbecode(idb);
         fprintf(stderr, "search error: %s\n", tcidberrmsg(ecode));
