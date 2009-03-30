@@ -4,9 +4,13 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+static int
+put(PyObject *self, PyObject *args){
+    return 0;
+}
+
 static PyObject *
-search(PyObject *self, PyObject *args)
-{
+search(PyObject *self, PyObject *args){
     const char *stext;
     TCIDB *idb;
     int ecode, rnum, i;
