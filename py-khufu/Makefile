@@ -8,8 +8,10 @@ objects = pykhufu.o pykhufu.so
 
 ifeq ($(OS),Darwin)
 	SHAREDFLAGS = -bundle
+	PYSITEPACKAGE = /opt/local/lib/python2.5/site-packages/
 else
 	SHAREDFLAGS = -shared
+	PYSITEPACKAGE = /usr/local/lib/python2.5/site-packages/
 endif
 
 
@@ -20,6 +22,10 @@ pykhufu.so : pykhufu.o
 
 pykhufu.o : pykhufu.c
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) pykhufu.c
+
+
+install :
+	cp pykhufu.so $(PYSITEPACKAGE)
 
 
 .PHONY : clean
