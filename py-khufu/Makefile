@@ -1,6 +1,6 @@
 CC = gcc
-CPPFLAGS = -I. -I/opt/local/include/python2.5 -I/usr/local/include/python2.5
-CFLAGS = -g -O2 -std=c99 -Wall -fPIC -fsigned-char -O2
+CPPFLAGS = -I. -I/opt/local/include/python2.5 -I/usr/local/include/python2.5 -I/usr/local/include
+CFLAGS = -g -O2 -std=c99 -Wall -fPIC -fsigned-char -DNDEBUG
 LIBS = -ltokyodystopia -ltokyocabinet -lbz2 -lz -lpthread -lm -lc 
 LDFLAGS = -L. -L/usr/local/lib -L/opt/local/lib
 OS=$(shell uname)
@@ -16,8 +16,8 @@ endif
 
 
 pykhufu.so : pykhufu.o
-		$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ \
-			$(LDFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ \
+		$(LDFLAGS) $(LIBS)
 
 
 pykhufu.o : pykhufu.c
