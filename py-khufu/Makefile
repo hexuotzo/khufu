@@ -16,7 +16,7 @@ endif
 
 
 pykhufu.so : pykhufu.o
-	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ \
+	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ pykhufu.o \
 		$(LDFLAGS) $(LIBS)
 
 
