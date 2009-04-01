@@ -1,8 +1,10 @@
 #encoding: utf-8
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
 from django.core.paginator import Paginator
 from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.conf import settings
+from django.utils.encoding import smart_unicode,force_unicode,smart_str
 try:
     import cmemcache as memcache
 except:
@@ -39,6 +41,16 @@ def isbot(request):
             return True
     return False
 
+def recomsearch(kids):
+    """类似专题之类,固定uid输出的函数"""
+    mc = memcache.Client(['114.113.30.29:11211'])
+    for key in kids:
+        d = mc.get(key)
+        if d:
+            d = cjson.decode(d)
+            d["kid"]=key
+            yield d
+
 def hello(request):
     data = []
     mc = memcache.Client(['114.113.30.29:11212'])
@@ -47,21 +59,17 @@ def hello(request):
         d = mc.get(key)
         if d:
             data.append( cjson.decode(d)[:4] )
+    
+    #专题的实现
     show_views=[
         "1918725321",
         "5710587117",
         "167035163130",
         "16549921536",
     ]
-    data_view = []
-    mc2 = memcache.Client(['114.113.30.29:11211'])
-    for key in show_views:
-        d = mc2.get(key)
-        if d:
-            d = cjson.decode(d)
-            d["kid"]=key
-            data_view.append( d )
-            
+    data_view = recomsearch(show_views)
+    
+    #菜单下面的推荐位的实现
     recoms=[
         "1918725321",
         "5710587117",
@@ -72,14 +80,8 @@ def hello(request):
         "6065323270",
         "7181029938",
     ]
-    data_recoms = []
-    for key in recoms:
-        d = mc2.get(key)
-        if d:
-            d = cjson.decode(d)
-            d["kid"]=key
-            data_recoms.append( d )
-            
+    data_recoms = recomsearch(recoms)
+
     return render_to_response('index.html',locals(),
             context_instance=RequestContext(request))
 
@@ -97,7 +99,7 @@ def keyword(request):
     type_class = "0"
     if "type_class" in request.GET:
         type_class=request.GET["type_class"]
-    result=list(tmpsearch(word,type_class))
+    result=list(search(word,type_class))
     p = Paginator(result,20)
     pp = p.page(page)
     result1=pp.object_list[:10]
@@ -107,34 +109,31 @@ def keyword(request):
 def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
     obj=cjson.decode(mc.get(str(kid)))
-    
+    #如果是机器人输出带拼音的正文
     if isbot(request):
         obj['memo']=obj['addpinyin']
     else:
         obj['memo']=obj['body']
 
+    #相关新闻的实现
     from ngram import ngram
     rel_page = []
     tg = ngram(menus,min_sim=0.0)
-    words = "||".join( (tg.getSimilarStrings(obj["title"].encode("utf8"))).keys() )
-    results=os.popen('dystmgr search -nl -max 10 /home/yanxu/khufu/khufu %s'%words).read()
-    for kid2 in results.split('\n'):
-        obj2=mc.get(kid2)
-        if obj2==None:continue
-        tmp=cjson.decode(obj2)
-        rel_page.append( (tmp['title'],kid2) )
+    words = "||".join( tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys() )
+    #相关新闻查询结果
+    for kid2,obj2 in search(words,"0",num=10):
+        rel_page.append( obj2['title'],kid2 )
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
 
-def tmpsearch(word,type_class):
-    word=word.encode("utf8")
-    type_class=type_class.encode("utf8")
+def search(word,type_class,num=100):
+    mc = memcache.Client(['114.113.30.29:11211'])
+    word = smart_str(word,"utf8")
+    type_class = smart_str(type_class,"utf8")
     if type_class!="0":
         word = " ".join( (word,type_class) )
-    mc = memcache.Client(['114.113.30.29:11211'])
-    results=os.popen('dystmgr search -nl -max 200 /home/yanxu/khufu/khufu %s'%word).read()
+    results=os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word) ).read()
     for kid in results.split('\n'):
         obj=mc.get(kid)
         if obj==None:continue
-        tmp=cjson.decode(obj)
-        yield tmp['title'],tmp['addpinyin'],kid
+        yield kid,cjson.decode(obj)
