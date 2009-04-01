@@ -7,7 +7,7 @@ OS=$(shell uname)
 objects = pykhufu.o pykhufu.so
 
 ifeq ($(OS),Darwin)
-	SHAREDFLAGS = -bundle
+	SHAREDFLAGS = -bundle -flat_namespace -undefined suppress
 	PYSITEPACKAGE = /opt/local/lib/python2.5/site-packages/
 else
 	SHAREDFLAGS = -shared
