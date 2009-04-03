@@ -122,7 +122,7 @@ def v(request,kid):
     words = "||".join( tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys() )
     #相关新闻查询结果
     for kid2,obj2 in search(words,"0",num=10):
-        rel_page.append( obj2['title'],kid2 )
+        rel_page.append( (obj2['title'],kid2) )
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
 
