@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 
+{% block title %}
+{% ifequal type_class "0" %}
+<title>{{word}}-早教知识网</title>
+{% else %}
+<title>{{word}}-{{type_class}}-早教知识网</title>
+{% endifequal %}
+{% endblock %}
+
+{% block keyword %}
+{% ifequal type_class "0" %}
+<meta name="keyword" content="育儿,孕产,早教,母婴,怀孕,宝宝,早期教育,分娩,早产,胎教,母婴网站,健康,专家,答疑" />
+{% else %}
+<meta name="keyword" content="育儿,孕产,早教,母婴,怀孕,宝宝,早期教育,分娩,早产,胎教,母婴网站,健康,专家,答疑" />
+{% endifequal %}
+{% endblock %}
+
+{% block description %}
+{% ifequal type_class "0" %}
+<meta name="description" content="早教知识网是全国唯一的早教知识查询网站.为父母提供权威,安全,免费的怀孕分娩,胎教,育儿,保健,喂养,常见病护理知识,早教知识.年轻父母可以在这里找到与婴幼儿发育,成长,教育有关的全部知识和咨询。">
+{% else %}
+<meta name="description" content="早教知识网是全国唯一的早教知识查询网站.为父母提供权威,安全,免费的怀孕分娩,胎教,育儿,保健,喂养,常见病护理知识,早教知识.年轻父母可以在这里找到与婴幼儿发育,成长,教育有关的全部知识和咨询。">
+{% endifequal %}
+{% endblock %}
+
+
 {% block body %}
 
 {% load text %}
