@@ -119,7 +119,9 @@ def v(request,kid):
     from ngram import ngram
     rel_page = []
     tg = ngram(menus,min_sim=0.0)
-    words = "||".join( tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys() )
+    keys = tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys()
+    title = " ".join( keys )
+    words = "||".join( keys )
     #相关新闻查询结果
     for kid2,obj2 in search(words,"0",num=10):
         rel_page.append( (obj2['title'],kid2) )

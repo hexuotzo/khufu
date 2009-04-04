@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>{{title}}-早教知识网</title>
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="{{obj.memo|truncatewords:50}} {{title}}">
+{% endblock %}
+
 {% block body %}
 
 {% load text %}
@@ -8,7 +16,7 @@
 	<div id="main">
 		<div id="info">
 			<h3>{{obj.title|removetext}}</h3>
-			<span style="display:none">2009年3月1日 作者：爱谁谁</span>
+			<span>{{obj.datetime}}</span>
 			<hr />
 			{{obj.memo|linebreaksbr}}
 		</div>
