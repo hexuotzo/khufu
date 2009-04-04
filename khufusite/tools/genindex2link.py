@@ -19,7 +19,7 @@ menu = [
     "3-6岁",
     "专家咨询",
 ]
-html = '<li><a href="/keyword/?insearch=%s&type_class=%s">%s</a></li>'
+html = '<li><a href="/keyword/?insearch=%s&amp;type_class=%s">%s</a></li>'
 
 for i in menu:
     print "".join([html%(i,v,v) for v in l])
