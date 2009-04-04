@@ -25,14 +25,6 @@ def activemenu2(word,text):
 
 @register.simple_tag
 def index2menu():
-    l = [
-        "生活提示",
-        "母胎变化",
-        "适时胎教",
-        "营养保健",
-        "疾病护理",
-        "常见问题"
-    ]
     menu = [
         "备孕",
         "怀孕",
@@ -46,11 +38,10 @@ def index2menu():
     html_tmpl = '''
 	<ul class="margin_left">
 		<li><h5><a href="/keyword/?insearch=%(m)s">%(m)s</a></h5></li>
-		<li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=%(n)s">%(n)s</a></li>
+		<li><a href="/keyword/?insearch=%(m)s&amp;type_class=生活提示">生活提示</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=母胎变化">母胎变化</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=适时胎教">适时胎教</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=营养保健">营养保健</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=疾病护理">疾病护理</a></li><li><a href="/keyword/?insearch=%(m)s&amp;type_class=常见问题">常见问题</a></li>
 	</ul>
     '''
     html = ''
     for m in menu:
-        for n in l:
-            html += html_tmpl % dict(m=m,n=n)
+        html += html_tmpl % dict(m=m)
     return html
