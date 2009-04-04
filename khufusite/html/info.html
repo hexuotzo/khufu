@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load text %}
+
 {% block title %}
 <title>{{obj.title|removetext}}-{{title}}-早教知识网</title>
 {% endblock %}
@@ -9,8 +11,6 @@
 {% endblock %}
 
 {% block body %}
-
-{% load text %}
 
 <div class="content overflow">
 	<div id="main">
