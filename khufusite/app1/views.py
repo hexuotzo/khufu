@@ -41,25 +41,30 @@ def isbot(request):
             return True
     return False
 
-def recomsearch(kids):
+def recomsearch(mcip,func):
     """类似专题之类,固定uid输出的函数"""
-    mc = memcache.Client(['114.113.30.29:11211'])
-    for key in kids:
-        d = mc.get(key)
-        if d:
-            d = cjson.decode(d)
-            d["kid"]=key
-            yield d
+    mc = memcache.Client([mcip])
+    def wapper(kids,flag=False):
+        data = []
+        for key in kids:
+            if flag:
+                key = hashlib.md5(key).hexdigest()
+            d = mc.get(key)
+            if d:
+                d = cjson.decode(d)
+                d2 = func(d,key)
+                if d2:
+                    data.append(d2)
+                else:
+                    data.append(d)
+        return data
+    return wapper
+mc11211 = recomsearch('114.113.30.29:11211',lambda x,key:x.__setitem__("kid",key))
+mc11212 = recomsearch('114.113.30.29:11212',lambda x,key:x.__getslice__(0,4))
 
 def hello(request):
-    data = []
-    mc = memcache.Client(['114.113.30.29:11212'])
-    for m in menus:
-        key = hashlib.md5(m).hexdigest()
-        d = mc.get(key)
-        if d:
-            data.append( cjson.decode(d)[:4] )
-    
+    data = mc11212(menus,True)
+
     #专题的实现
     show_views=[
         "1918725321",
@@ -67,7 +72,7 @@ def hello(request):
         "167035163130",
         "16549921536",
     ]
-    data_view = recomsearch(show_views)
+    data_view = mc11211(show_views)
     
     #菜单下面的推荐位的实现
     recoms=[
@@ -80,7 +85,7 @@ def hello(request):
         "6065323270",
         "7181029938",
     ]
-    data_recoms = recomsearch(recoms)
+    data_recoms = mc11211(recoms)
 
     return render_to_response('index.html',locals(),
             context_instance=RequestContext(request))
