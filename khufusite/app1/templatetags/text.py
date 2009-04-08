@@ -15,6 +15,7 @@ def removetext(text):
 @register.filter
 def cutstr(text,count):
     text=smart_str(text,"utf8")
+    text=text.strip()
     return text[:count]
 
 @register.simple_tag
