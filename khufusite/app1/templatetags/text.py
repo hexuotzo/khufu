@@ -1,15 +1,21 @@
 #encoding: utf-8
 
 from django import template
+from django.utils.encoding import smart_unicode,force_unicode,smart_str
 
 register = template.Library()
 
 @register.filter
 def removetext(text):
-    text=text.encode("utf8")
+    text=smart_str(text,"utf8")
     text=text.replace("-育儿早教-中国早教网","")
     text=text.replace("-怀孕胎教-中国早教网","")
     return text
+
+@register.filter
+def cutstr(text,count):
+    text=smart_str(text,"utf8")
+    return text[:count]
 
 @register.simple_tag
 def activemenu(word,text):
