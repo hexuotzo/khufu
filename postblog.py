@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import urllib,urllib2,httplib,cookielib,os,re,sys,time,md5,copy
+
 keywords = ["flash相册","flash","动感相册","电子相册","相册","章子怡","范冰冰","张筱雨","汤加丽","白玲","自拍","外链","艺术","互联网","IT","数码相册","56","开心"]
 
 def getData (blog):
@@ -68,39 +69,50 @@ def postsohu (username,passwd):
 			postdata(opener,sohudata,'http://blog.sohu.com/manage/entry.do')
 
 
-def postsina (username,passwd):
-	userdata = {'loginname':username,'passwd':passwd}
-	opener = login(userdata,'http://my.blog.sina.com.cn/login.php?index=index&type=new')
-	data = getData("sina")
-	for d in data:
-		postpage=urllib2.Request('http://control.blog.sina.com.cn/admin/article/article_add.php')
-		c = opener.open(postpage)
-		bincontent= c.read()
-		p=re.compile(r'''\s+<input type="hidden" name="vtoken" value="(.*)"/>\s+''',re.M)
-		c = p.findall(bincontent)
-		print c
-		if len(c)>0:
-			sinadata = {'album':'',
-			            'blog_body':d['content'],
-			            'blog_class':0,
-			            'blog_id':'',
-			            'blog_title':d['title'],
-			            'is2bbs':1,
-			            'is_album':0,
-			            'is_media':'0',
-			            'join_circle':1,
-			            'sina_sort_id':'105',
-			            'newsid':'',
-			            'sno':'',
-			            'stag':'',
-			            'tag':d['tag'],
-			            'time':'',
-			            'x_cms_flag':1,
-			            'url':'',
-			            'vtoken':c[0]
-			}
-			postdata(opener,sinadata,'http://control.blog.sina.com.cn/admin/article/article_post.php')
-			time.sleep(70)
+def poststep (**args):
+    loginurl = args['login']
+    step1url,step1regx = args['step1']
+    posturl,postcontent = args['post']
+    def func(username,passwd):
+        userdata = {'loginname':username,'passwd':passwd}
+        opener = login(userdata,loginurl)
+        data = getData("")
+        for d in data:
+            postpage=urllib2.Request(step1url)
+            c = opener.open(postpage)
+            bincontent= c.read()
+            p=re.compile(step1regx,re.M)
+            c = p.findall(bincontent)
+            # print c
+            if len(c)>0:
+                postdata(opener,postcontent(c,d),posturl)
+                time.sleep(70)
+    return func
+
+postsina = poststep(login='http://my.blog.sina.com.cn/login.php?index=index&type=new',
+            step1=('http://control.blog.sina.com.cn/admin/article/article_add.php',r'''\s+<input type="hidden" name="vtoken" value="(.*)"/>\s+'''),
+            post=('http://control.blog.sina.com.cn/admin/article/article_post.php',
+            lambda c,d:{
+                'album':'',
+                'blog_body':d['content'],
+                'blog_class':0,
+                'blog_id':'',
+                'blog_title':d['title'],
+                'is2bbs':1,
+                'is_album':0,
+                'is_media':'0',
+                'join_circle':1,
+                'sina_sort_id':'105',
+                'newsid':'',
+                'sno':'',
+                'stag':'',
+                'tag':d['tag'],
+                'time':'',
+                'x_cms_flag':1,
+                'url':'',
+                'vtoken':c[0]
+            })
+)
 
 def postbaidu (username,passwd):
 	headers={'Connection':'Keep-Alive',
@@ -128,7 +140,7 @@ def postbaidu (username,passwd):
 
 def main ():
 	sohupassport =[{'user':'','passwd':''}]
-	sinapassport =[{'user':'','passwd':''}]
+	sinapassport =[{'user':'zaojiao100@gmail.com','passwd':'123456'}]
 	baidupassport =[{'user':'','passwd':''}]
 	print "start time %s\n" %(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     # for users in sohupassport:
