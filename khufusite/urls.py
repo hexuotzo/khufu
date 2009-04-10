@@ -1,9 +1,14 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from khufusite.app1.rss import RssSiteNewsFeed
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+
+feeds = {
+    'rss': RssSiteNewsFeed,
+}
 
 urlpatterns = patterns('',
     # Example:
@@ -25,5 +30,8 @@ urlpatterns = patterns('',
             {'document_root': '/home/yanxu/khufu/khufusite/media/css'}),
     (r'^v/(?P<kid>.*)/','khufusite.app1.views.v'),
     #(r'$','khufusite.app1.views.index'),
-    (r'comments/',include('django.contrib.comments.urls'))
+    (r'comments/',include('django.contrib.comments.urls')),
+    
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
+            {'feed_dict': feeds}),
 )
