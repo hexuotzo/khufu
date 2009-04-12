@@ -15,6 +15,7 @@ def login(userdata,posturl):
 	opener=urllib2.build_opener(cj)
 	c = opener.open(request,urllib.urlencode(userdata))
 	bincontent= c.read()
+	print bincontent
 	return opener
 
 #baidu用
@@ -48,25 +49,32 @@ def postdata (opener,data,posturl):
 	return bincontent
 
 def postsohu (username,passwd):
-	m = md5.md5(passwd)
-	userdata = {'appid':'1019','b':'1','password':m.hexdigest(),
-	'persistentcookie':0,'pwdtype':'1','s':'1213527861109','userid':username+'@sohu.com','w':'1280'}
-	data = getData("sohu")
-	opener = login(userdata,'http://passport.sohu.com/sso/login.jsp?userid='+username+'%40sohu.com&password='+userdata['password']+'&appid=1019&persistentcookie=0&s=1213527861109&b=1&w=1280&pwdtype=1')
-	while len(data)>0:
-		d = data.pop()
-		postpage=urllib2.Request('http://blog.sohu.com/manage/entry.do?m=add&t=shortcut')
-		c = opener.open(postpage)
-		bincontent= c.read()
-		p=re.compile(r'''\s+<input type="hidden" name="aid" value="(.*)">\s+''',re.M)
-		c = p.findall(bincontent)
-		print c
-		if len(c)>0:
-			sohudata = {'aid':c[0],'allowComment':2,'categoryId':0,'contrCataId':'','contrChId':''
-			,'entrycontent':unicode(d['content'],"utf-8").encode("gbk"),'entrytitle':unicode(d['title'],"utf-8").encode("gbk"),'excerpt':'',
-			'keywords':unicode(d['tag'],"utf-8").encode("gbk"),'m':'save','newGategory':'','oper':'art_ok','perm':'0','save':'-','shortcutFlag':'true'}
-			#print sohudata
-			postdata(opener,sohudata,'http://blog.sohu.com/manage/entry.do')
+    m = md5.md5(passwd)
+    userdata = {
+        'appid':'1019',
+        'b':'1',
+        'password':m.hexdigest(),
+        'persistentcookie':0,
+        'pwdtype':'1',
+        's':'1213527861109',
+        'userid':'%s@sohu.com'%username,
+        'w':'1280'
+    }
+    data = getData("sohu")
+    opener = login(userdata,'http://passport.sohu.com/sso/login.jsp?userid=%s%%40sohu.com&password=%s&appid=1019&persistentcookie=0&s=1213527861109&b=1&w=1280&pwdtype=1'%(username,userdata['password']))
+    for d in data:
+        postpage=urllib2.Request('http://blog.sohu.com/manage/entry.do?m=add&t=shortcut')
+        c = opener.open(postpage)
+        bincontent= c.read()
+        p=re.compile(r'''\s+<input type="hidden" name="aid" value="(.*)">\s+''',re.M)
+        c = p.findall(bincontent)
+        print c
+        if len(c)>0:
+            sohudata = {'aid':c[0],'allowComment':2,'categoryId':0,'contrCataId':'','contrChId':''
+            ,'entrycontent':unicode(d['content'],"utf-8").encode("gbk"),'entrytitle':unicode(d['title'],"utf-8").encode("gbk"),'excerpt':'',
+            'keywords':unicode(d['tag'],"utf-8").encode("gbk"),'m':'save','newGategory':'','oper':'art_ok','perm':'0','save':'-','shortcutFlag':'true'}
+            #print sohudata
+            postdata(opener,sohudata,'http://blog.sohu.com/manage/entry.do')
 
 
 def poststep (**args):
@@ -139,17 +147,16 @@ def postbaidu (username,passwd):
 			print "data error\r\n"
 
 def main ():
-	sohupassport =[{'user':'','passwd':''}]
-	sinapassport =[{'user':'zaojiao100@gmail.com','passwd':'123456'}]
-	baidupassport =[{'user':'','passwd':''}]
-	print "start time %s\n" %(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    # for users in sohupassport:
-    #   print "user:%s\r\n" % (users["user"])
-    #   postsohu(users["user"],users["passwd"])
-    # print "SINA USER %s\r\n" %(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-	for users in sinapassport :
-		print "user:%s\n" % (users["user"])
-		postsina (users["user"],users["passwd"])
+    sohupassport =[{'user':'zaojiao100@sohu.com','passwd':'123456'}]
+    sinapassport =[{'user':'zaojiao100@gmail.com','passwd':'123456'}]
+    baidupassport =[{'user':'','passwd':''}]
+    print "start time %s\n" %(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    for users in sohupassport:
+        print "user:%s\r\n" % (users["user"])
+        postsohu(users["user"],users["passwd"])
+    # for users in sinapassport :
+    #     print "user:%s\n" % (users["user"])
+    #     postsina (users["user"],users["passwd"])
     # for users in baidupassport :
     #   print "user:%s\r\n" % (users["user"])
     #   postbaidu (users["user"],users["passwd"])
