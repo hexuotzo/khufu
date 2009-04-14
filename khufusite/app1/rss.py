@@ -9,6 +9,12 @@ try:
 except:
     import memcache
 
+def removetext(text):
+    text=smart_str(text,"utf8")
+    text=text.replace("-育儿早教-中国早教网","")
+    text=text.replace("-怀孕胎教-中国早教网","")
+    return text
+
 def rss(request):
     mc = memcache.Client(['boypark.cn:11211'])
     cmd = 'dystmgr search -nl -max 20 /home/yanxu/khufu/khufu 备孕'
@@ -21,7 +27,7 @@ def rss(request):
         obj=mc.get(kid)
         if obj==None:continue
         obj=cjson.decode(mc.get(kid))
-        f.add_item(title=u"%s" % obj['title'],
+        f.add_item(title=u"%s" % removetext(obj['title']),
                 link=u"http://www.zaojiao100.com/v/%s/" % kid,
                 description=u"%s" % obj['body']
         )
