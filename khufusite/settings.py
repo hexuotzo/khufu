@@ -78,7 +78,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.comments',
-    'khufusite.app1'
+    'khufusite.app1',
+    'django.contrib.flatpages',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -88,4 +89,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     
     'khufusite.app1.views.globalrequest',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
