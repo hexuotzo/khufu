@@ -6,7 +6,8 @@ def getwords(doc):
         "备孕","怀孕","产后",
         "发烧","胎教","母胎",
         "疾病","营养","护理",
-        "疾病","孕妇","孕妈"
+        "疾病","孕妇","孕妈",
+        "生育",
     ]
     tg = ngram(menus,min_sim=0.0)
     words = tg.getSimilarStrings(doc.encode("utf8")).keys()
@@ -14,11 +15,10 @@ def getwords(doc):
 
 class classifier(object):
     """docstring for classifier"""
-    def __init__(self, getfeatures,filename=None):
+    def __init__(self, getfeatures):
         self.fc = {}
         self.cc = {}
         self.getfeatures = getfeatures
-        self.filename = filename
     def incf(self,f,cat):
         '''增加对特征/分类组合的计数值'''
         self.fc.setdefault(f,{})
@@ -57,25 +57,51 @@ class classifier(object):
     def weightedprob(self,f,cat,prf,weight=1.0,ap=0.5):
         """合理概率计算"""
         basicprob = prf(f,cat)#当前概率
-        totals=sum([self.fcount(f,c) for c in self.categories])#计算特征在所有分类中出现的次数
+        totals=sum([self.fcount(f,c) for c in self.categories()])#计算特征在所有分类中出现的次数
         bp=((weight*ap)+(totals*basicprob))/(weight+totals)
         return bp
 
 class naivebayes(classifier):
     """贝耶斯概率"""
+    def __init__(self,getfeatures):
+        classifier.__init__(self,getfeatures)
+        self.thresholds={}
+    def setthreshold(self,cat,t):
+        self.thresholds[cat]=t
+    def getthreshold(self,cat):
+        if cat not in self.thresholds: return 1.0
+        return self.thresholds[cat]
     def docprob(self,item,cat):
         features = self.getfeatures(item)
         #将所有特征的概率相乘
         p=1
         for f in features:p*=self.weightedprob(f,cat,self.fprob)
         return p
+    def prob(self,item,cat):
+        catprob=self.catcount(cat)/self.totalcount()
+        docprob=self.docprob(item,cat)
+        return docprob*catprob
+    def classify(self,item,default='unknow'):
+        probs={}
+        m=0.0
+        for cat in self.categories():
+            probs[cat]=self.prob(item,cat)
+            if probs[cat]>m:
+                m=probs[cat]
+                best=cat
+        for cat in probs:
+            if cat==best: continue
+            if probs[cat]*self.getthreshold(best)>probs[best]: return default
+        return best
 
 def simpletrain(cat):
-    c1 = docclass.classifier(docclass.getwords)
+    c1 = docclass.naivebayes(docclass.getwords)
     try:
         os.stat('results.pickle')
         c1 = pickle.load(open('results.pickle'))
     except:
+        import memcache
+        mc = memcache.Client(['boypark.cn:11211'])
         f = open('results.pickle','w')
         #训练备孕
         for r in open('beiyun.train'):
@@ -88,15 +114,12 @@ def simpletrain(cat):
         pickle.dump(c1,f)
     return c1
 if __name__ == '__main__':
-    import memcache
     import docclass
     import cPickle as pickle
     import os
     from simplejson import dumps,loads
 
-    mc = memcache.Client(['boypark.cn:11211'])
     c1 = simpletrain('备孕')
-    print c1.fcount('高血压','备孕')
-    print c1.fprob('高血压','备孕')
-    
+    print c1.classify(u'''测试文本''')
+
     
