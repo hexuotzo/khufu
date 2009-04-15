@@ -54,6 +54,21 @@ class classifier(object):
         """计算单词在分类中出现的概率"""
         if self.catcount(cat)==0:return 0
         return self.fcount(f,cat)/self.catcount(cat)
+    def weightedprob(self,f,cat,prf,weight=1.0,ap=0.5):
+        """合理概率计算"""
+        basicprob = prf(f,cat)#当前概率
+        totals=sum([self.fcount(f,c) for c in self.categories])#计算特征在所有分类中出现的次数
+        bp=((weight*ap)+(totals*basicprob))/(weight+totals)
+        return bp
+
+class naivebayes(classifier):
+    """贝耶斯概率"""
+    def docprob(self,item,cat):
+        features = self.getfeatures(item)
+        #将所有特征的概率相乘
+        p=1
+        for f in features:p*=self.weightedprob(f,cat,self.fprob)
+        return p
 
 def simpletrain(cat):
     c1 = docclass.classifier(docclass.getwords)
