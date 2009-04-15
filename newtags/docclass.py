@@ -1,8 +1,15 @@
+#encoding: utf-8
 from ngram import ngram
 
 def getwords(doc):
+    menus = [
+        "备孕","怀孕","产后",
+        "发烧","胎教","母胎",
+        "疾病","营养","护理",
+        "疾病","孕妇","孕妈"
+    ]
     tg = ngram(menus,min_sim=0.0)
-    words = tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys()
+    words = tg.getSimilarStrings(doc.encode("utf8")).keys()
     return dict([(w,1) for w in words])
 
 class classifier(object):
@@ -43,3 +50,38 @@ class classifier(object):
         for f in features:
             self.incf(f,cat)
         self.incc(cat)
+    def fprob(self,f,cat):
+        """计算单词在分类中出现的概率"""
+        if self.catcount(cat)==0:return 0
+        return self.fcount(f,cat)/self.catcount(cat)
+
+def simpletrain(cat):
+    c1 = docclass.classifier(docclass.getwords)
+    try:
+        os.stat('results.pickle')
+        c1 = pickle.load(open('results.pickle'))
+    except:
+        f = open('results.pickle','w')
+        #训练备孕
+        for r in open('beiyun.train'):
+            r = r.strip()
+            obj = mc.get(r)
+            if obj==None:continue
+            obj = loads(obj)
+            print obj['title']
+            c1.train(obj['body'],cat)
+        pickle.dump(c1,f)
+    return c1
+if __name__ == '__main__':
+    import memcache
+    import docclass
+    import cPickle as pickle
+    import os
+    from simplejson import dumps,loads
+
+    mc = memcache.Client(['boypark.cn:11211'])
+    c1 = simpletrain('备孕')
+    print c1.fcount('高血压','备孕')
+    print c1.fprob('高血压','备孕')
+    
+    
