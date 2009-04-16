@@ -61,6 +61,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'khufusite.urls'
@@ -80,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'khufusite.app1',
     'django.contrib.flatpages',
+    'django.contrib.sitemaps',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -87,7 +90,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
-    
     'khufusite.app1.views.globalrequest',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+
 )
