@@ -79,7 +79,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.comments',
     'khufusite.app1',
-    'django.contrib.flatpages',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -89,5 +88,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     
     'khufusite.app1.views.globalrequest',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
+
+DOMAIN = "http://www.zaojiao100.com"
