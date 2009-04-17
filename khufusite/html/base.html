@@ -16,7 +16,7 @@
 <script>
 menu = "备孕"
 function menu2(text){
-	window.location="/keyword/?insearch="+menu+"&type_class="+text
+	window.location="{{domain}}/keyword/?insearch="+menu+"&type_class="+text
 }
 </script>
 </head>
@@ -43,14 +43,14 @@ function menu2(text){
 <div id="guide">
 	<ul class="overflow">
 		<li><a href="/" {%activemenu word ""%}>首页</a></li>
-		<li><a href="/keyword/?insearch=备孕" {%activemenu word "备孕"%} onmouseover="javascript:menu='备孕'">备孕</a></li>
-		<li><a href="/keyword/?insearch=怀孕" {%activemenu word "怀孕"%} onmouseover="javascript:menu='怀孕'">怀孕</a></li>
-		<li><a href="/keyword/?insearch=产后" {%activemenu word "产后"%} onmouseover="javascript:menu='产后'">产后</a></li>
-		<li><a href="/keyword/?insearch=0-1岁" {%activemenu word "0-1岁"%} onmouseover="javascript:menu='0-1岁'">0-1岁</a></li>
-		<li><a href="/keyword/?insearch=1-2岁" {%activemenu word "1-2岁"%} onmouseover="javascript:menu='1-2岁'">1-2岁</a></li>
-		<li><a href="/keyword/?insearch=2-3岁" {%activemenu word "2-3岁"%} onmouseover="javascript:menu='2-3岁'">2-3岁</a></li>
-		<li><a href="/keyword/?insearch=3-6岁" {%activemenu word "3-6岁"%} onmouseover="javascript:menu='3-6岁'">3-6岁</a></li>
-		<li><a href="/keyword/?insearch=专家咨询" {%activemenu word "专家咨询"%} onmouseover="javascript:menu='专家咨询'">专家咨询</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=备孕" {%activemenu word "备孕"%} onmouseover="javascript:menu='备孕'">备孕</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=怀孕" {%activemenu word "怀孕"%} onmouseover="javascript:menu='怀孕'">怀孕</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=产后" {%activemenu word "产后"%} onmouseover="javascript:menu='产后'">产后</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=0-1岁" {%activemenu word "0-1岁"%} onmouseover="javascript:menu='0-1岁'">0-1岁</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=1-2岁" {%activemenu word "1-2岁"%} onmouseover="javascript:menu='1-2岁'">1-2岁</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=2-3岁" {%activemenu word "2-3岁"%} onmouseover="javascript:menu='2-3岁'">2-3岁</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=3-6岁" {%activemenu word "3-6岁"%} onmouseover="javascript:menu='3-6岁'">3-6岁</a></li>
+		<li><a href="{{domain}}/keyword/?insearch=专家咨询" {%activemenu word "专家咨询"%} onmouseover="javascript:menu='专家咨询'">专家咨询</a></li>
 	</ul>
 </div>
 
@@ -66,7 +66,7 @@ function menu2(text){
 </div>
 
 <div id="search">
-<form action="/keyword/" method="GET">
+<form action="{{domain}}/keyword/" method="GET">
 <img src="/images/icon9.gif" />
 <h3>育儿知识查询</h3>
 <input type="text" class="searchbox" value="{% firstof word "孩子发烧" %}" name="insearch" id="insearch" onclick="this.value=''" />
@@ -86,7 +86,7 @@ function menu2(text){
 <div id="recom">
 	<ul class="overflow">
 	{% for d in data_recoms %}
-	  <li><a href="/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></li>
+	  <li><a href="{{domain}}/v/{{d.kid}}/" target="_blank">{{d.title|removetext}}</a></li>
 	{% endfor %}
 	</ul>
 </div>
