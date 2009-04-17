@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+from django.utils.encoding import smart_unicode,force_unicode,smart_str
 from django.http import HttpResponse
 from django.utils import feedgenerator
 import os
@@ -10,9 +11,10 @@ except:
     import memcache
 
 def removetext(text):
+    text=smart_str(text,"utf8")
     text=text.replace("-育儿早教-中国早教网","")
     text=text.replace("-怀孕胎教-中国早教网","")
-    return text
+    return smart_unicode(text)
 
 def rss(request):
     mc = memcache.Client(['boypark.cn:11211'])
