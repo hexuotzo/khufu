@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+from django.utils.encoding import smart_unicode,force_unicode,smart_str
 from django.http import HttpResponse
 from django.utils import feedgenerator
 import os
