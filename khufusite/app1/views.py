@@ -133,14 +133,14 @@ def v(request,kid):
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
 
-def search(word,type_class,num=100):
-    mc = memcache.Client(['114.113.30.29:11211'])
+def search(word,type_class,num=1000):
     word = smart_str(word,"utf8")
     type_class = smart_str(type_class,"utf8")
     if type_class!="0":
         word = " ".join( (word,type_class) )
-    results=os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word) ).read()
-    for kid in results.split('\n'):
-        obj=mc.get(kid)
-        if obj==None:continue
-        yield kid,cjson.decode(obj)
+    results=os.popen('tctmgr search -pv -ord savedate numdesc /Users/yanxu/Desktop/khufu/infodb/infodb tag1 STRBW "%s"' % word ).read()
+    for text in results.split('\n'):
+        text = text.split("\t")
+        if len(text)<>7:continue
+        kid,p1,title,p2,savedate,p3,tag1 = text
+        yield kid,{"title":title}

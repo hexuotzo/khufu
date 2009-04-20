@@ -10,6 +10,8 @@ def removetext(text):
     text=smart_str(text,"utf8")
     text=text.replace("-育儿早教-中国早教网","")
     text=text.replace("-怀孕胎教-中国早教网","")
+    text=text.replace("-专家指导-中国早教网","")
+    text=text.replace("-新闻资讯-中国早教网","")
     return text
 
 @register.filter
