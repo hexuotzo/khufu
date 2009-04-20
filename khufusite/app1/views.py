@@ -26,9 +26,11 @@ menus = [
 
 def globalrequest(request):
     word,type_class = "",""
+    domain = settings.DOMAIN
     return dict(word=word,
                 type_class=type_class,
-                menus=menus)
+                menus=menus,
+                domain=domain)
 
 def isbot(request):
     botlist = [

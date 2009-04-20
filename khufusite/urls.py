@@ -1,26 +1,9 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from khufusite import settings
-from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
-from khufusite.app1.sitemaps import BlogSitemap
-from khufusite.app1.models import Entry
-
-info_dict = {
-    'queryset': Entry.objects.all(),
-    'date_field': 'pub_date',
-}
-
-sitemaps = {
-    'flatpages': FlatPageSitemap,
-    'app1': BlogSitemap,
-}
-
-
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
-
 
 
 urlpatterns = patterns('',
@@ -46,7 +29,4 @@ urlpatterns = patterns('',
     (r'comments/',include('django.contrib.comments.urls')),
     
     (r'^rss/', 'khufusite.app1.rss.rss'),
-    #(r'^sitemap.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
-    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),    
-    (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),    
 )

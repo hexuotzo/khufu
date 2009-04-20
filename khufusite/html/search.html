@@ -34,12 +34,12 @@
 		<h5>{{word}} &gt; 文章列表</h5>
 		<ul>
 			{%for kid,i in result1%}
-			<li><a href="/v/{{kid}}/" target="_blank">{{i.title|removetext}}</a><span>02.29 2009</span></li>
+			<li><a href="{{domain}}/v/{{kid}}/" target="_blank">{{i.title|removetext}}</a><span>02.29 2009</span></li>
 			{%endfor%}
 		</ul>
 		<ul>
 			{%for kid,j in result2%}
-			<li><a href="/v/{{kid}}/" target="_blank">{{j.title|removetext}}</a><span>02.29 2009</span></li>
+			<li><a href="{{domain}}/v/{{kid}}/" target="_blank">{{j.title|removetext}}</a><span>02.29 2009</span></li>
 			{%endfor%}
 		</ul>
 		
