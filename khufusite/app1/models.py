@@ -15,6 +15,10 @@ class Entry(models.Model):
     title         = models.CharField(max_length=200)
     pub_date      = models.DateTimeField('date published',blank=True)
     #khufuforms    = models.ForeignKey(KhufuForm)
+    slug          = models.SlugField(
+                     unique_for_date='pub_date',
+                     help_text='Automatically built From the title.'
+                     )    
 
 
 
@@ -26,7 +30,7 @@ class Entry(models.Model):
 
 
     def get_absolute_url(self):
-        return "/hello/%s/%s/" % (self.pub_date.strftime("%Y/%b/%d").lower(), self.slug)
+        return "/hello/%s/%s/" % (self.pub_date.strftime("%Y/%b/%d").lower(), self.title)
 
     def __unicode__(self):
         return self.title
