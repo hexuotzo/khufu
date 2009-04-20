@@ -81,7 +81,7 @@ class naivebayes(classifier):
         catprob=self.catcount(cat)/self.totalcount()
         docprob=self.docprob(item,cat)
         return docprob*catprob
-    def classify(self,item,default='unknow'):
+    def classify(self,item,default='专家咨询'):
         probs={}
         m=0.0
         for cat in self.categories():
@@ -94,32 +94,38 @@ class naivebayes(classifier):
             if probs[cat]*self.getthreshold(best)>probs[best]: return default
         return best
 
-def simpletrain(cat):
-    c1 = docclass.naivebayes(docclass.getwords)
-    try:
-        os.stat('results.pickle')
-        c1 = pickle.load(open('results.pickle'))
-    except:
-        import memcache
-        mc = memcache.Client(['boypark.cn:11211'])
-        f = open('results.pickle','w')
-        #训练备孕
-        for r in open('beiyun.train'):
-            r = r.strip()
-            obj = mc.get(r)
-            if obj==None:continue
-            obj = loads(obj)
-            print obj['title']
-            c1.train(obj['body'],cat)
-        pickle.dump(c1,f)
-    return c1
+def simpletrain(c1,fname,cat):
+    import memcache
+    mc = memcache.Client(['boypark.cn:11211'])
+    #读取训练数据
+    for r in open(fname):
+        r = r.strip()
+        obj = mc.get(r)
+        if obj==None:continue
+        obj = loads(obj)
+        print obj['title']
+        c1.train(obj['body'],cat)
+
 if __name__ == '__main__':
     import docclass
     import cPickle as pickle
     import os
     from simplejson import dumps,loads
-
-    c1 = simpletrain('备孕')
-    print c1.classify(u'''测试文本''')
+    
+    try:
+        os.stat('results.pickle')
+        c1 = pickle.load(open('results.pickle'))
+    except:
+        f = open('results.pickle','w')
+        c1 = docclass.naivebayes(docclass.getwords)
+        simpletrain(c1,'trains/beiyun.train','备孕')
+        simpletrain(c1,'trains/huaiyun.train','怀孕')
+        simpletrain(c1,'trains/chanhou.train','产后')
+        simpletrain(c1,'trains/0-1.train','0-1岁')
+        simpletrain(c1,'trains/2-3.train','2-3岁')
+        simpletrain(c1,'trains/3-6.train','3-6岁')
+        pickle.dump(c1,f)
+        
+    print c1.classify(u'''aa''')
 
     

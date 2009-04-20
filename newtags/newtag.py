@@ -5,6 +5,8 @@ import datetime
 import re
 import string
 import glob
+import docclass
+import cPickle as pickle
 from bodytext import getbody
 
 
@@ -39,7 +41,8 @@ def readtitle(fname):
 
 path = sys.argv[1]
 for fname in findpath(path):
-    c1 = docclass.naivebayes(docclass.getwords)
+    #c1 = docclass.naivebayes(docclass.getwords)
+    c1 = pickle.load(open('results.pickle'))
     if fname.find("article")==-1:continue
     r=readtext(fname)
     if r=='':continue
@@ -51,7 +54,8 @@ for fname in findpath(path):
         body = getbody(r.encode("utf8"))
     except:
         continue
-    title = readtitle(fname)
-    cmd = 'tctmgr put infodb/infodb %s "title" "%s" "savedate" "%s" "tag1" "%s"' % (kid,title,nowtime.date(),c1.classify(body))
+    title = readtitle(fname).encode("utf8")
+    cmd = 'tctmgr put ../infodb/infodb %s "title" "%s" "savedate" "%s" "tag1" "%s"' % (kid,title,nowtime.date(),c1.classify(body))
+    print c1.classify(body)
     print os.popen(cmd).read()
     
