@@ -99,18 +99,15 @@ def link(request):
         context_instance=RequestContext(request))
 
 def keyword(request):
+    if "insearch" in request.GET:
+        word=request.GET["insearch"]
     page = 1
     if "page" in request.GET:
         page = request.GET["page"]
     type_class = "0"
     if "type_class" in request.GET:
         type_class=request.GET["type_class"]
-    if "insearch" in request.GET:
-        word=request.GET["insearch"]
-        result=list(search(word,type_class,2000))
-    if "q" in request.GET:
-        word=request.GET["q"]
-        result=list(search(word,type_class,2000,True))
+    result=list(search(word,type_class,2000))
     p = Paginator(result,20)
     pp = p.page(page)
     result1=pp.object_list[:10]
@@ -139,17 +136,16 @@ def v(request,kid):
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
 
-def search(word,type_class,num=1000,s=False):
+def search(word,type_class,num=1000):
     word = smart_str(word,"utf8")
     type_class = smart_str(type_class,"utf8")
     if type_class!="0":
         word = " ".join( (word,type_class) )
-    if s:
+    results=os.popen('tctmgr search -pv -ord savedate numdesc /home/yanxu/khufu/infodb/infodb tag1 STRBW "%s"' % word ).read()
+    if results=='':
         results = 'dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)
-    else:
-        results=os.popen('tctmgr search -pv -ord savedate numdesc /home/yanxu/khufu/infodb/infodb tag1 STRBW "%s"' % word ).read()
     for text in results.split('\n'):
-        if s:
+        if text.isdigit():
             kid = text
             obj=mc.get(kid)
             if obj==None:continue
