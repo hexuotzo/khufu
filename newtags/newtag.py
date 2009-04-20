@@ -1,16 +1,14 @@
 # encoding: utf-8
 import os,sys
 import hashlib
-import cjson
 import datetime
 import re
-from pykhufu import PyDystopia
-import cmemcache as memcache
-from html2text import html2text
-from addpinyin import *
-from bodytext import getbody
 import string
 import glob
+import docclass
+import cPickle as pickle
+from bodytext import getbody
+
 
 def findpath(path):
     #dir:文件夹名 
@@ -42,10 +40,9 @@ def readtitle(fname):
     return u''
 
 path = sys.argv[1]
-pd = PyDystopia()
-mc = memcache.Client(['114.113.30.29:11211'])
 for fname in findpath(path):
-    #fname = os.path.join(d,f)
+    #c1 = docclass.naivebayes(docclass.getwords)
+    c1 = pickle.load(open('results.pickle'))
     if fname.find("article")==-1:continue
     r=readtext(fname)
     if r=='':continue
@@ -54,13 +51,11 @@ for fname in findpath(path):
     nowtime=datetime.datetime.now()
     print "key",key,kid,fname
     try:
-        text = html2text(r)
         body = getbody(r.encode("utf8"))
     except:
         continue
-    ttl = readtitle(fname)
-    pinyin = addpinyin(body)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body,"kid":kid})
-    pd.put(kid,text.encode('utf8'))
-    mc.set(str(kid),dbvalue)
-pd.commit()
+    title = readtitle(fname).encode("utf8")
+    cmd = 'tctmgr put ../infodb/infodb %s "title" "%s" "savedate" "%s" "tag1" "%s"' % (kid,title,nowtime.date(),c1.classify(body))
+    print c1.classify(body)
+    print os.popen(cmd).read()
+    
