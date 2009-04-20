@@ -60,7 +60,7 @@ for fname in findpath(path):
         continue
     ttl = readtitle(fname)
     pinyin = addpinyin(body)
-    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body"kid":kid})
+    dbvalue=cjson.encode({"title":ttl,"url":fname,"html":r,"text":text,"datetime":str(nowtime),"addpinyin":pinyin,"body":body,"kid":kid})
     pd.put(kid,text.encode('utf8'))
     mc.set(str(kid),dbvalue)
 pd.commit()
