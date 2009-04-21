@@ -1,7 +1,9 @@
 #!/usr/local/bin/python
 # encoding: utf-8
-from pykhufu import PyDystopia
-import cmemcache as memcache
+try:
+    import cmemcache as memcache
+except ImportError:
+    import memcache
 import cjson
 import sys,os,hashlib
 
@@ -13,20 +15,35 @@ MENU = [
     "1-2岁",
     "2-3岁",
     "3-6岁",
-    "专家咨询",
+    # "专家咨询",
 ]
 
 def search(word):
-    for kid in os.popen('dystmgr search -nl khufu %s' % word).read().split('\n'):
-        if kid=='':continue
-        d = mc.get(kid)
-        if d:
-            obj = cjson.decode(d)
-            d = dict(
-                title = obj['title'],
-                kid = kid
-            )
-            yield kid,d
+    if word=='3-6岁':
+        for kid in ['508111489111',
+                    '509210323473',
+                    '513616214258',
+                    '516076124350']:
+            d=mc.get(kid)
+            if d:
+                d=cjson.decode(d)
+                yield kid,{"kid":kid,"title":d["title"]}
+    elif word=='1-2岁':
+        for kid in ['25958321621',
+                    '28294915184',
+                    '29934388407',
+                    '32830901239']:
+            d=mc.get(kid)
+            if d:
+                d=cjson.decode(d)
+                yield kid,{"kid":kid,"title":d["title"]}
+    else:
+        for text in os.popen('tctmgr search -pv -ord savedate numdesc -m 4 infodb/infodb tag1 STRBW "%s"' % word ).read().split('\n'):
+            text = text.split("\t")
+            if len(text)<>7:continue
+            kid,p1,title,p2,savedate,p3,tag1 = text
+            print kid,title
+            yield kid,{"kid":kid,"title":unicode(title,"utf8")}
 
 def words():
     if len(sys.argv)>1:
