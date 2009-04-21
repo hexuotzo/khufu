@@ -143,7 +143,8 @@ def search(word,type_class,num=1000):
         word = " ".join( (word,type_class) )
     results=os.popen('tctmgr search -pv -ord savedate numdesc /home/yanxu/khufu/infodb/infodb tag1 STRBW "%s"' % word ).read()
     if results=='':
-        results = 'dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)
+        mc = memcache.Client(['114.113.30.29:11211'])
+        results = os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)).read()
     for text in results.split('\n'):
         if text.isdigit():
             kid = text
