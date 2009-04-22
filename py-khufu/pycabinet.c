@@ -41,6 +41,7 @@ search(PyObject *self, PyObject *args){
         if(cols){
           // printf("%s", rbuf);
           tcmapiterinit(cols);
+          PyDict_SetItemString(pDict, "kid", Py_BuildValue("s",rbuf));
           while((name = tcmapiternext2(cols)) != NULL){
               // printf("%s",tcmapget2(cols, name));
               PyDict_SetItemString(pDict, name, Py_BuildValue("s", tcmapget2(cols, name)));
