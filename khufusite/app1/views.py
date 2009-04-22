@@ -147,8 +147,13 @@ def search(word,type_class,num=1000):
         results = os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)).read()
     for text in results.split('\n'):
         if text.isdigit():
-            text = os.popen('tctmgr get /home/yanxu/khufu/infodb/infodb %s' % text).read().strip()
+            kid = text
+            text = os.popen('tctmgr get -pz /home/yanxu/khufu/infodb/infodb %s' % text).read().strip()
         text = text.split("\t")
-        if len(text)<>7:continue
-        kid,p1,title,p2,savedate,p3,tag1 = text
+        if len(text)==7:
+            kid,p1,title,p2,savedate,p3,tag1 = text
+        elif len(text)==6:
+            p1,title,p2,savedate,p3,tag1 = text
+        else:
+            continue
         yield kid,{"title":title}
