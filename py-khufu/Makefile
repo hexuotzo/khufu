@@ -1,10 +1,10 @@
 CC = gcc
 CPPFLAGS = -I. -I/opt/local/include/python2.5 -I/usr/local/include/python2.5 -I/usr/local/include
 CFLAGS = -g -O2 -std=c99 -Wall -fPIC -fsigned-char -DNDEBUG
-LIBS = -ltokyodystopia -ltokyocabinet -lbz2 -lz -lpthread -lm -lc 
+LIBS = -ltokyocabinet -lbz2 -lz -lpthread -lm -lc 
 LDFLAGS = -L. -L/usr/local/lib -L/opt/local/lib
 OS=$(shell uname)
-objects = pykhufu.o pykhufu.so
+objects = pykhufu.o pykhufu.so pycabinet.o pycabinet.so
 
 ifeq ($(OS),Darwin)
 	SHAREDFLAGS = -bundle -flat_namespace -undefined suppress
@@ -15,13 +15,22 @@ else
 endif
 
 
-pykhufu.so : pykhufu.o
-	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ pykhufu.o \
+# pykhufu.so : pykhufu.o
+# 	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ pykhufu.o \
+# 		$(LDFLAGS) $(LIBS)
+# 
+# 
+# pykhufu.o : pykhufu.c
+# 	$(CC) -c $(CPPFLAGS) $(CFLAGS) pykhufu.c
+
+
+pycabinet.so : pycabinet.o
+	$(CC) $(CFLAGS) $(SHAREDFLAGS) -o $@ pycabinet.o \
 		$(LDFLAGS) $(LIBS)
 
 
-pykhufu.o : pykhufu.c
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) pykhufu.c
+pycabinet.o : pycabinet.c
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) pycabinet.c
 
 
 install :
