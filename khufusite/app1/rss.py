@@ -14,11 +14,13 @@ def removetext(text):
     text=smart_str(text,"utf8")
     text=text.replace("-育儿早教-中国早教网","")
     text=text.replace("-怀孕胎教-中国早教网","")
-    return smart_unicode(text)
+    text=text.replace("-专家指导-中国早教网","")
+    text=text.replace("-新闻资讯-中国早教网","")
+    return text
 
 def rss(request):
     mc = memcache.Client(['boypark.cn:11211'])
-    cmd = 'dystmgr search -nl -max 20 /home/yanxu/khufu/khufu 备孕'
+    cmd = 'tctmgr search -pv -ord savedate numdesc -m 20 /home/yanxu/khufu/infodb/infodb tag1 STRBW "怀孕"'
     f = feedgenerator.Rss201rev2Feed(
         title = "早教知识网-全国唯一的早教知识查询、搜索网站 育儿 早教 健康 胎教 怀孕",
         link = "http://www.zaojiao100.com/rss/",
