@@ -6,6 +6,8 @@ except ImportError:
     import memcache
 import cjson
 import sys,os,hashlib
+import pycabinet
+import random
 
 MENU = [
     "备孕",
@@ -15,35 +17,16 @@ MENU = [
     "1-2岁",
     "2-3岁",
     "3-6岁",
-    # "专家咨询",
+    "专家咨询",
 ]
 
 def search(word):
-    if word=='3-6岁':
-        for kid in ['508111489111',
-                    '509210323473',
-                    '513616214258',
-                    '516076124350']:
-            d=mc.get(kid)
-            if d:
-                d=cjson.decode(d)
-                yield kid,{"kid":kid,"title":d["title"]}
-    elif word=='1-2岁':
-        for kid in ['25958321621',
-                    '28294915184',
-                    '29934388407',
-                    '32830901239']:
-            d=mc.get(kid)
-            if d:
-                d=cjson.decode(d)
-                yield kid,{"kid":kid,"title":d["title"]}
-    else:
-        for text in os.popen('tctmgr search -pv -ord savedate numdesc -m 4 infodb/infodb tag1 STRBW "%s"' % word ).read().split('\n'):
-            text = text.split("\t")
-            if len(text)<>7:continue
-            kid,p1,title,p2,savedate,p3,tag1 = text
-            print kid,title
-            yield kid,{"kid":kid,"title":unicode(title,"utf8")}
+    data = pycabinet.search('/home/yanxu/khufu/infodb/infodb','tag1','怀孕',1000)
+    for i in range(4):
+        obj = random.choice(data)
+        kid,title = obj["kid"],unicode(obj["title"],"utf8")
+        print kid,title
+        yield kid,title
 
 def words():
     if len(sys.argv)>1:
@@ -53,11 +36,12 @@ def words():
         for word in MENU:
             yield word
 
-mc = memcache.Client(['114.113.30.29:11211'])
+# mc = memcache.Client(['114.113.30.29:11211'])
 mc2 = memcache.Client(['114.113.30.29:11212'])
 for word in words():
     print word
     data = [d for kid,d in search(word)]
-    obj = cjson.encode(data)
-    k = hashlib.md5(word).hexdigest()
-    mc2.set(k,obj)
+    if data>0:
+        obj = cjson.encode(data)
+        k = hashlib.md5(word).hexdigest()
+        mc2.set(k,obj)
