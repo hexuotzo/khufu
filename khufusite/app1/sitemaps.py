@@ -9,7 +9,7 @@ class KhufuSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        dbname = '../infodb/infodb'
+        dbname = '/home/yanxu/khufu/infodb/infodb'
         data = pycabinet.search(dbname,'tag1','怀孕',1000)
         res = []
         for i in range(20):
