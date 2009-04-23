@@ -27,6 +27,6 @@ def rss(request):
         title = smart_unicode(obj['title'],"utf8")
         f.add_item(title=removetext(title),
                 link=u"http://www.zaojiao100.com/v/%s/" % obj["kid"],
-                description=title
+                description=removetext(title)
         )
     return HttpResponse(f.writeString('UTF-8'))
