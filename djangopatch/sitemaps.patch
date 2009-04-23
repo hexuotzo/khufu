@@ -1,0 +1,29 @@
+Index: django/contrib/sitemaps/__init__.py
+===================================================================
+--- django/contrib/sitemaps/__init__.py	(revision 10481)
++++ django/contrib/sitemaps/__init__.py	(working copy)
+@@ -1,4 +1,5 @@
+ from django.core import urlresolvers, paginator
++from django.conf import settings
+ import urllib
+ 
+ PING_URL = "http://www.google.com/webmasters/tools/ping"
+@@ -60,11 +61,15 @@
+     paginator = property(_get_paginator)
+ 
+     def get_urls(self, page=1):
+-        from django.contrib.sites.models import Site
+-        current_site = Site.objects.get_current()
++        if 'DOMAIN' in settings.get_all_members():
++            domain = settings.DOMAIN
++        else:
++            from django.contrib.sites.models import Site
++            current_site = Site.objects.get_current()
++            domain = current_site.domain
+         urls = []
+         for item in self.paginator.page(page).object_list:
+-            loc = "http://%s%s" % (current_site.domain, self.__get('location', item))
++            loc = "http://%s%s" % (domain, self.__get('location', item))
+             url_info = {
+                 'location':   loc,
+                 'lastmod':    self.__get('lastmod', item, None),
