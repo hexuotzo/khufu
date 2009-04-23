@@ -1,10 +1,14 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from khufusite.app1.sitemaps import KhufuSitemap
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
+sitemaps = {
+    'blog': KhufuSitemap(),
+}
 
 urlpatterns = patterns('',
     # Example:
@@ -29,4 +33,5 @@ urlpatterns = patterns('',
     (r'comments/',include('django.contrib.comments.urls')),
     
     (r'^rss/', 'khufusite.app1.rss.rss'),
+    (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
