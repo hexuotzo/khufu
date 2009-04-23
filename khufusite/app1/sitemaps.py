@@ -18,7 +18,7 @@ class KhufuSitemap(Sitemap):
         return res
 
     def location(self,obj):
-        return "http://www.zaojiao100.com/v/%s/" % obj["kid"]
+        return "/v/%s/" % obj["kid"]
 
     def lastmod(self, obj):
         return datetime.strptime(obj["savedate"],'%Y-%m-%d')
