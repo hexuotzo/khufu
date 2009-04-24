@@ -9,12 +9,22 @@ class KhufuSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
+        menus = [
+            "备孕",
+            "怀孕",
+            "产后",
+            "0-1岁",
+            "1-2岁",
+            "2-3岁",
+            "3-6岁",
+            "专家咨询",
+        ]
         dbname = '/home/yanxu/khufu/infodb/infodb'
-        data = pycabinet.search(dbname,'tag1','怀孕',1000)
         res = []
-        for i in range(20):
-            obj = random.choice(data)
-            res.append(obj)
+        for m in menus:
+            data = pycabinet.search(dbname,'tag1',m,2000)
+            for obj in data:
+                res.append(obj)
         return res
 
     def location(self,obj):
