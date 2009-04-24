@@ -26,7 +26,7 @@ def search(word):
         obj = random.choice(data)
         kid,title = obj["kid"],unicode(obj["title"],"utf8")
         print kid,title
-        yield kid,title
+        yield kid,{'title':title,'kid':kid}
 
 def words():
     if len(sys.argv)>1:
