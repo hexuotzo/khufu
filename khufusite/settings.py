@@ -90,4 +90,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'khufusite.app1.views.globalrequest',
 )
 
-DOMAIN = "http://www.zaojiao100.com"
+DOMAIN = "www.zaojiao100.com"

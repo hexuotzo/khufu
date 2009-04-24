@@ -158,6 +158,8 @@ def search(word,type_class,num=1000):
             continue
         yield kid,{"title":title}
 
-def webmasterhome(request):
-    return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/webmasterhome.htm').read())
-    
+
+def google9b196a21d9a447d9(request):
+    return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/google9b196a21d9a447d9.html').
+    read())
+
