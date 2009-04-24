@@ -34,4 +34,5 @@ urlpatterns = patterns('',
     
     (r'^rss/', 'khufusite.app1.rss.rss'),
     (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    (r'^webmasterhome.htm$', 'khufusite.app1.views.webmasterhome'),
 )

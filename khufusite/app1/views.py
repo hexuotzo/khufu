@@ -157,3 +157,7 @@ def search(word,type_class,num=1000):
         else:
             continue
         yield kid,{"title":title}
+
+def webmasterhome(request):
+    return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/webmasterhome.htm').read())
+    
