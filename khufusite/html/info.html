@@ -39,7 +39,7 @@
 	
 		<div class="pink margin_bottom">
 			<dl >
-				<dt><img src="/images/icon1.gif"/>相关文章</dt>
+				<dt><img src="{{media_url}}/images/icon1.gif"/>相关文章</dt>
 				{% for d in rel_page %}
 				<dd><a href="/v/{{d.1}}/" target="_blank">{{d.0|removetext}}</a></dd>
 				  {% endfor %}
