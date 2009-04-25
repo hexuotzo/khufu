@@ -11,14 +11,14 @@
 {% block description %}
 <meta name="description" content="早教知识网是全国唯一的早教知识查询网站.为父母提供权威,安全,免费的怀孕分娩,胎教,育儿,保健,喂养,常见病护理知识,早教知识.年轻父母可以在这里找到与婴幼儿发育,成长,教育有关的全部知识和咨询。">
 {% endblock %}
-<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{media_url}}/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feed.feedsky.com/zaojiao100" />
 </head>
 
 <body>
 {% load text %}
 	<div id="top" class="overflow">
-		<div class="logo"><a href="http://www.zaojiao100.com" target="_self"><img src="/images/logo.gif" border="0" /></a></div>
+		<div class="logo"><a href="http://www.zaojiao100.com" target="_self"><img src="{{media_url}}/images/logo.gif" border="0" /></a></div>
 		<div class="ad">
 			<script type="text/javascript"><!--
 			google_ad_client = "pub-3900865177765003";
@@ -61,7 +61,7 @@
 
 <div id="search">
 <form action="{{domain}}/keyword/" method="GET">
-<img src="/images/icon9.gif" />
+<img src="{{media_url}}/images/icon9.gif" />
 <h3>育儿知识查询</h3>
 <input type="text" class="searchbox" value="{% firstof word "孩子发烧" %}" name="insearch" onclick="this.value=''" />
 <select id="type_class" name="type_class">
@@ -73,7 +73,7 @@
   <option value="2-3岁">2-3岁</option>
   <option value="3-6岁">3-6岁</option>
 </select>
-<input type="image" src="/images/baby_10.gif" name="Submit" value="提交"/>
+<input type="image" src="{{media_url}}/images/baby_10.gif" name="Submit" value="提交"/>
 </form>
 </div>
 
