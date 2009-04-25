@@ -31,7 +31,8 @@ def globalrequest(request):
     return dict(word=word,
                 type_class=type_class,
                 menus=menus,
-                domain=domain)
+                domain=domain,
+                media_url=media_url)
 
 def isbot(request):
     botlist = [
