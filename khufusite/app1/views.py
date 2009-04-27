@@ -114,7 +114,8 @@ def keyword(request):
     pp = p.page(page)
     result1=pp.object_list[:10]
     result2=pp.object_list[10:]
-    return render_to_response('search.html',locals())
+    return render_to_response('search.html',locals(),
+        context_instance=RequestContext(request))
 
 def v(request,kid):
     mc = memcache.Client(['114.113.30.29:11211'])
