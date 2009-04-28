@@ -47,10 +47,10 @@ def isbot(request):
 
 def recomsearch(mcip,func):
     """类似专题之类,固定uid输出的函数"""
-    mc = memcache.Client([mcip])
     def wapper(kids,flag=False):
         data = []
         for key in kids:
+            mc = memcache.Client([mcip])
             if flag:
                 key = hashlib.md5(key).hexdigest()
             d = mc.get(key)
