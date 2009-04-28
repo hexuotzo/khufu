@@ -26,8 +26,8 @@ menus = [
 
 def globalrequest(request):
     word,type_class = "",""
-    domain = settings.DOMAIN
-    media_url = "http://%s" % settings.MEDIA_URL
+    domain = "http://%s" % settings.DOMAIN
+    media_url = settings.MEDIA_URL
     return dict(word=word,
                 type_class=type_class,
                 menus=menus,
