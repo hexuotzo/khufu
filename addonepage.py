@@ -8,6 +8,7 @@ import hashlib
 import datetime
 import cjson
 import string
+import os
 
 url = ''
 tag = '专家咨询'
@@ -28,4 +29,4 @@ dbvalue=cjson.encode({"title":title,"url":url,"html":text,"text":text,"datetime"
 mc.set(str(kid),dbvalue)
 
 cmd = 'tctmgr put infodb/infodb %s "title" "%s" "savedate" "%s" "tag1" "%s"' % (kid,title.encode("utf8"),now.date(),tag)
-
+print os.popen(cmd).read()
