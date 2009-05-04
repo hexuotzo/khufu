@@ -1,0 +1,1 @@
+../newtags/docclass.py
