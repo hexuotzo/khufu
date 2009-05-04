@@ -44,7 +44,6 @@ mc2 = memcache.Client(['114.113.30.29:11212'])
 for word in words():
     print word
     for kid,data in search(word):
-        if kid==None:continue
         obj = cjson.encode(data)
         k = hashlib.md5(word).hexdigest()
         mc2.set(k,obj)
