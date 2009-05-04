@@ -57,12 +57,16 @@ def getData(title,url):
 def analy_list(lists):
     for data_list in lists:
         try:
-            print '\t\t\t'+data_list[0].decode('gbk'), "http://baby.sina.com.cn"+data_list[1]
+            title = data_list[0].decode('gbk')
+            url = data_list[1]
         except:
-            print '\t\t\t'+data_list[0], "http://baby.sina.com.cn"+data_list[1]
+            title = data_list[0]
+            url = data_list[1]
+        print title,url
         #开始抓每页内容
         try:
-            print getData(data_list[0],"http://baby.sina.com.cn"+data_list[1])[0].decode('gbk')
+            body = getData(data_list[0],"http://baby.sina.com.cn"+data_list[1])[0].decode('gbk')
+            print body
         except:
             continue
-        # break
+        yield title,url,body
