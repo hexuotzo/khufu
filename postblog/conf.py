@@ -62,11 +62,11 @@ def analy_list(lists):
         except:
             title = data_list[0]
             url = data_list[1]
-        print title,url
         #开始抓每页内容
         try:
             body = getData(data_list[0],"http://baby.sina.com.cn"+data_list[1])[0].decode('gbk')
-            print body
+            # print body
         except:
             continue
+        print title,url
         yield title,url,body
