@@ -21,8 +21,11 @@ MENU = [
 ]
 
 def search(word):
-    data = pycabinet.search('/home/yanxu/khufu/infodb/infodb','tag1','怀孕',1000)
-    for i in range(4):
+    dbpath = '/home/yanxu/khufu/infodb/infodb'
+    data = pycabinet.search(dbpath,'tag1',word,5000)
+    if len(data)==0:
+        data = pycabinet.search(dbpath,'tag1','怀孕',5000)
+    for i in range(10):
         obj = random.choice(data)
         kid,title = obj["kid"],unicode(obj["title"],"utf8")
         print kid,title
@@ -40,8 +43,8 @@ def words():
 mc2 = memcache.Client(['114.113.30.29:11212'])
 for word in words():
     print word
-    data = [d for kid,d in search(word)]
-    if data>0:
+    for kid,data in search(word):
+        if kid==None:continue
         obj = cjson.encode(data)
         k = hashlib.md5(word).hexdigest()
         mc2.set(k,obj)
