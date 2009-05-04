@@ -39,6 +39,8 @@ def isbot(request):
         'Baiduspider',
         'Googlebot',
         'Yahoo! Slurp',
+        'Sogou web spider',
+        'YoudaoBot',
     ]
     for bot in botlist:
         if request.META['HTTP_USER_AGENT'].find(bot)==0:
