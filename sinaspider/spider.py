@@ -13,7 +13,7 @@ def indb(title,url,body):
 	title = title.encode("utf8")
 	kid = uid.getKid(url)
 	text = html2text(body)
-    pinyin = addpinyin(text)
+	pinyin = addpinyin(text)
 	tag = c1.classify(body)
 	print kid,title,url,tag
 	os.popen(cmd % (kid,title,now.date(),tag))
