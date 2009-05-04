@@ -43,7 +43,8 @@ def words():
 mc2 = memcache.Client(['114.113.30.29:11212'])
 for word in words():
     print word
-    for kid,data in search(word):
+    data = [d for kid,d in search(word)]
+    if data>0:
         obj = cjson.encode(data)
         k = hashlib.md5(word).hexdigest()
         mc2.set(k,obj)
