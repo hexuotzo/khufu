@@ -22,7 +22,7 @@ class KhufuSitemap(Sitemap):
         dbname = '/home/yanxu/khufu/infodb/infodb'
         res = []
         for m in menus:
-            data = pycabinet.search(dbname,'tag1',m,2000)
+            data = pycabinet.search(dbname,'tag1',m,5000)
             for obj in data:
                 res.append(obj)
         return res
