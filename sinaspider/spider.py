@@ -21,7 +21,7 @@ def indb(title,url,body):
 	os.popen(cmd % (kid,title,now.date(),tag))
 
 	mc = memcache.Client(['114.113.30.29:11211'])
-	dbvalue=cjson.encode({"title":title,"url":url,"html":body,"text":text,"datetime":str(now),"addpinyin":pinyin,"body":text,"kid":kid})
+	dbvalue=cjson.encode({"title":title.decode("utf8"),"url":url,"html":body,"text":text,"datetime":str(now),"addpinyin":pinyin,"body":text,"kid":kid})
 	mc.set(str(kid),dbvalue)
 	
 if __name__ == '__main__':
