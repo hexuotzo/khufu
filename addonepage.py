@@ -4,11 +4,10 @@ try:
 except:
     import memcache
 from addpinyin import *
-import hashlib
 import datetime
 import cjson
-import string
 import os
+import uid
 
 url = ''
 tag = '专家咨询'
@@ -19,9 +18,7 @@ text = u'''
 pinyin = addpinyin(text)
 now = datetime.datetime.now()
 
-key = "%s" % hashlib.md5(url).hexdigest()
-kid = string.atoi(key[:10],16)
-
+kid = uid.getKid(url)
 print kid,title
 
 mc = memcache.Client(['114.113.30.29:11211'])
