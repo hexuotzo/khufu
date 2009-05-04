@@ -66,7 +66,7 @@ def recomsearch(mcip,func):
         return data
     return wapper
 mc11211 = recomsearch('114.113.30.29:11211',lambda x,key:x.__setitem__("kid",key))
-mc11212 = recomsearch('114.113.30.29:11212',lambda x,key:x.__getslice__(0,4))
+mc11212 = recomsearch('114.113.30.29:11212',lambda x,key:x.__getslice__(0,10))
 
 def hello(request):
     data = mc11212(menus,True)
