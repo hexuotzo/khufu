@@ -6,15 +6,21 @@ from datetime import datetime
 import cPickle as pickle
 import uid
 import os
+import cmemcache
 
 def indb(title,url,body):
 	url = "http://baby.sina.com.cn%s" % url
 	title = title.encode("utf8")
 	kid = uid.getKid(url)
-	body = html2text(body)
+	text = html2text(body)
+    pinyin = addpinyin(text)
 	tag = c1.classify(body)
 	print kid,title,url,tag
 	os.popen(cmd % (kid,title,now.date(),tag))
+
+	mc = memcache.Client(['114.113.30.29:11211'])
+	dbvalue=cjson.encode({"title":title,"url":url,"html":body,"text":text,"datetime":str(now),"addpinyin":pinyin,"body":text,"kid":kid})
+	mc.set(str(kid),dbvalue)
 	
 if __name__ == '__main__':
 	c1 = pickle.load(open('../newtags/results.pickle'))
