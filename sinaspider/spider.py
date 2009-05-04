@@ -1,9 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 from conf import *
+from html2text import html2text
+import cPickle as pickle
 
 	
 if __name__ == '__main__':
+	c1 = pickle.load(open('../newtags/results.pickle'))
+    
 	for title,dic in index_dic_type_one.items():
 		spiderUrl = '%s/%s/%s'%(url, title, dic.get('url'))
 		# spiderUrl = 'http://baby.sina.com.cn/fmq/sc.html'
@@ -24,7 +28,10 @@ if __name__ == '__main__':
 		print analy_now_dateaTitle.decode('gbk'),analy_now_dateaUrl
 		data_lists = getDatalinks(analy_html)
 		for title,url,body in analy_list(data_lists):
-			print "t1",title,url
+			url = "http://%s" % url
+			body = html2text(body)
+			dtype = c1.classify(body)
+			print "t1",title,url,dtype
 		
 		for links in bar_link_lists:
 			spiderUrl = url+links[0]
@@ -34,9 +41,10 @@ if __name__ == '__main__':
 			bar_html = ''.join(reg(bar_reSyntax,analy_html))
 			data_lists = getDatalinks(analy_html)
 			for title,url,body in analy_list(data_lists):
+				url = "http://%s" % url
+				body = html2text(body)
+				dtype = c1.classify(body)
 				print "t2",title,url
-            # break
-        # break
 		
 		
 		
