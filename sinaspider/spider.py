@@ -8,6 +8,7 @@ import cPickle as pickle
 import uid
 import os
 import cmemcache as memcache
+import cjson
 
 def indb(title,url,body):
 	url = "http://baby.sina.com.cn%s" % url
