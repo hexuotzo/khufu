@@ -7,7 +7,7 @@ from addpinyin import *
 import cPickle as pickle
 import uid
 import os
-import cmemcache
+import cmemcache as memcache
 
 def indb(title,url,body):
 	url = "http://baby.sina.com.cn%s" % url
