@@ -53,7 +53,10 @@ if __name__ == '__main__':
 		
 		for links in bar_link_lists:
 			spiderUrl = url+links[0]
-			print links[1].decode('gbk'), spiderUrl
+			try:
+				print links[1].decode('gbk'), spiderUrl
+			except:
+				continue
 			analy_html = analyzier(spiderUrl)
 			bar_reSyntax = dic.get('re')[0]
 			bar_html = ''.join(reg(bar_reSyntax,analy_html))
