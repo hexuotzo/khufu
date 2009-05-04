@@ -23,7 +23,8 @@ if __name__ == '__main__':
 		
 		print analy_now_dateaTitle.decode('gbk'),analy_now_dateaUrl
 		data_lists = getDatalinks(analy_html)
-		analy_list(data_lists)
+		for title,url,body in analy_list(data_lists):
+			print "t1",title,url
 		
 		for links in bar_link_lists:
 			spiderUrl = url+links[0]
@@ -32,9 +33,10 @@ if __name__ == '__main__':
 			bar_reSyntax = dic.get('re')[0]
 			bar_html = ''.join(reg(bar_reSyntax,analy_html))
 			data_lists = getDatalinks(analy_html)
-			analy_list(data_lists)
-			break
-		break
+			for title,url,body in analy_list(data_lists):
+				print "t2",title,url
+            # break
+        # break
 		
 		
 		

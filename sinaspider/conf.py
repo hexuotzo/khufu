@@ -36,10 +36,10 @@ def getHtml(url):
     }
     l_proxy_support = urllib2.ProxyHandler({"http" : \
         "http://%(host)s:%(port)d" % l_proxy_info})
-    l_opener = urllib2.build_opener(l_proxy_support, urllib2.HTTPHandler)
-    urllib2.install_opener(l_opener)
-    # opener = urllib2.build_opener()
-    feeddata = l_opener.open(request).read()
+    # opener = urllib2.build_opener(l_proxy_support, urllib2.HTTPHandler)
+    # urllib2.install_opener(opener)
+    opener = urllib2.build_opener()
+    feeddata = opener.open(request).read()
     return feeddata
 
 def analyzier(url):
@@ -68,5 +68,5 @@ def analy_list(lists):
             # print body
         except:
             continue
-        print title,url
+        # print "conf",title,url
         yield title,url,body
