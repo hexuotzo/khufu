@@ -6,30 +6,34 @@
 
 static PyObject *
 get(PyObject *self,PyObject *args){
+    TCTDB *tdb;
+    int ecode;
+    const char *name;
+
     const char *dbname;
     const char *key;
     if (!PyArg_ParseTuple(args, "ss", &dbname, &key))
         return NULL;
+
     tdb = tctdbnew();
-    
     if(!tctdbopen(tdb, dbname, TDBONOLCK | TDBOREADER)){
         ecode = tctdbecode(tdb);
         fprintf(stderr, "open error: %s\n", tctdberrmsg(ecode));
     }
+    name = tctdbget3(tdb,key);
     if(!tctdbclose(tdb)){
         ecode = tctdbecode(tdb);
         fprintf(stderr, "close error: %s\n", tctdberrmsg(ecode));
     }
-
     tctdbdel(tdb);
+    return Py_BuildValue("s",name);
 }
 
 
 static PyObject *
 search(PyObject *self, PyObject *args){
     TCTDB *tdb;
-    int ecode, pksiz, i, rsiz;
-    char pkbuf[256];
+    int ecode, i, rsiz;
     const char *rbuf, *name;
     TCMAP *cols;
     TDBQRY *qry;
