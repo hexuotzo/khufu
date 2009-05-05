@@ -4,6 +4,26 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+static PyObject *
+get(PyObject *self,PyObject *args){
+    const char *dbname;
+    const char *key;
+    if (!PyArg_ParseTuple(args, "ss", &dbname, &key))
+        return NULL;
+    tdb = tctdbnew();
+    
+    if(!tctdbopen(tdb, dbname, TDBONOLCK | TDBOREADER)){
+        ecode = tctdbecode(tdb);
+        fprintf(stderr, "open error: %s\n", tctdberrmsg(ecode));
+    }
+    if(!tctdbclose(tdb)){
+        ecode = tctdbecode(tdb);
+        fprintf(stderr, "close error: %s\n", tctdberrmsg(ecode));
+    }
+
+    tctdbdel(tdb);
+}
+
 
 static PyObject *
 search(PyObject *self, PyObject *args){
@@ -68,6 +88,7 @@ search(PyObject *self, PyObject *args){
 
 PyMethodDef methods[] = {
   {"search", search, METH_VARARGS},
+  {"get", get, METH_VARARGS},
   {NULL, NULL},
 };
 
