@@ -57,6 +57,7 @@ search(PyObject *self, PyObject *args){
     }
     qry = tctdbqrynew(tdb);
     tctdbqryaddcond(qry, sfield, TDBQCSTREQ, stext);
+    tctdbqrysetorder(qry, "savedate", TDBQOSTRDESC);
     tctdbqrysetlimit(qry, max, 0);
     res = tctdbqrysearch(qry);
     for(i = 0; i < tclistnum(res); i++){
