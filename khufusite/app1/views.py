@@ -153,19 +153,19 @@ def search(word,type_class,num=1000):
     if len(results)==0:
         ###早晚要替掉的脏代码!###
         results = os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)).read()
-    for text in results.split('\n'):
-        if text.isdigit():
-            kid = text
-            text = pycabinet.get(dbpath,kid)
-        text = text.split()
-        if len(text)==6:
-            p1,title,p2,savedate,p3,tag1 = text
-        else:
-            continue
-        yield kid,{"title":title}
+        for text in results.split('\n'):
+            if text.isdigit():
+                kid = text
+                text = pycabinet.get(dbpath,kid)
+            text = text.split()
+            if len(text)==6:
+                p1,title,p2,savedate,p3,tag1 = text
+            else:
+                continue
+            yield kid,{"title":title}
     else:
         for r in results:
-            yield r['kid'],{"title",r["title"]}
+            yield r['kid'],{"title":r["title"]}
 
 def google9b196a21d9a447d9(request):
     return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/google9b196a21d9a447d9.html').
