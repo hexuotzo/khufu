@@ -12,6 +12,7 @@ except:
 import cjson
 import hashlib
 import os
+import pycabinet
 
 menus = [
     "备孕",
@@ -70,7 +71,7 @@ mc11212 = recomsearch('114.113.30.29:11212',lambda x,key:x.__getslice__(0,10))
 
 def hello(request):
     data = mc11212(menus,True)
-
+        
     #专题的实现
     show_views=[
         "190031665444",
@@ -92,7 +93,7 @@ def hello(request):
         "7181029938",
     ]
     data_recoms = mc11211(recoms)
-
+    
     return render_to_response('index.html',locals(),
             context_instance=RequestContext(request))
 
@@ -127,7 +128,7 @@ def v(request,kid):
         obj['memo']=obj['addpinyin']
     else:
         obj['memo']=obj['body']
-
+        
     #相关新闻的实现
     from ngram import ngram
     rel_page = []
@@ -146,23 +147,25 @@ def search(word,type_class,num=1000):
     type_class = smart_str(type_class,"utf8")
     if type_class!="0":
         word = " ".join( (word,type_class) )
-    results=os.popen('tctmgr search -pv -ord savedate numdesc /home/yanxu/khufu/infodb/infodb tag1 STRBW "%s"' % word ).read()
-    if results=='':
-        # mc = memcache.Client(['114.113.30.29:11211'])
+    dbpath = '/home/yanxu/khufu/infodb/infodb'
+    results=pycabinet.search(dbpath,'tag1',word,5000)
+    
+    if len(results)==0:
+        ###早晚要替掉的脏代码!###
         results = os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)).read()
     for text in results.split('\n'):
         if text.isdigit():
             kid = text
-            text = os.popen('tctmgr get -pz /home/yanxu/khufu/infodb/infodb %s' % text).read().strip()
-        text = text.split("\t")
-        if len(text)==7:
-            kid,p1,title,p2,savedate,p3,tag1 = text
-        elif len(text)==6:
+            text = pycabinet.get(dbpath,kid)
+        text = text.split()
+        if len(text)==6:
             p1,title,p2,savedate,p3,tag1 = text
         else:
             continue
         yield kid,{"title":title}
-
+    else:
+        for r in results:
+            yield r['kid'],{"title",r["title"]}
 
 def google9b196a21d9a447d9(request):
     return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/google9b196a21d9a447d9.html').
