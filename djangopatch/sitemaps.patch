@@ -1,6 +1,6 @@
 Index: django/contrib/sitemaps/__init__.py
 ===================================================================
---- django/contrib/sitemaps/__init__.py	(revision 10481)
+--- django/contrib/sitemaps/__init__.py	(revision 10689)
 +++ django/contrib/sitemaps/__init__.py	(working copy)
 @@ -1,4 +1,5 @@
  from django.core import urlresolvers, paginator
@@ -8,7 +8,24 @@ Index: django/contrib/sitemaps/__init__.py
  import urllib
  
  PING_URL = "http://www.google.com/webmasters/tools/ping"
-@@ -60,11 +61,15 @@
+@@ -27,9 +28,13 @@
+     if sitemap_url is None:
+         raise SitemapNotFound("You didn't provide a sitemap_url, and the sitemap URL couldn't be auto-detected.")
+ 
+-    from django.contrib.sites.models import Site
+-    current_site = Site.objects.get_current()
+-    url = "http://%s%s" % (current_site.domain, sitemap_url)
++    if 'DOMAIN' in settings.get_all_members():
++        domain = settings.DOMAIN
++    else:
++        from django.contrib.sites.models import Site
++        current_site = Site.objects.get_current()
++        domain = current_site.domain
++    url = "http://%s%s" % (domain, sitemap_url)
+     params = urllib.urlencode({'sitemap':url})
+     urllib.urlopen("%s?%s" % (ping_url, params))
+ 
+@@ -60,11 +65,15 @@
      paginator = property(_get_paginator)
  
      def get_urls(self, page=1):
