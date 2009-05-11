@@ -8,45 +8,45 @@ def getData (blog):
     return [{"content":"测试内容","title":"测试标题","tag":"测试tag"}]
 
 def login(userdata,posturl):
-	print userdata
-	cookie=cookielib.CookieJar()
-	cj=urllib2.HTTPCookieProcessor(cookie)
-	request=urllib2.Request(posturl)
-	opener=urllib2.build_opener(cj)
-	c = opener.open(request,urllib.urlencode(userdata))
-	bincontent= c.read()
-	print bincontent
-	return opener
+    print userdata
+    cookie=cookielib.CookieJar()
+    cj=urllib2.HTTPCookieProcessor(cookie)
+    request=urllib2.Request(posturl)
+    opener=urllib2.build_opener(cj)
+    c = opener.open(request,urllib.urlencode(userdata))
+    bincontent= c.read()
+    print bincontent
+    return opener
 
 #baidu用
 def connection (data,method,host,url,headers):
-	print "---request---"
-	print data,method,host,url,headers
-	conn=httplib.HTTPConnection(host)
-	data = urllib.urlencode(data)
-	conn.request(method,url,data,headers)
-	res=conn.getresponse()
-	cookie=re.split(r',',res.getheader('set-cookie'))
-	print "---get cookie---"
-	print cookie
-	if not headers.has_key("cookie"):
-		headers['cookie']=""
-	for c in cookie:
-		b=re.split(r';',c)
-		b=b[0].strip()
-		if b[0]=="B":
-			if headers['cookie']=="":
-				headers['cookie']=b
-			else:
-				headers['cookie']=headers['cookie']+';'+b
-	res.close()
-	return headers
+    print "---request---"
+    print data,method,host,url,headers
+    conn=httplib.HTTPConnection(host)
+    data = urllib.urlencode(data)
+    conn.request(method,url,data,headers)
+    res=conn.getresponse()
+    cookie=re.split(r',',res.getheader('set-cookie'))
+    print "---get cookie---"
+    print cookie
+    if not headers.has_key("cookie"):
+        headers['cookie']=""
+    for c in cookie:
+        b=re.split(r';',c)
+        b=b[0].strip()
+        if b[0]=="B":
+            if headers['cookie']=="":
+                headers['cookie']=b
+            else:
+                headers['cookie']=headers['cookie']+';'+b
+    res.close()
+    return headers
 
 def postdata (opener,data,posturl):
-	loginrequest=urllib2.Request(posturl)
-	c = opener.open(loginrequest,urllib.urlencode(data))
-	bincontent = c.read()
-	return bincontent
+    loginrequest=urllib2.Request(posturl)
+    c = opener.open(loginrequest,urllib.urlencode(data))
+    bincontent = c.read()
+    return bincontent
 
 def postsohu (username,passwd):
     m = md5.md5(passwd)
@@ -123,28 +123,28 @@ postsina = poststep(login='http://my.blog.sina.com.cn/login.php?index=index&type
 )
 
 def postbaidu (username,passwd):
-	headers={'Connection':'Keep-Alive',
-	'User-Agent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 2.0.50727; .NET CLR 1.1.4322)',
-	'domain':'baidu.com'
-	}
-	hihost='hi.baidu.com'
-	#获得cookie
-	headers = connection('','GET',hihost,'/',headers)
-	#登录
-	passhost='passport.baidu.com'
-	userdata={'username':username,'password':passwd,'mem_pass':'on'}
-	headers = connection(userdata,'POST',passhost,'/?login',headers)
-	#发日志
-	data = getData("baidu")
-	while len(data)>0:
-		d = data.pop()
-		try:
-			baidudata = {'cm':1,'ct':1,'spBlogCatName':unicode('默认分类',"utf-8").encode("gb2312"),'spBlogPower':0,'spBlogText':unicode(d['content'],"utf-8").encode("gb2312")
-			,'spBlogTitle':unicode(d['title'],"utf-8").encode("gb2312"),'spIsCmtAllow':1,'spRefURL':'http://hi.baidu.com/icejtest22/creat/blog/',
-			'spVcode':'','spVerifyKey':'','tj':''}
-			headers = connection(baidudata,'POST',hihost,'/%s/commit' %(username),headers)
-		except Exception:
-			print "data error\r\n"
+    headers={'Connection':'Keep-Alive',
+    'User-Agent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 2.0.50727; .NET CLR 1.1.4322)',
+    'domain':'baidu.com'
+    }
+    hihost='hi.baidu.com'
+    #获得cookie
+    headers = connection('','GET',hihost,'/',headers)
+    #登录
+    passhost='passport.baidu.com'
+    userdata={'username':username,'password':passwd,'mem_pass':'on'}
+    headers = connection(userdata,'POST',passhost,'/?login',headers)
+    #发日志
+    data = getData("baidu")
+    while len(data)>0:
+        d = data.pop()
+        try:
+            baidudata = {'cm':1,'ct':1,'spBlogCatName':unicode('默认分类',"utf-8").encode("gb2312"),'spBlogPower':0,'spBlogText':unicode(d['content'],"utf-8").encode("gb2312")
+            ,'spBlogTitle':unicode(d['title'],"utf-8").encode("gb2312"),'spIsCmtAllow':1,'spRefURL':'http://hi.baidu.com/icejtest22/creat/blog/',
+            'spVcode':'','spVerifyKey':'','tj':''}
+            headers = connection(baidudata,'POST',hihost,'/%s/commit' %(username),headers)
+        except Exception:
+            print "data error\r\n"
 
 def main ():
     sohupassport =[{'user':'zaojiao100@sohu.com','passwd':'123456'}]
