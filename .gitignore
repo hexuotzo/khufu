@@ -5,3 +5,5 @@ Icon?
 *~
 *.o
 *.so
+*.tct
+*.tch
