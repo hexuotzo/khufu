@@ -1,0 +1,145 @@
+# This is a shell archive.  Save it in a file, remove anything before
+# this line, and then unpack it by entering "sh file".  Note, it may
+# create directories; files and directories will be owned by you and
+# have default permissions.
+#
+# This archive contains:
+#
+#	ruby-wgettsv/
+#	ruby-wgettsv/Makefile
+#	ruby-wgettsv/pkg-descr
+#	ruby-wgettsv/pkg-plist
+#	ruby-wgettsv/wgettsv.shar
+#	ruby-wgettsv/distinfo
+#
+echo c - ruby-wgettsv/
+mkdir -p ruby-wgettsv/ > /dev/null 2>&1
+echo x - ruby-wgettsv/Makefile
+sed 's/^X//' >ruby-wgettsv/Makefile << 'END-of-ruby-wgettsv/Makefile'
+X# New ports collection makefile for:    ruby-wgettsv
+X# Date created:                         17 Jan 2009
+X# Whom:                                 Qing Feng <qingfeng@me.com>
+X#
+X# $FreeBSD$
+X#
+X
+XPORTNAME=	ruby-wgettsv
+XPORTVERSION=	0.95
+XCATEGORIES=	www ruby
+XMASTER_SITES=	http://alpha.mixi.co.jp/dist/tctsearch/
+XPKGNAMEPREFIX=	${RUBY_PKGNAMEPREFIX}
+XDISTNAME=	wgettsv
+XEXTRACT_SUFX=	
+XEXTRACT_ONLY=	
+X
+XMAINTAINER=	qingfeng@me.com
+XCOMMENT=	Collect WWW resources and generate TSV data
+X
+XUSE_RUBY=		yes
+XUSE_RUBY_FEATURES=	iconv
+X
+XNO_BUILD=		yes
+X
+Xpost-extract:
+X	${CP} ${DISTDIR}/${DISTNAME} ${WRKDIR}/${DISTNAME}
+X
+Xdo-configure:
+X	${SED} -e "s,^#!/usr/bin/ruby -w,#!${RUBY} -w," \
+X		    <${DISTDIR}/${DISTNAME} >${WRKDIR}/${DISTNAME}
+Xdo-install:
+X	${INSTALL_DATA} -m0755 ${WRKDIR}/${DISTNAME} ${PREFIX}/bin
+X
+Xdo-package:
+X	#
+X
+X.include <bsd.port.mk>
+END-of-ruby-wgettsv/Makefile
+echo x - ruby-wgettsv/pkg-descr
+sed 's/^X//' >ruby-wgettsv/pkg-descr << 'END-of-ruby-wgettsv/pkg-descr'
+XCollect WWW resources and generate TSV data
+X
+XWWW:	http://alpha.mixi.co.jp/dist/tctsearch/wgettsv
+END-of-ruby-wgettsv/pkg-descr
+echo x - ruby-wgettsv/pkg-plist
+sed 's/^X//' >ruby-wgettsv/pkg-plist << 'END-of-ruby-wgettsv/pkg-plist'
+Xbin/wgettsv
+END-of-ruby-wgettsv/pkg-plist
+echo x - ruby-wgettsv/wgettsv.shar
+sed 's/^X//' >ruby-wgettsv/wgettsv.shar << 'END-of-ruby-wgettsv/wgettsv.shar'
+X# This is a shell archive.  Save it in a file, remove anything before
+X# this line, and then unpack it by entering "sh file".  Note, it may
+X# create directories; files and directories will be owned by you and
+X# have default permissions.
+X#
+X# This archive contains:
+X#
+X#	ruby-wgettsv/
+X#	ruby-wgettsv/Makefile
+X#	ruby-wgettsv/pkg-descr
+X#	ruby-wgettsv/pkg-plist
+X#	ruby-wgettsv/wgettsv.shar
+X#	ruby-wgettsv/distinfo
+X#
+Xecho c - ruby-wgettsv/
+Xmkdir -p ruby-wgettsv/ > /dev/null 2>&1
+Xecho x - ruby-wgettsv/Makefile
+Xsed 's/^X//' >ruby-wgettsv/Makefile << 'END-of-ruby-wgettsv/Makefile'
+XX# New ports collection makefile for:    ruby-wgettsv
+XX# Date created:                         17 Jan 2009
+XX# Whom:                                 Qing Feng <qingfeng@me.com>
+XX#
+XX# $FreeBSD$
+XX#
+XX
+XXPORTNAME=	ruby-wgettsv
+XXPORTVERSION=	0.95
+XXCATEGORIES=	www ruby
+XXMASTER_SITES=	http://alpha.mixi.co.jp/dist/tctsearch/
+XXPKGNAMEPREFIX=	${RUBY_PKGNAMEPREFIX}
+XXDISTNAME=	wgettsv
+XXEXTRACT_SUFX=	
+XXEXTRACT_ONLY=	
+XX
+XXMAINTAINER=	qingfeng@me.com
+XXCOMMENT=	Collect WWW resources and generate TSV data
+XX
+XXUSE_RUBY=		yes
+XXUSE_RUBY_FEATURES=	iconv
+XX
+XXNO_BUILD=		yes
+XX
+XXpost-extract:
+XX	${CP} ${DISTDIR}/${DISTNAME} ${WRKDIR}/${DISTNAME}
+XX
+XXdo-configure:
+XX	${SED} -e "s,^#!/usr/bin/ruby -w,#!${RUBY} -w," \
+XX		    <${DISTDIR}/${DISTNAME} >${WRKDIR}/${DISTNAME}
+XXdo-install:
+XX	${INSTALL_DATA} -m0755 ${WRKDIR}/${DISTNAME} ${PREFIX}/bin
+XX
+XXdo-package:
+XX	#
+XX
+XX.include <bsd.port.mk>
+XEND-of-ruby-wgettsv/Makefile
+Xecho x - ruby-wgettsv/pkg-descr
+Xsed 's/^X//' >ruby-wgettsv/pkg-descr << 'END-of-ruby-wgettsv/pkg-descr'
+XXCollect WWW resources and generate TSV data
+XX
+XXWWW:	http://alpha.mixi.co.jp/dist/tctsearch/wgettsv
+XEND-of-ruby-wgettsv/pkg-descr
+Xecho x - ruby-wgettsv/pkg-plist
+Xsed 's/^X//' >ruby-wgettsv/pkg-plist << 'END-of-ruby-wgettsv/pkg-plist'
+XXbin/wgettsv
+XEND-of-ruby-wgettsv/pkg-plist
+Xecho x - ruby-wgettsv/wgettsv.shar
+Xsed 's/^X//' >ruby-wgettsv/wgettsv.shar << 'END-of-ruby-wgettsv/wgettsv.shar'
+END-of-ruby-wgettsv/wgettsv.shar
+echo x - ruby-wgettsv/distinfo
+sed 's/^X//' >ruby-wgettsv/distinfo << 'END-of-ruby-wgettsv/distinfo'
+XMD5 (wgettsv) = d10e992bda678b346117603d6a155899
+XSHA256 (wgettsv) = bcdffde247208611e526e1a4efe5c315fd5d69d0c1e72c44dfc3bc578a46128e
+XSIZE (wgettsv) = 8532
+END-of-ruby-wgettsv/distinfo
+exit
+
