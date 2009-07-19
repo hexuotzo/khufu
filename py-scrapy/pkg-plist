@@ -1,0 +1,491 @@
+.hg_archival.txt
+.hgignore
+@dirrm docs
+@dirrm docs/_ext
+@dirrm docs/_static
+@dirrm docs/_templates
+@dirrm docs/experimental
+@dirrm docs/intro
+@dirrm docs/media
+@dirrm docs/misc
+@dirrm docs/ref
+@dirrm docs/topics
+@dirrm docs/topics/_images
+@dirrm examples
+@dirrm examples/experimental
+@dirrm examples/experimental/googledir
+@dirrm examples/experimental/googledir/googledir
+@dirrm examples/experimental/googledir/googledir/spiders
+@dirrm examples/experimental/googledir/googledir/templates
+@dirrm examples/googledir
+@dirrm examples/googledir/googledir
+@dirrm examples/googledir/googledir/spiders
+@dirrm extras
+@dirrm extras/sql
+@dirrm profiling
+@dirrm profiling/priorityqueue
+@dirrm scrapy
+@dirrm scrapy/command
+@dirrm scrapy/command/commands
+@dirrm scrapy/conf
+@dirrm scrapy/conf/commands
+@dirrm scrapy/contrib
+@dirrm scrapy/contrib/cluster
+@dirrm scrapy/contrib/cluster/crawler
+@dirrm scrapy/contrib/cluster/hooks
+@dirrm scrapy/contrib/cluster/master
+@dirrm scrapy/contrib/cluster/tools
+@dirrm scrapy/contrib/cluster/worker
+@dirrm scrapy/contrib/codecs
+@dirrm scrapy/contrib/downloadermiddleware
+@dirrm scrapy/contrib/item
+@dirrm scrapy/contrib/linkextractors
+@dirrm scrapy/contrib/pipeline
+@dirrm scrapy/contrib/response
+@dirrm scrapy/contrib/schedulermiddleware
+@dirrm scrapy/contrib/spider
+@dirrm scrapy/contrib/spidermiddleware
+@dirrm scrapy/contrib/spiders
+@dirrm scrapy/contrib/web
+@dirrm scrapy/contrib/webconsole
+@dirrm scrapy/contrib_exp
+@dirrm scrapy/contrib_exp/adaptors
+@dirrm scrapy/contrib_exp/downloadermiddleware
+@dirrm scrapy/contrib_exp/history
+@dirrm scrapy/contrib_exp/newitem
+@dirrm scrapy/contrib_exp/pipeline
+@dirrm scrapy/core
+@dirrm scrapy/core/downloader
+@dirrm scrapy/core/downloader/responsetypes
+@dirrm scrapy/core/scheduler
+@dirrm scrapy/extension
+@dirrm scrapy/fetcher
+@dirrm scrapy/http
+@dirrm scrapy/http/request
+@dirrm scrapy/http/response
+@dirrm scrapy/item
+@dirrm scrapy/link
+@dirrm scrapy/log
+@dirrm scrapy/mail
+@dirrm scrapy/management
+@dirrm scrapy/patches
+@dirrm scrapy/spider
+@dirrm scrapy/stats
+@dirrm scrapy/stats/collector
+@dirrm scrapy/templates
+@dirrm scrapy/templates/project
+@dirrm scrapy/templates/project/module
+@dirrm scrapy/templates/project/module/spiders
+@dirrm scrapy/templates/project/module/templates
+@dirrm scrapy/templates/project/root
+@dirrm scrapy/tests
+@dirrm scrapy/tests/sample_data
+@dirrm scrapy/tests/sample_data/adaptors
+@dirrm scrapy/tests/sample_data/compressed
+@dirrm scrapy/tests/sample_data/feeds
+@dirrm scrapy/tests/sample_data/link_extractor
+@dirrm scrapy/tests/sample_data/test_site
+@dirrm scrapy/tests/test_spiders
+@dirrm scrapy/utils
+@dirrm scrapy/xlib
+@dirrm scrapy/xlib/pydispatch
+@dirrm scrapy/xlib/spidermonkey
+@dirrm scrapy/xpath
+@dirrm scripts
+AUTHORS
+INSTALL
+LICENSE
+MANIFEST.in
+README
+bin/runtests.bat
+bin/runtests.sh
+bin/scrapy-admin.py
+docs/Makefile
+docs/README
+docs/_ext/scrapydocs.py
+docs/_static/items_adaptors-sample1.html
+docs/_static/scrapydoc.css
+docs/_static/selectors-sample1.html
+docs/_templates/index.html
+docs/_templates/layout.html
+docs/conf.py
+docs/contents.rst
+docs/experimental/index.rst
+docs/experimental/newitem-adaptors.rst
+docs/experimental/newitem.rst
+docs/faq.rst
+docs/intro/index.rst
+docs/intro/install.rst
+docs/intro/overview.rst
+docs/intro/tutorial.rst
+docs/media/scrapy-architecture.dia
+docs/misc/api-stability.rst
+docs/misc/index.rst
+docs/ref/downloader-middleware.rst
+docs/ref/email.rst
+docs/ref/exceptions.rst
+docs/ref/extension-manager.rst
+docs/ref/extensions.rst
+docs/ref/index.rst
+docs/ref/link-extractors.rst
+docs/ref/logging.rst
+docs/ref/request-response.rst
+docs/ref/selectors.rst
+docs/ref/settings.rst
+docs/ref/signals.rst
+docs/ref/spiders.rst
+docs/topics/_images/adaptors_diagram.png
+docs/topics/_images/adaptors_diagram.svg
+docs/topics/_images/firebug1.png
+docs/topics/_images/firebug2.png
+docs/topics/_images/firebug3.png
+docs/topics/_images/scrapy_architecture.odg
+docs/topics/_images/scrapy_architecture.png
+docs/topics/adaptors.rst
+docs/topics/architecture.rst
+docs/topics/downloader-middleware.rst
+docs/topics/extensions.rst
+docs/topics/firebug.rst
+docs/topics/firefox.rst
+docs/topics/index.rst
+docs/topics/item-pipeline.rst
+docs/topics/items.rst
+docs/topics/link-extractors.rst
+docs/topics/robotstxt.rst
+docs/topics/selectors.rst
+docs/topics/settings.rst
+docs/topics/shell.rst
+docs/topics/spider-middleware.rst
+docs/topics/spiders.rst
+docs/topics/stats.rst
+docs/topics/telnetconsole.rst
+docs/topics/webconsole.rst
+examples/experimental/googledir/googledir/__init__.py
+examples/experimental/googledir/googledir/items.py
+examples/experimental/googledir/googledir/pipelines.py
+examples/experimental/googledir/googledir/settings.py
+examples/experimental/googledir/googledir/spiders/__init__.py
+examples/experimental/googledir/googledir/spiders/google_directory.py
+examples/experimental/googledir/googledir/templates/spider_basic.tmpl
+examples/experimental/googledir/googledir/templates/spider_crawl.tmpl
+examples/experimental/googledir/googledir/templates/spider_csvfeed.tmpl
+examples/experimental/googledir/googledir/templates/spider_xmlfeed.tmpl
+examples/experimental/googledir/scrapy-ctl.py
+examples/googledir/googledir/__init__.py
+examples/googledir/googledir/items.py
+examples/googledir/googledir/pipelines.py
+examples/googledir/googledir/settings.py
+examples/googledir/googledir/spiders/__init__.py
+examples/googledir/googledir/spiders/google_directory.py
+examples/googledir/scrapy-ctl.py
+extras/sql/scraping.sql
+profiling/priorityqueue/pq_classes.py
+profiling/priorityqueue/run.py
+profiling/priorityqueue/test_cases.py
+scrapy/__init__.py
+scrapy/command/__init__.py
+scrapy/command/cmdline.py
+scrapy/command/commands/__init__.py
+scrapy/command/commands/crawl.py
+scrapy/command/commands/download.py
+scrapy/command/commands/genspider.py
+scrapy/command/commands/help.py
+scrapy/command/commands/list.py
+scrapy/command/commands/log.py
+scrapy/command/commands/parse.py
+scrapy/command/commands/shell.py
+scrapy/command/commands/start.py
+scrapy/command/models.py
+scrapy/conf/__init__.py
+scrapy/conf/commands/__init__.py
+scrapy/conf/commands/crawl.py
+scrapy/conf/commands/help.py
+scrapy/conf/commands/list.py
+scrapy/conf/commands/log.py
+scrapy/conf/commands/shell.py
+scrapy/conf/commands/stats.py
+scrapy/conf/commands/test.py
+scrapy/conf/default_settings.py
+scrapy/contrib/__init__.py
+scrapy/contrib/aws.py
+scrapy/contrib/closedomain.py
+scrapy/contrib/cluster/__init__.py
+scrapy/contrib/cluster/crawler/__init__.py
+scrapy/contrib/cluster/crawler/manager.py
+scrapy/contrib/cluster/hooks/__init__.py
+scrapy/contrib/cluster/hooks/svn.py
+scrapy/contrib/cluster/master/__init__.py
+scrapy/contrib/cluster/master/manager.py
+scrapy/contrib/cluster/master/web.py
+scrapy/contrib/cluster/master/ws_api.txt
+scrapy/contrib/cluster/tools/scrapy-cluster-ctl.py
+scrapy/contrib/cluster/tools/test-worker.py
+scrapy/contrib/cluster/worker/__init__.py
+scrapy/contrib/cluster/worker/manager.py
+scrapy/contrib/codecs/__init__.py
+scrapy/contrib/codecs/x_mac_roman.py
+scrapy/contrib/debug.py
+scrapy/contrib/delayedclosedomain.py
+scrapy/contrib/domainsch.py
+scrapy/contrib/downloadermiddleware/__init__.py
+scrapy/contrib/downloadermiddleware/cache.py
+scrapy/contrib/downloadermiddleware/common.py
+scrapy/contrib/downloadermiddleware/cookies.py
+scrapy/contrib/downloadermiddleware/debug.py
+scrapy/contrib/downloadermiddleware/defaultheaders.py
+scrapy/contrib/downloadermiddleware/errorpages.py
+scrapy/contrib/downloadermiddleware/httpauth.py
+scrapy/contrib/downloadermiddleware/httpcache.py
+scrapy/contrib/downloadermiddleware/httpcompression.py
+scrapy/contrib/downloadermiddleware/redirect.py
+scrapy/contrib/downloadermiddleware/retry.py
+scrapy/contrib/downloadermiddleware/robotstxt.py
+scrapy/contrib/downloadermiddleware/stats.py
+scrapy/contrib/downloadermiddleware/useragent.py
+scrapy/contrib/dupefilter.py
+scrapy/contrib/groupsettings.py
+scrapy/contrib/item/__init__.py
+scrapy/contrib/item/models.py
+scrapy/contrib/itemsampler.py
+scrapy/contrib/linkextractors/__init__.py
+scrapy/contrib/linkextractors/htmlparser.py
+scrapy/contrib/linkextractors/image.py
+scrapy/contrib/linkextractors/lxmlparser.py
+scrapy/contrib/linkextractors/regex.py
+scrapy/contrib/linkextractors/sgml.py
+scrapy/contrib/memdebug.py
+scrapy/contrib/memusage.py
+scrapy/contrib/pipeline/__init__.py
+scrapy/contrib/pipeline/images.py
+scrapy/contrib/pipeline/media.py
+scrapy/contrib/pipeline/s3images.py
+scrapy/contrib/pipeline/show.py
+scrapy/contrib/response/__init__.py
+scrapy/contrib/response/soup.py
+scrapy/contrib/schedulermiddleware/__init__.py
+scrapy/contrib/schedulermiddleware/duplicatesfilter.py
+scrapy/contrib/spider/__init__.py
+scrapy/contrib/spider/profiler.py
+scrapy/contrib/spider/reloader.py
+scrapy/contrib/spidermiddleware/__init__.py
+scrapy/contrib/spidermiddleware/depth.py
+scrapy/contrib/spidermiddleware/httperror.py
+scrapy/contrib/spidermiddleware/offsite.py
+scrapy/contrib/spidermiddleware/referer.py
+scrapy/contrib/spidermiddleware/requestlimit.py
+scrapy/contrib/spidermiddleware/restrict.py
+scrapy/contrib/spidermiddleware/urlfilter.py
+scrapy/contrib/spidermiddleware/urllength.py
+scrapy/contrib/spiders/__init__.py
+scrapy/contrib/spiders/crawl.py
+scrapy/contrib/spiders/feed.py
+scrapy/contrib/spiders/init.py
+scrapy/contrib/statsmailer.py
+scrapy/contrib/web/__init__.py
+scrapy/contrib/web/http.py
+scrapy/contrib/web/json.py
+scrapy/contrib/web/service.py
+scrapy/contrib/web/site.py
+scrapy/contrib/webconsole/__init__.py
+scrapy/contrib/webconsole/enginestatus.py
+scrapy/contrib/webconsole/livestats.py
+scrapy/contrib/webconsole/scheduler.py
+scrapy/contrib/webconsole/spiderctl.py
+scrapy/contrib/webconsole/stats.py
+scrapy/contrib_exp/__init__.py
+scrapy/contrib_exp/adaptors/__init__.py
+scrapy/contrib_exp/adaptors/date.py
+scrapy/contrib_exp/adaptors/extraction.py
+scrapy/contrib_exp/adaptors/markup.py
+scrapy/contrib_exp/adaptors/misc.py
+scrapy/contrib_exp/downloadermiddleware/__init__.py
+scrapy/contrib_exp/downloadermiddleware/decompression.py
+scrapy/contrib_exp/history/__init__.py
+scrapy/contrib_exp/history/history.py
+scrapy/contrib_exp/history/middleware.py
+scrapy/contrib_exp/history/scheduler.py
+scrapy/contrib_exp/history/store.py
+scrapy/contrib_exp/newitem/__init__.py
+scrapy/contrib_exp/newitem/adaptors.py
+scrapy/contrib_exp/newitem/fields.py
+scrapy/contrib_exp/newitem/models.py
+scrapy/contrib_exp/newitem/serialization.py
+scrapy/contrib_exp/pipeline/shoveitem.py
+scrapy/core/__init__.py
+scrapy/core/downloader/__init__.py
+scrapy/core/downloader/dnscache.py
+scrapy/core/downloader/handlers.py
+scrapy/core/downloader/manager.py
+scrapy/core/downloader/middleware.py
+scrapy/core/downloader/responsetypes/__init__.py
+scrapy/core/downloader/responsetypes/mime.types
+scrapy/core/downloader/webclient.py
+scrapy/core/engine.py
+scrapy/core/exceptions.py
+scrapy/core/manager.py
+scrapy/core/scheduler/__init__.py
+scrapy/core/scheduler/middleware.py
+scrapy/core/scheduler/schedulers.py
+scrapy/core/scheduler/store.py
+scrapy/core/scraper.py
+scrapy/core/signals.py
+scrapy/extension/__init__.py
+scrapy/fetcher/__init__.py
+scrapy/http/__init__.py
+scrapy/http/cookies.py
+scrapy/http/headers.py
+scrapy/http/request/__init__.py
+scrapy/http/request/form.py
+scrapy/http/request/rpc.py
+scrapy/http/response/__init__.py
+scrapy/http/response/html.py
+scrapy/http/response/text.py
+scrapy/http/response/xml.py
+scrapy/http/url.py
+scrapy/item/__init__.py
+scrapy/item/adaptors.py
+scrapy/item/models.py
+scrapy/item/pipeline.py
+scrapy/link/__init__.py
+scrapy/link/extractors.py
+scrapy/log/__init__.py
+scrapy/mail/__init__.py
+scrapy/management/__init__.py
+scrapy/management/telnet.py
+scrapy/management/web.py
+scrapy/patches/__init__.py
+scrapy/patches/monkeypatches.py
+scrapy/spider/__init__.py
+scrapy/spider/manager.py
+scrapy/spider/middleware.py
+scrapy/spider/models.py
+scrapy/stats/__init__.py
+scrapy/stats/collector/__init__.py
+scrapy/stats/collector/mysql.py
+scrapy/stats/collector/simpledb.py
+scrapy/stats/corestats.py
+scrapy/stats/signals.py
+scrapy/templates/project/module/__init__.py
+scrapy/templates/project/module/items.py.tmpl
+scrapy/templates/project/module/pipelines.py.tmpl
+scrapy/templates/project/module/settings.py.tmpl
+scrapy/templates/project/module/spiders/__init__.py
+scrapy/templates/project/module/templates/spider_basic.tmpl
+scrapy/templates/project/module/templates/spider_crawl.tmpl
+scrapy/templates/project/module/templates/spider_csvfeed.tmpl
+scrapy/templates/project/module/templates/spider_xmlfeed.tmpl
+scrapy/templates/project/root/scrapy-ctl.py
+scrapy/tests/__init__.py
+scrapy/tests/sample_data/adaptors/enc-ascii.html
+scrapy/tests/sample_data/adaptors/enc-cp1252.html
+scrapy/tests/sample_data/adaptors/enc-latin1.html
+scrapy/tests/sample_data/adaptors/enc-utf8-meta-latin1.html
+scrapy/tests/sample_data/adaptors/enc-utf8.html
+scrapy/tests/sample_data/adaptors/extr_unquoted.xml
+scrapy/tests/sample_data/compressed/feed-sample1.tar
+scrapy/tests/sample_data/compressed/feed-sample1.xml
+scrapy/tests/sample_data/compressed/feed-sample1.xml.bz2
+scrapy/tests/sample_data/compressed/feed-sample1.xml.gz
+scrapy/tests/sample_data/compressed/feed-sample1.zip
+scrapy/tests/sample_data/compressed/html-gzip.bin
+scrapy/tests/sample_data/compressed/html-rawdeflate.bin
+scrapy/tests/sample_data/compressed/html-zlibdeflate.bin
+scrapy/tests/sample_data/feeds/feed-sample1.xml
+scrapy/tests/sample_data/feeds/feed-sample2.xml
+scrapy/tests/sample_data/feeds/feed-sample3.csv
+scrapy/tests/sample_data/feeds/feed-sample4.csv
+scrapy/tests/sample_data/feeds/feed-sample5.csv
+scrapy/tests/sample_data/link_extractor/image_linkextractor.html
+scrapy/tests/sample_data/link_extractor/linkextractor_latin1.html
+scrapy/tests/sample_data/link_extractor/linkextractor_noenc.html
+scrapy/tests/sample_data/link_extractor/sgml_linkextractor.html
+scrapy/tests/sample_data/test_site/index.html
+scrapy/tests/sample_data/test_site/item1.html
+scrapy/tests/sample_data/test_site/item2.html
+scrapy/tests/test_adaptors.py
+scrapy/tests/test_aws.py
+scrapy/tests/test_c14nurls.py
+scrapy/tests/test_contrib_linkextractors.py
+scrapy/tests/test_contrib_response_soup.py
+scrapy/tests/test_dependencies.py
+scrapy/tests/test_downloadermiddleware_cookies.py
+scrapy/tests/test_downloadermiddleware_decompression.py
+scrapy/tests/test_downloadermiddleware_httpcompression.py
+scrapy/tests/test_downloadermiddleware_redirect.py
+scrapy/tests/test_downloadermiddleware_retry.py
+scrapy/tests/test_downloadermiddleware_useragent.py
+scrapy/tests/test_dupefilter.py
+scrapy/tests/test_engine.py
+scrapy/tests/test_http_cookies.py
+scrapy/tests/test_http_headers.py
+scrapy/tests/test_http_request.py
+scrapy/tests/test_http_response.py
+scrapy/tests/test_http_url.py
+scrapy/tests/test_item.py
+scrapy/tests/test_itemadaptor.py
+scrapy/tests/test_libxml2.py
+scrapy/tests/test_newitem.py
+scrapy/tests/test_pipeline_images.py
+scrapy/tests/test_responsetypes.py
+scrapy/tests/test_robustscrapeditem.py
+scrapy/tests/test_schedulermiddleware_duplicatesfilter.py
+scrapy/tests/test_serialization.py
+scrapy/tests/test_spidermonkey.py
+scrapy/tests/test_spiders/__init__.py
+scrapy/tests/test_spiders/testspider.py
+scrapy/tests/test_stats.py
+scrapy/tests/test_utils_datatypes.py
+scrapy/tests/test_utils_defer.py
+scrapy/tests/test_utils_iterators.py
+scrapy/tests/test_utils_markup.py
+scrapy/tests/test_utils_middleware.py
+scrapy/tests/test_utils_misc.py
+scrapy/tests/test_utils_python.py
+scrapy/tests/test_utils_request.py
+scrapy/tests/test_utils_response.py
+scrapy/tests/test_utils_url.py
+scrapy/tests/test_webclient.py
+scrapy/tests/test_xpath.py
+scrapy/tests/test_xpath_extension.py
+scrapy/utils/__init__.py
+scrapy/utils/c14n.py
+scrapy/utils/datatypes.py
+scrapy/utils/db.py
+scrapy/utils/defer.py
+scrapy/utils/display.py
+scrapy/utils/http.py
+scrapy/utils/iterators.py
+scrapy/utils/markup.py
+scrapy/utils/middleware.py
+scrapy/utils/misc.py
+scrapy/utils/python.py
+scrapy/utils/request.py
+scrapy/utils/response.py
+scrapy/utils/serialization.py
+scrapy/utils/test.py
+scrapy/utils/url.py
+scrapy/xlib/BeautifulSoup.py
+scrapy/xlib/ClientForm.py
+scrapy/xlib/__init__.py
+scrapy/xlib/lrucache.py
+scrapy/xlib/lsprofcalltree.py
+scrapy/xlib/pydispatch/__init__.py
+scrapy/xlib/pydispatch/dispatcher.py
+scrapy/xlib/pydispatch/errors.py
+scrapy/xlib/pydispatch/license.txt
+scrapy/xlib/pydispatch/robust.py
+scrapy/xlib/pydispatch/robustapply.py
+scrapy/xlib/pydispatch/saferef.py
+scrapy/xlib/spidermonkey/INSTALL.scrapy
+scrapy/xlib/spidermonkey/__init__.py
+scrapy/xlib/spidermonkey/sm_settings.py
+scrapy/xlib/spidermonkey/spidermonkey.py
+scrapy/xpath/__init__.py
+scrapy/xpath/constructors.py
+scrapy/xpath/document.py
+scrapy/xpath/extension.py
+scrapy/xpath/selector.py
+scrapy/xpath/types.py
+scripts/rpm-install.sh
+setup.cfg
+setup.py

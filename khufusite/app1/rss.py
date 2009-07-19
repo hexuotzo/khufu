@@ -21,7 +21,7 @@ def rss(request):
         link = "http://www.zaojiao100.com/rss/",
         description = "早教知识网是全国唯一的早教知识查询网站.为父母提供权威,安全,免费的怀孕分娩,胎教,育儿,保健,喂养,常见病护理知识,早教知识.年轻父母可以在这里找到与婴幼儿发育,成长,教育有关的全部知识和咨询。"
     )
-    data = pycabinet.search('/home/yanxu/khufu/infodb/infodb','tag1','怀孕',1000)
+    data = pycabinet.search('/home/yanxu/khufu/infodb/infodb.tct','tag1','怀孕',1000)
     for i in range(20):
         obj = random.choice(data)
         title = smart_unicode(obj['title'],"utf8")

@@ -19,7 +19,7 @@ class KhufuSitemap(Sitemap):
             "3-6岁",
             "专家咨询",
         ]
-        dbname = '/home/yanxu/khufu/infodb/infodb'
+        dbname = '/home/yanxu/khufu/infodb/infodb.tct'
         res = []
         for m in menus:
             data = pycabinet.search(dbname,'tag1',m,5000)
