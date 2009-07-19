@@ -47,6 +47,19 @@ put(PyObject *self,PyObject *args){
     return Py_BuildValue("s",value);
 }
 
+static PyObject *
+put3(PyObject *self,PyObject *args){
+    const char *dbname;
+    const char *key;
+    const char *value;
+    if (!PyArg_ParseTuple(args, "sss", &dbname, &key, &value))
+        return NULL;
+    TCADB *adb = openadb(dbname);
+    tctdbput3(adb->tdb, key, value);
+    closeadb(adb);
+    return Py_BuildValue("s",value);
+}
+
 
 static PyObject *
 get(PyObject *self,PyObject *args){
@@ -208,6 +221,7 @@ PyMethodDef methods[] = {
   {"create", create, METH_VARARGS},
   {"put", put, METH_VARARGS},
   {"put2", put2, METH_VARARGS},
+  {"put3", put3, METH_VARARGS},
   {"get", get, METH_VARARGS},
   {"out", out, METH_VARARGS},
   {"list", list, METH_VARARGS},

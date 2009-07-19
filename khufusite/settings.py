@@ -1,6 +1,7 @@
 # Django settings for khufusite project.
 
-DEBUG = True
+#DEBUG = False
+DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

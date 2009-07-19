@@ -113,6 +113,7 @@ def keyword(request):
     if "type_class" in request.GET:
         type_class=request.GET["type_class"]
     result=list(search(word,type_class,2000))
+    print result
     p = Paginator(result,20)
     pp = p.page(page)
     result1=pp.object_list[:10]
@@ -147,7 +148,7 @@ def search(word,type_class,num=1000):
     type_class = smart_str(type_class,"utf8")
     if type_class!="0":
         word = " ".join( (word,type_class) )
-    dbpath = '/home/yanxu/khufu/infodb/infodb'
+    dbpath = '/home/yanxu/khufu/infodb/infodb.tct'
     results=pycabinet.search(dbpath,'tag1',word,5000)
     
     if len(results)==0:

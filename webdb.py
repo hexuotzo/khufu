@@ -21,7 +21,7 @@ MENU = [
 ]
 
 def search(word):
-    dbpath = '/home/yanxu/khufu/infodb/infodb'
+    dbpath = '/home/yanxu/khufu/infodb/infodb.tct'
     data = pycabinet.search(dbpath,'tag1',word,5000)
     if len(data)==0:
         data = pycabinet.search(dbpath,'tag1','怀孕',5000)
