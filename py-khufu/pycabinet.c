@@ -3,6 +3,7 @@
 #include <tcadb.h>
 #include <tcbdb.h>
 #include <tctdb.h>
+#include <tcrdb.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -162,37 +163,39 @@ list(PyObject *self,PyObject *args){
 
 static PyObject *
 search(PyObject *self, PyObject *args){
-    TCTDB *tdb;
+    TCRDB *rdb;
     int ecode, i, rsiz;
     const char *rbuf, *name;
     TCMAP *cols;
-    TDBQRY *qry;
+    RDBQRY *qry;
     TCLIST *res;
 
-    const char *dbname;
+    const char *host;
+    const int *port;
     const char *sfield;
     const char *stext;
     const int *max;
     PyObject* pDict = PyDict_New();
     PyObject* pList = PyList_New(0);
 
-    if (!PyArg_ParseTuple(args, "sssi", &dbname, &sfield, &stext,&max))
+    if (!PyArg_ParseTuple(args, "sissi", &host, &port, &sfield, &stext,&max))
         return NULL;
 
-    tdb = tctdbnew();
+    rdb = tcrdbnew();
     
-    if(!tctdbopen(tdb, dbname, TDBONOLCK | TDBOREADER)){
-        ecode = tctdbecode(tdb);
-        fprintf(stderr, "open error: %s\n", tctdberrmsg(ecode));
+    /* connect to the server */
+    if(!tcrdbopen(rdb, host, port)){
+        ecode = tcrdbecode(rdb);
+        fprintf(stderr, "open error: %s\n", tcrdberrmsg(ecode));
     }
-    qry = tctdbqrynew(tdb);
-    tctdbqryaddcond(qry, sfield, TDBQCSTREQ, stext);
-    tctdbqrysetorder(qry, "savedate", TDBQOSTRDESC);
-    tctdbqrysetlimit(qry, max, 0);
-    res = tctdbqrysearch(qry);
+    qry = tcrdbqrynew(rdb);
+    tcrdbqryaddcond(qry, sfield, TDBQCSTREQ, stext);
+    // tcrdbqryaddcond(qry, "savedate", TDBQOSTRDESC);
+    tcrdbqrysetlimit(qry, max, 0);
+    res = tcrdbqrysearch(qry);
     for(i = 0; i < tclistnum(res); i++){
         rbuf = tclistval(res, i, &rsiz);
-        cols = tctdbget(tdb, rbuf, rsiz);
+        cols = tcrdbtblget(rdb, rbuf, rsiz);
         if(cols){
           tcmapiterinit(cols);
           PyDict_SetItemString(pDict, "kid", Py_BuildValue("s",rbuf));
@@ -205,14 +208,14 @@ search(PyObject *self, PyObject *args){
         }
     }
     tclistdel(res);
-    tctdbqrydel(qry);
+    tcrdbqrydel(qry);
 
-    if(!tctdbclose(tdb)){
-        ecode = tctdbecode(tdb);
-        fprintf(stderr, "close error: %s\n", tctdberrmsg(ecode));
+    if(!tcrdbclose(rdb)){
+        ecode = tcrdbecode(rdb);
+        fprintf(stderr, "close error: %s\n", tcrdberrmsg(ecode));
     }
 
-    tctdbdel(tdb);
+    tcrdbdel(rdb);
 
     return Py_BuildValue("O",pList);
 }

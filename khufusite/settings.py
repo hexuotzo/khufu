@@ -1,3 +1,4 @@
+#encoding: utf-8
 # Django settings for khufusite project.
 
 #DEBUG = False
@@ -70,7 +71,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/yanxu/khufu/khufusite/html",
+    "html",
 )
 
 INSTALLED_APPS = (
@@ -92,3 +93,45 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 DOMAIN = "www.zaojiao100.com"
+MC_IP = "114.113.30.29"
+MC_DATA_PORT = 11213
+MC_MENU_PORT = 11212
+
+TOP_VIEWS=(
+    "190031665444",
+    "286689246066",
+    "739093912196",
+    "228643594003",
+)
+
+RECOMS = (
+    "1918725321",
+    "5710587117",
+    "167035163130",
+    "16549921536",
+    "9389121638",
+    "16549921536",
+    "6065323270",
+    "7181029938",
+)
+
+MENUS = (
+    "备孕",
+    "怀孕",
+    "产后",
+    "0-1岁",
+    "1-2岁",
+    "2-3岁",
+    "3-6岁",
+    "专家咨询",
+)
+
+BOTLIST = (
+    'Baiduspider',
+    'Googlebot',
+    'Yahoo! Slurp',
+    'Sogou web spider',
+    'YoudaoBot',
+)
+
+

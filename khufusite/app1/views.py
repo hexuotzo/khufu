@@ -1,5 +1,5 @@
 #encoding: utf-8
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -12,18 +12,7 @@ except:
 import cjson
 import hashlib
 import os
-import pycabinet
-
-menus = [
-    "备孕",
-    "怀孕",
-    "产后",
-    "0-1岁",
-    "1-2岁",
-    "2-3岁",
-    "3-6岁",
-    "专家咨询",
-]
+import pycabinet as pb
 
 def globalrequest(request):
     word,type_class = "",""
@@ -31,68 +20,45 @@ def globalrequest(request):
     media_url = settings.MEDIA_URL
     return dict(word=word,
                 type_class=type_class,
-                menus=menus,
+                menus=settings.MENUS,
                 domain=domain,
                 media_url=media_url)
 
 def isbot(request):
-    botlist = [
-        'Baiduspider',
-        'Googlebot',
-        'Yahoo! Slurp',
-        'Sogou web spider',
-        'YoudaoBot',
-    ]
-    for bot in botlist:
+    for bot in settings.BOTLIST:
         if request.META['HTTP_USER_AGENT'].find(bot)==0:
             return True
     return False
 
-def recomsearch(mcip,func):
-    """类似专题之类,固定uid输出的函数"""
-    def wapper(kids,flag=False):
-        data = []
-        for key in kids:
-            mc = memcache.Client([mcip])
-            if flag:
-                key = hashlib.md5(key).hexdigest()
-            d = mc.get(key)
-            if d:
-                d = cjson.decode(d)
-                d2 = func(d,key)
-                if d2:
-                    data.append(d2)
-                else:
-                    data.append(d)
-        return data
-    return wapper
-mc11211 = recomsearch('114.113.30.29:11211',lambda x,key:x.__setitem__("kid",key))
-mc11212 = recomsearch('114.113.30.29:11212',lambda x,key:x.__getslice__(0,10))
+def getDataByKid(kid):
+    try:
+        d = pb.search(settings.MC_IP,settings.MC_DATA_PORT,"kid",kid,1)[0]
+    except:
+        return ""
+    return d
+
+def getDataByKids(kids):
+    for kid in kids:
+        d = getDataByKid(kid)
+        yield d
+
+def getDataByMenus(menus):
+    mc = memcache.Client(["%s:%s" % (settings.MC_IP,settings.MC_MENU_PORT)])
+    data = []
+    for menu in menus:
+        key = hashlib.md5(menu).hexdigest()
+        d = mc.get(key)
+        if d:
+            d = cjson.decode(d)
+            yield d
 
 def hello(request):
-    data = mc11212(menus,True)
-        
-    #专题的实现
-    show_views=[
-        "190031665444",
-        "286689246066",
-        "739093912196",
-        "228643594003",
-    ]
-    data_view = mc11211(show_views)
+    data = list(getDataByMenus(settings.MENUS))
     
+    #专题的实现
+    data_view = list(getDataByKids(settings.TOP_VIEWS))
     #菜单下面的推荐位的实现
-    recoms=[
-        "1918725321",
-        "5710587117",
-        "167035163130",
-        "16549921536",
-        "9389121638",
-        "16549921536",
-        "6065323270",
-        "7181029938",
-    ]
-    data_recoms = mc11211(recoms)
+    data_recoms = list(getDataByKids(settings.RECOMS))
     
     return render_to_response('index.html',locals(),
             context_instance=RequestContext(request))
@@ -122,13 +88,15 @@ def keyword(request):
         context_instance=RequestContext(request))
 
 def v(request,kid):
-    mc = memcache.Client(['114.113.30.29:11211'])
-    obj=cjson.decode(mc.get(str(kid)))
+    try:
+        obj=pb.search(settings.MC_IP,11213,'kid',kid,1)[0]
+    except:
+        raise Http404
     #如果是机器人输出带拼音的正文
     if isbot(request):
         obj['memo']=obj['addpinyin']
     else:
-        obj['memo']=obj['body']
+        obj['memo']=obj['text']
         
     #相关新闻的实现
     from ngram import ngram
@@ -138,8 +106,8 @@ def v(request,kid):
     title = " ".join( keys )
     words = "||".join( keys )
     #相关新闻查询结果
-    for kid2,obj2 in search(words,"0",num=10):
-        rel_page.append( (obj2['title'],kid2) )
+    # for kid2,obj2 in search(words,"0",num=10):
+    #     rel_page.append( (obj2['title'],kid2) )
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
 
@@ -149,7 +117,7 @@ def search(word,type_class,num=1000):
     if type_class!="0":
         word = " ".join( (word,type_class) )
     dbpath = '/home/yanxu/khufu/infodb/infodb.tct'
-    results=pycabinet.search(dbpath,'tag1',word,5000)
+    results=pb.search(dbpath,'tag1',word,5000)
     
     if len(results)==0:
         ###早晚要替掉的脏代码!###
@@ -157,7 +125,7 @@ def search(word,type_class,num=1000):
         for text in results.split('\n'):
             if text.isdigit():
                 kid = text
-                text = pycabinet.get(dbpath,kid)
+                text = pb.get(dbpath,kid)
             text = text.split()
             if len(text)==6:
                 p1,title,p2,savedate,p3,tag1 = text
