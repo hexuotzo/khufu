@@ -33,13 +33,13 @@
 	<div id="main">
 		<h5>{{word}} &gt; 文章列表</h5>
 		<ul>
-			{%for kid,i in result1%}
-			<li><a href="{{domain}}/v/{{kid}}/" target="_blank">{{i.title|removetext}}</a><span>02.29 2009</span></li>
+			{%for i in result1%}
+			<li><a href="{{domain}}/v/{{i.kid}}/" target="_blank">{{i.title|removetext}}</a><span>{{i.savedate}}</span></li>
 			{%endfor%}
 		</ul>
 		<ul>
-			{%for kid,j in result2%}
-			<li><a href="{{domain}}/v/{{kid}}/" target="_blank">{{j.title|removetext}}</a><span>02.29 2009</span></li>
+			{%for j in result2%}
+			<li><a href="{{domain}}/v/{{j.kid}}/" target="_blank">{{j.title|removetext}}</a><span>{{j.savedate}}</span></li>
 			{%endfor%}
 		</ul>
 		

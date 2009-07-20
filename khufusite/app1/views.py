@@ -30,12 +30,25 @@ def isbot(request):
             return True
     return False
 
+def search(port,field,value,maxnum):
+    value = smart_str(value,"utf8")
+    return pb.search(settings.MC_IP,port,field,value,maxnum)
+
+def searchdata(field,value,maxnum):
+    data = search(settings.MC_DATA_PORT,field,value,maxnum)
+    for d in data:
+        yield d
+
+def searchinfo(field,value,maxnum):
+    data = search(settings.MC_INFO_PORT,field,value,maxnum)
+    for d in data:
+        yield d
+
 def getDataByKid(kid):
     try:
-        d = pb.search(settings.MC_IP,settings.MC_DATA_PORT,"kid",kid,1)[0]
+        return list(searchinfo("kid",kid,1))[0]
     except:
         return ""
-    return d
 
 def getDataByKids(kids):
     for kid in kids:
@@ -44,7 +57,6 @@ def getDataByKids(kids):
 
 def getDataByMenus(menus):
     mc = memcache.Client(["%s:%s" % (settings.MC_IP,settings.MC_MENU_PORT)])
-    data = []
     for menu in menus:
         key = hashlib.md5(menu).hexdigest()
         d = mc.get(key)
@@ -70,16 +82,15 @@ def link(request):
         context_instance=RequestContext(request))
 
 def keyword(request):
+    page = 1
+    type_class = "0"
     if "insearch" in request.GET:
         word=request.GET["insearch"]
-    page = 1
     if "page" in request.GET:
         page = request.GET["page"]
-    type_class = "0"
     if "type_class" in request.GET:
         type_class=request.GET["type_class"]
-    result=list(search(word,type_class,2000))
-    print result
+    result=list(searchinfo("tag1",word,5000))
     p = Paginator(result,20)
     pp = p.page(page)
     result1=pp.object_list[:10]
@@ -89,7 +100,7 @@ def keyword(request):
 
 def v(request,kid):
     try:
-        obj=pb.search(settings.MC_IP,11213,'kid',kid,1)[0]
+        obj=getDataByKid('kid',kid,1)
     except:
         raise Http404
     #如果是机器人输出带拼音的正文
@@ -110,31 +121,6 @@ def v(request,kid):
     #     rel_page.append( (obj2['title'],kid2) )
     return render_to_response('info.html',locals(),
         context_instance=RequestContext(request))
-
-def search(word,type_class,num=1000):
-    word = smart_str(word,"utf8")
-    type_class = smart_str(type_class,"utf8")
-    if type_class!="0":
-        word = " ".join( (word,type_class) )
-    dbpath = '/home/yanxu/khufu/infodb/infodb.tct'
-    results=pb.search(dbpath,'tag1',word,5000)
-    
-    if len(results)==0:
-        ###早晚要替掉的脏代码!###
-        results = os.popen('dystmgr search -nl -max %s /home/yanxu/khufu/khufu %s' % (num,word)).read()
-        for text in results.split('\n'):
-            if text.isdigit():
-                kid = text
-                text = pb.get(dbpath,kid)
-            text = text.split()
-            if len(text)==6:
-                p1,title,p2,savedate,p3,tag1 = text
-            else:
-                continue
-            yield kid,{"title":title}
-    else:
-        for r in results:
-            yield r['kid'],{"title":r["title"]}
 
 def google9b196a21d9a447d9(request):
     return HttpResponse(open('/home/yanxu/khufu/khufusite/media/html/google9b196a21d9a447d9.html').
