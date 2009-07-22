@@ -60,7 +60,8 @@ def getDataByKid(kid):
 
 def getDataByKids(kids):
     for kid in kids:
-        yield getDataByKid(kid)
+        d = getDataByKid(kid)
+        if d!="":yield d
 
 def getDataByMenus(menus):
     mc = memcache.Client(["%s:%s" % (settings.MC_IP,settings.MC_MENU_PORT)])
