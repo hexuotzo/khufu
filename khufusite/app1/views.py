@@ -14,6 +14,13 @@ import hashlib
 import os
 import pycabinet as pb
 
+IS_FULLTEXT = 1
+NOT_FULLTEXT = 0
+
+class Results(list):
+    def __len__(self):
+        return 40 * 20 # 40 page
+
 def globalrequest(request):
     word,type_class = "",""
     domain = "http://%s" % settings.DOMAIN
@@ -30,23 +37,23 @@ def isbot(request):
             return True
     return False
 
-def search(port,field,value,maxnum):
+def search(port,field,value,spage,epage,is_fulltext):
     value = smart_str(value,"utf8")
-    return pb.search(settings.MC_IP,port,field,value,maxnum)
+    return pb.search(settings.MC_IP,port,field,value,spage,epage,is_fulltext)
 
-def searchdata(field,value,maxnum):
-    data = search(settings.MC_DATA_PORT,field,value,maxnum)
+def searchdata(field,value,spage,epage,is_fulltext):
+    data = search(settings.MC_DATA_PORT,field,value,spage,epage,is_fulltext)
     for d in data:
         yield d
 
-def searchinfo(field,value,maxnum):
-    data = search(settings.MC_INFO_PORT,field,value,maxnum)
+def searchinfo(field,value,spage,epage,is_fulltext):
+    data = search(settings.MC_INFO_PORT,field,value,spage,epage,is_fulltext)
     for d in data:
         yield d
 
 def getDataByKid(kid):
     try:
-        return list(searchinfo("kid",kid,1))[0]
+        return list(searchinfo("kid",kid,1,0,NOT_FULLTEXT))[0]
     except:
         return ""
 
@@ -84,14 +91,24 @@ def link(request):
 def keyword(request):
     page = 1
     type_class = "0"
+    one_page = 20
     if "insearch" in request.GET:
         word=request.GET["insearch"]
+        word=smart_str(word,"utf8")
     if "page" in request.GET:
         page = request.GET["page"]
+        page = int(page)
     if "type_class" in request.GET:
         type_class=request.GET["type_class"]
-    result=list(searchinfo("tag1",word,5000))
-    p = Paginator(result,20)
+    spage = (page-1) * one_page
+    epage = spage + one_page
+    if word in settings.MENUS:
+        result = list(searchinfo("tag1",word,epage,spage,NOT_FULLTEXT))
+        result = Results(result)
+    else:
+        result=list(searchdata("text",word,epage,spage,IS_FULLTEXT))
+        result=Results(result)
+    p = Paginator(result,one_page)
     pp = p.page(page)
     result1=pp.object_list[:10]
     result2=pp.object_list[10:]

@@ -174,11 +174,14 @@ search(PyObject *self, PyObject *args){
     const int *port;
     const char *sfield;
     const char *stext;
-    const int *max;
+    const int *spage;
+    const int *epage;
+    const int *is_fulltext;
     PyObject* pDict = PyDict_New();
     PyObject* pList = PyList_New(0);
 
-    if (!PyArg_ParseTuple(args, "sissi", &host, &port, &sfield, &stext,&max))
+    if (!PyArg_ParseTuple(args,"sissiii",&host,&port,&sfield, \
+                            &stext,&spage,&epage,&is_fulltext))
         return NULL;
 
     rdb = tcrdbnew();
@@ -189,9 +192,12 @@ search(PyObject *self, PyObject *args){
         fprintf(stderr, "open error: %s\n", tcrdberrmsg(ecode));
     }
     qry = tcrdbqrynew(rdb);
-    tcrdbqryaddcond(qry, sfield, TDBQCSTREQ, stext);
+    if(is_fulltext)
+        tcrdbqryaddcond(qry, sfield, RDBQCFTSPH, stext);
+    else
+        tcrdbqryaddcond(qry, sfield, RDBQCSTREQ, stext);
     // tcrdbqryaddcond(qry, "savedate", TDBQOSTRDESC);
-    tcrdbqrysetlimit(qry, max, 0);
+    tcrdbqrysetlimit(qry, spage, epage);
     res = tcrdbqrysearch(qry);
     for(i = 0; i < tclistnum(res); i++){
         rbuf = tclistval(res, i, &rsiz);

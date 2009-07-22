@@ -22,6 +22,7 @@ def cutstr(text,count):
 
 @register.simple_tag
 def activemenu(word,text):
+    text=smart_str(text,"utf8")
     if word==text:
         return 'class="active"'
     return ""
