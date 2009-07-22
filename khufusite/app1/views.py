@@ -53,14 +53,14 @@ def searchinfo(field,value,spage,epage,is_fulltext):
 
 def getDataByKid(kid):
     try:
-        return list(searchinfo("kid",kid,1,0,NOT_FULLTEXT))[0]
+        v = searchdata("kid",kid,1,0,NOT_FULLTEXT)
+        return list(v)[0]
     except:
         return ""
 
 def getDataByKids(kids):
     for kid in kids:
-        d = getDataByKid(kid)
-        yield d
+        yield getDataByKid(kid)
 
 def getDataByMenus(menus):
     mc = memcache.Client(["%s:%s" % (settings.MC_IP,settings.MC_MENU_PORT)])
@@ -117,7 +117,7 @@ def keyword(request):
 
 def v(request,kid):
     try:
-        obj=getDataByKid('kid',kid,1)
+        obj=getDataByKid(kid)
     except:
         raise Http404
     #如果是机器人输出带拼音的正文
@@ -127,12 +127,12 @@ def v(request,kid):
         obj['memo']=obj['text']
         
     #相关新闻的实现
-    from ngram import ngram
-    rel_page = []
-    tg = ngram(menus,min_sim=0.0)
-    keys = tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys()
-    title = " ".join( keys )
-    words = "||".join( keys )
+    # from ngram import ngram
+    # rel_page = []
+    # tg = ngram(settings.MENUS,min_sim=0.0)
+    # keys = tg.getSimilarStrings(smart_str(obj["title"],"utf8")).keys()
+    # title = " ".join( keys )
+    # words = "||".join( keys )
     #相关新闻查询结果
     # for kid2,obj2 in search(words,"0",num=10):
     #     rel_page.append( (obj2['title'],kid2) )
