@@ -36,6 +36,7 @@ class ZaojiaoSpider(CrawlSpider):
         item.title = cn(hxs.x('//h1/text()').extract()[0])
         item.body = cn(hxs.x('//div[@id="content"]').extract()[0])
         item.url = response.url
+        item.savedate = str(date.today())
         item.uuid = str(abs(hash(response.url)))
         
         '''
@@ -46,7 +47,7 @@ class ZaojiaoSpider(CrawlSpider):
             'url':item.url,
             'title':item.title.encode('utf8'),
             'addpinyin':item.body.encode('utf8'),
-            'savedate':str(date.today()),
+            'savedate':item.savedate,
             'kid':item.uuid,
         }
         pb.put4("114.113.30.29",11213,item.uuid,v)
@@ -63,7 +64,7 @@ class ZaojiaoSpider(CrawlSpider):
         )
         info_v = {
             'title':item.title.encode('utf8'),
-            'savedate':str(date.today()),
+            'savedate':item.savedate,
             'kid':item.uuid,
             'tag1':random.choice(menus)
         }

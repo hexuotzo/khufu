@@ -26,7 +26,6 @@ def rss(request):
     data = pb.search(settings.MC_IP,settings.MC_DATA_PORT, \
             'savedate',str(date.today()),20,0,0)
     for obj in data:
-        obj = random.choice(data)
         title = smart_unicode(obj['title'],"utf8")
         text = smart_unicode(obj['text'],"utf8")
         f.add_item(title=removetext(title),
