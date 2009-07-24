@@ -6,7 +6,7 @@ except ImportError:
     import memcache
 import cjson
 import sys,os,hashlib
-import pycabinet
+import pycabinet as pb
 import random
 
 MENU = [
@@ -21,10 +21,9 @@ MENU = [
 ]
 
 def search(word):
-    dbpath = '/home/yanxu/khufu/infodb/infodb.tct'
-    data = pycabinet.search(dbpath,'tag1',word,5000)
+    data = pb.search('114.113.30.29',11214,'tag1',word,500,0,0)
     if len(data)==0:
-        data = pycabinet.search(dbpath,'tag1','怀孕',5000)
+        data = pb.search('114.113.30.29',11214,'tag1','怀孕',500,0,0)
     for i in range(10):
         obj = random.choice(data)
         kid,title = obj["kid"],unicode(obj["title"],"utf8")
