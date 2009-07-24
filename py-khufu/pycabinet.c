@@ -83,7 +83,6 @@ put4(PyObject *self,PyObject *args){
     PyObject *key, *value;
     int pos = 0;
     while (PyDict_Next(kv, &pos, &key, &value)) {
-        printf("key,value: %s %s\n",PyString_AsString(key),PyString_AsString(value));
         tcmapput2(cols, PyString_AsString(key), PyString_AsString(value));
     }
     if(!tcrdbtblput(rdb, pkbuf, pksiz, cols)){
