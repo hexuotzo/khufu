@@ -5,7 +5,7 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.xpath.selector import HtmlXPathSelector
 from scrapy.item import ScrapedItem
 from zaojiao_bot.items import ZaojiaoBotItem
-from datetime import datetime
+from datetime import date
 import random
 import pycabinet as pb
 
@@ -46,7 +46,7 @@ class ZaojiaoSpider(CrawlSpider):
             'url':item.url,
             'title':item.title.encode('utf8'),
             'addpinyin':item.body.encode('utf8'),
-            'savedate':str(datetime.now()),
+            'savedate':str(date.today()),
             'kid':item.uuid,
         }
         pb.put4("114.113.30.29",11213,item.uuid,v)
@@ -63,7 +63,7 @@ class ZaojiaoSpider(CrawlSpider):
         )
         info_v = {
             'title':item.title.encode('utf8'),
-            'savedate':str(datetime.now()),
+            'savedate':str(date.today()),
             'kid':item.uuid,
             'tag1':random.choice(menus)
         }
