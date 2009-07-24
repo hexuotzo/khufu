@@ -1,3 +1,4 @@
+#encoding: utf-8
 from scrapy import log
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
@@ -48,7 +49,7 @@ class ZaojiaoSpider(CrawlSpider):
             'savedate':str(datetime.now()),
             'kid':item.uuid,
         }
-        pb.put4("114.113.30.29",11214,item.uuid,v)
+        pb.put4("114.113.30.29",11213,item.uuid,v)
         
         menus = (
             "备孕",
