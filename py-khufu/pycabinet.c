@@ -61,6 +61,43 @@ put3(PyObject *self,PyObject *args){
     return Py_BuildValue("s",value);
 }
 
+static PyObject *
+put4(PyObject *self,PyObject *args){
+    TCRDB *rdb;
+    int ecode,pksiz;
+    char pkbuf[256];
+    const char *host;
+    const int *port;
+    const char *dbkey;
+    PyObject *kv;
+    TCMAP *cols;
+    if (!PyArg_ParseTuple(args,"sisO",&host,&port,&dbkey,&kv))
+        return NULL;
+    rdb = tcrdbnew();
+    if(!tcrdbopen(rdb, host, port)){
+        ecode = tcrdbecode(rdb);
+        fprintf(stderr, "open error: %s\n", tcrdberrmsg(ecode));
+    }
+    pksiz = sprintf(pkbuf, dbkey);
+    cols = tcmapnew();
+    PyObject *key, *value;
+    int pos = 0;
+    while (PyDict_Next(kv, &pos, &key, &value)) {
+        printf("key,value: %s %s\n",PyString_AsString(key),PyString_AsString(value));
+        tcmapput2(cols, PyString_AsString(key), PyString_AsString(value));
+    }
+    if(!tcrdbtblput(rdb, pkbuf, pksiz, cols)){
+        ecode = tcrdbecode(rdb);
+        fprintf(stderr, "put error: %s\n", tcrdberrmsg(ecode));
+    }
+    tcmapdel(cols);
+    if(!tcrdbclose(rdb)){
+        ecode = tcrdbecode(rdb);
+        fprintf(stderr, "close error: %s\n", tcrdberrmsg(ecode));
+    }
+    tcrdbdel(rdb);
+    return Py_BuildValue("s","ok");
+}
 
 static PyObject *
 get(PyObject *self,PyObject *args){
@@ -231,6 +268,7 @@ PyMethodDef methods[] = {
   {"put", put, METH_VARARGS},
   {"put2", put2, METH_VARARGS},
   {"put3", put3, METH_VARARGS},
+  {"put4", put4, METH_VARARGS},
   {"get", get, METH_VARARGS},
   {"out", out, METH_VARARGS},
   {"list", list, METH_VARARGS},
