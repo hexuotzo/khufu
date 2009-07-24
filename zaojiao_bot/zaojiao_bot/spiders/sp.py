@@ -4,6 +4,8 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.xpath.selector import HtmlXPathSelector
 from scrapy.item import ScrapedItem
 from zaojiao_bot.items import ZaojiaoBotItem
+from datetime import datetime
+import random
 import pycabinet as pb
 
 def safecn(i):
@@ -38,9 +40,33 @@ class ZaojiaoSpider(CrawlSpider):
         '''
         in data db
         '''
-        col='title\t%s\turl\t%s\ttext\t%s\taddpinyin\t%s\tkid\t%s'
-        v = col % (item.title.encode('utf8'),item.url,item.body.encode('utf8'),item.body.encode('utf8'),item.uuid)
-        pb.put3('datadb.tct',item.uuid,v)
+        v = {
+            'text':item.body.encode('utf8'),
+            'url':item.url,
+            'title':item.title.encode('utf8'),
+            'addpinyin':item.body.encode('utf8'),
+            'savedate':str(datetime.now()),
+            'kid':item.uuid,
+        }
+        pb.put4("114.113.30.29",11214,item.uuid,v)
+        
+        menus = (
+            "备孕",
+            "怀孕",
+            "产后",
+            "0-1岁",
+            "1-2岁",
+            "2-3岁",
+            "3-6岁",
+            "专家咨询",
+        )
+        info_v = {
+            'title':item.title.encode('utf8'),
+            'savedate':str(datetime.now()),
+            'kid':item.uuid,
+            'tag1':random.choice(menus)
+        }
+        pb.put4("114.113.30.29",11214,item.uuid,info_v)
         
         return [item]
 
