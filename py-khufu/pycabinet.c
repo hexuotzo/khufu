@@ -85,7 +85,7 @@ put4(PyObject *self,PyObject *args){
     while (PyDict_Next(kv, &pos, &key, &value)) {
         tcmapput2(cols, PyString_AsString(key), PyString_AsString(value));
     }
-    if(!tcrdbtblput(rdb, pkbuf, pksiz, cols)){
+    if(!tcrdbtblputkeep(rdb, pkbuf, pksiz, cols)){
         ecode = tcrdbecode(rdb);
         fprintf(stderr, "put error: %s\n", tcrdberrmsg(ecode));
     }
