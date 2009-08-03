@@ -24,24 +24,17 @@ class ZaojiaoSpider(CrawlSpider):
     domain_name = "zaojiao.com"
     start_urls = [
         "http://www.zaojiao.com/pregnancy/",
+        "http://www.zaojiao.com/education/",
+        "http://www.zaojiao.com/zhidao/",
+        "http://forum.zaojiao.com/index.php",
     ]
     rules = (
-        Rule(SgmlLinkExtractor(allow=('\.html',),), \
+        Rule(SgmlLinkExtractor(allow=('article_\.html',),), \
                 callback='parse_item'),
+        Rule(SgmlLinkExtractor(allow=('viewthread\.php',),), \
+                callback='parse_item_forum'),
     )
-    def parse_item(self, response):
-        log.msg("response.url",response.url)
-        hxs = HtmlXPathSelector(response)
-        item = ScrapedItem()
-        item.title = cn(hxs.x('//h1/text()').extract()[0])
-        item.body = cn(hxs.x('//div[@id="content"]').extract()[0])
-        item.url = response.url
-        item.savedate = str(date.today())
-        item.uuid = str(abs(hash(response.url)))
-        
-        '''
-        in data db
-        '''
+    def save_to_tt(self,item):
         v = {
             'text':item.body.encode('utf8'),
             'url':item.url,
@@ -69,6 +62,28 @@ class ZaojiaoSpider(CrawlSpider):
             'tag1':random.choice(menus)
         }
         pb.put4("114.113.30.29",11214,item.uuid,info_v,0)
+    
+    def parse_item_forum(self,response):
+        hxs = HtmlXPathSelector(response)
+        item = ScrapedItem()
+        item.title = cn(hxs.x('//h2/text()').extract()[0])
+        item.body = cn(hxs.x('//div[@class="t_msgfont"]').extract()[0])
+        item.url = response.url
+        item.savedate = str(date.today())
+        item.uuid = str(abs(hash(response.url)))
+
+        self.save_to_tt(item)
+    
+    def parse_item(self, response):
+        hxs = HtmlXPathSelector(response)
+        item = ScrapedItem()
+        item.title = cn(hxs.x('//h1/text()').extract()[0])
+        item.body = cn(hxs.x('//div[@id="content"]').extract()[0])
+        item.url = response.url
+        item.savedate = str(date.today())
+        item.uuid = str(abs(hash(response.url)))
+        
+        self.save_to_tt(item)
         
         return [item]
 
