@@ -23,4 +23,4 @@ TEMPLATES_DIR = '%s/templates' % zaojiao_bot.__path__[0]
 DEFAULT_ITEM_CLASS = 'zaojiao_bot.items.ZaojiaoBotItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
-LOGFILE = 'zaojiao_bot.log'
+LOGFILE = '/home/yanxu/khufu/zaojiao_bot/zaojiao_bot.log'

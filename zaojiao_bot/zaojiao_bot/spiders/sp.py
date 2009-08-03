@@ -50,7 +50,7 @@ class ZaojiaoSpider(CrawlSpider):
             'savedate':item.savedate,
             'kid':item.uuid,
         }
-        pb.put4("114.113.30.29",11213,item.uuid,v)
+        pb.put4("114.113.30.29",11213,item.uuid,v,0)
         
         menus = (
             "备孕",
@@ -68,7 +68,7 @@ class ZaojiaoSpider(CrawlSpider):
             'kid':item.uuid,
             'tag1':random.choice(menus)
         }
-        pb.put4("114.113.30.29",11214,item.uuid,info_v)
+        pb.put4("114.113.30.29",11214,item.uuid,info_v,0)
         
         return [item]
 

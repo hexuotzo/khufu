@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/local/bin/python
 
 import os
 os.environ.setdefault('SCRAPYSETTINGS_MODULE', 'zaojiao_bot.settings')

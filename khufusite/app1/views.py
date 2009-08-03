@@ -119,13 +119,13 @@ def keyword(request):
 def v(request,kid):
     try:
         obj=getDataByKid(kid)
+    #如果是机器人输出带拼音的正文
+        if isbot(request):
+            obj['memo']=obj['addpinyin']
+        else:
+            obj['memo']=obj['text']
     except:
         raise Http404
-    #如果是机器人输出带拼音的正文
-    if isbot(request):
-        obj['memo']=obj['addpinyin']
-    else:
-        obj['memo']=obj['text']
         
     #相关新闻的实现
     # from ngram import ngram

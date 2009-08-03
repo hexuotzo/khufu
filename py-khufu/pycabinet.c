@@ -69,9 +69,10 @@ put4(PyObject *self,PyObject *args){
     const char *host;
     const int *port;
     const char *dbkey;
+    const int *is_over;
     PyObject *kv;
     TCMAP *cols;
-    if (!PyArg_ParseTuple(args,"sisO",&host,&port,&dbkey,&kv))
+    if (!PyArg_ParseTuple(args,"sisOi",&host,&port,&dbkey,&kv,&is_over))
         return NULL;
     rdb = tcrdbnew();
     if(!tcrdbopen(rdb, host, port)){
@@ -85,9 +86,17 @@ put4(PyObject *self,PyObject *args){
     while (PyDict_Next(kv, &pos, &key, &value)) {
         tcmapput2(cols, PyString_AsString(key), PyString_AsString(value));
     }
-    if(!tcrdbtblputkeep(rdb, pkbuf, pksiz, cols)){
-        ecode = tcrdbecode(rdb);
-        fprintf(stderr, "put error: %s\n", tcrdberrmsg(ecode));
+    if(is_over){
+        if(!tcrdbtblput(rdb, pkbuf, pksiz, cols)){
+            ecode = tcrdbecode(rdb);
+            fprintf(stderr, "put error: %s\n", tcrdberrmsg(ecode));
+        }
+    }
+    else{
+        if(!tcrdbtblputkeep(rdb, pkbuf, pksiz, cols)){
+            ecode = tcrdbecode(rdb);
+            fprintf(stderr, "put error: %s\n", tcrdberrmsg(ecode));
+        }
     }
     tcmapdel(cols);
     if(!tcrdbclose(rdb)){
