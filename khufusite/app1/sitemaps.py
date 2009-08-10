@@ -1,31 +1,21 @@
 # encoding: utf-8
 from django.contrib.sitemaps import Sitemap
+from django.conf import settings
 from datetime import datetime
-import pycabinet
+import pycabinet as pb
 import random
 
 class KhufuSitemap(Sitemap):
     changefreq = "never"
     priority = 0.5
 
+    def _alldata(self):
+        for m in settings.MENUS:
+            for obj in pb.search(settings.MC_IP,settings.MC_INFO_PORT, \
+                            'tag1',m,1000,0,0):
+                yield obj
     def items(self):
-        menus = [
-            "备孕",
-            "怀孕",
-            "产后",
-            "0-1岁",
-            "1-2岁",
-            "2-3岁",
-            "3-6岁",
-            "专家咨询",
-        ]
-        dbname = '/home/yanxu/khufu/infodb/infodb.tct'
-        res = []
-        for m in menus:
-            data = pycabinet.search(dbname,'tag1',m,5000)
-            for obj in data:
-                res.append(obj)
-        return res
+        return list(self._alldata())
 
     def location(self,obj):
         return "/v/%s/" % obj["kid"]
